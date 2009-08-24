@@ -8,6 +8,7 @@
  */
 
 #include "game.h"
+#include "OgreStringConverter.h"
 
 Game::Game() {
 	m_state = STARTUP;
@@ -28,16 +29,16 @@ bool Game::requestStateChange(GameState newState) {
 	if (m_state == STARTUP) {
 		m_locked = false;
 		m_state = newState;
-		
+
 		return true;
 	}
-	
+
 	// this state cannot be changed once initiated
 	if (m_state == SHUTDOWN) {
 		return false;
 	}
-	
-	if ((m_state == GUI || m_state == GAME || m_state == LOADING || m_state == CANCEL_LOADING) && 
+
+	if ((m_state == GUI || m_state == GAME || m_state == LOADING || m_state == CANCEL_LOADING) &&
 		(newState != STARTUP) && (newState != m_state)) {
 		m_state = newState;
 		return true;

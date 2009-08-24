@@ -7,6 +7,11 @@
  *
  */
 
+#pragma once
+
+#include <vector>
+#include <map>
+
 typedef enum {
 	STARTUP,
 	GUI,
@@ -17,11 +22,11 @@ typedef enum {
 } GameState;
 
 class Game {
-	
+
 public:
 	Game();
 	virtual ~Game();
-	
+
 public:
 	bool requestStateChange(GameState state);
 	bool lockState();
@@ -31,7 +36,7 @@ public:
 	void setFrameTime(float ms);
 	inline float getFrameTime() {return m_frame_time;};
 
-protected:	
+protected:
 	GameState m_state;
 	bool m_locked;
 	float m_frame_time;
