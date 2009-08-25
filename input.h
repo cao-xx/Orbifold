@@ -9,24 +9,25 @@
 
 #pragma once
 
-#include "OISEvents.h"
-#include "OISInputManager.h"
-#include "OISMouse.h"
-#include "OISKeyboard.h"
+#include <OIS/OISEvents.h>
+#include <OIS/OISInputManager.h>
+#include <OIS/OISMouse.h>
+#include <OIS/OISKeyboard.h>
 
 class Game;
 
 class InputHandler :
-	public OIS::MousListener,
-	public OIS::Keylistener
+	public OIS::MouseListener,
+	public OIS::KeyListener
 {
 	private :
 		OIS::InputManager *m_ois;
 		OIS::Mouse *mMouse;
 		OIS::Keyboard *mKeyboard;
 		unsigned long m_hWnd;
+		Game *m_game;	
 	public:
-		InputHandler(Game *game; unsigned long hWnd);
+		InputHandler(Game *game, unsigned long hWnd);
 		~InputHandler();
 
 		void setWindowDimensions(int width, int height);
@@ -34,8 +35,8 @@ class InputHandler :
 
 		// MouseListener
 		bool mouseMoved(const OIS::MouseEvent &evt);
-		bool mousePressed(const OIS::MouseEvent &evt);
-		bool mousReleased(const OIS::MouseEvent &evt);
+		bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID);
+		bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID);
 
 		//Keylistener
 		bool keyPressed(const OIS::KeyEvent &evt);

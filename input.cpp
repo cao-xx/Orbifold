@@ -12,6 +12,7 @@
 #include "game.h"
 
 InputHandler::InputHandler(Game *game, unsigned long hWnd) {
+	
 	OIS::ParamList pl;
 	pl.insert(OIS::ParamList::value_type("WINDOW", Ogre::StringConverter::toString(hWnd)));
 
@@ -27,7 +28,7 @@ InputHandler::InputHandler(Game *game, unsigned long hWnd) {
 
 InputHandler::~InputHandler() {
   if (mMouse)
-    m_ois->destroyInputObjec(mMouse);
+    m_ois->destroyInputObject(mMouse);
   if (mKeyboard)
     m_ois->destroyInputObject(mKeyboard);
 
@@ -43,7 +44,7 @@ void::InputHandler::setWindowDimensions(int width, int height){
   //TODO: Update if window resizes
   const OIS::MouseState &ms = mMouse->getMouseState();
   ms.width = width;
-  ms.height = heigth;
+  ms.height = height;
 }
 
 //MouseListener: Just a stub for now.
@@ -69,4 +70,4 @@ bool InputHandler::keyReleased(const OIS::KeyEvent &evt) {
     m_game->requestStateChange(SHUTDOWN);
   return true;
 }
-}
+

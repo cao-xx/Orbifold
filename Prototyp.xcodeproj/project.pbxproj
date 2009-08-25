@@ -11,6 +11,8 @@
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		AA699C8C104334EB00D41692 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA699C8A104334EB00D41692 /* game.cpp */; };
 		AA699C90104335EB00D41692 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA699C8F104335EB00D41692 /* input.cpp */; };
+		AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
+		AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
 		AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAA63041042D8DE00A475D5 /* Ogre.framework */; };
 		AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AB33103D5A1A00F445AD /* Cg.framework */; };
 		AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC2C103D5A7700F445AD /* IOKit.framework */; };
@@ -27,6 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */,
 				AAD6AD09103D949500F445AD /* libois.a in CopyFiles */,
 				AAD6AD05103D614F00F445AD /* IOKit.framework in CopyFiles */,
 				AAD6AD03103D613B00F445AD /* Cg.framework in CopyFiles */,
@@ -44,6 +47,7 @@
 		AA699C8B104334EB00D41692 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
 		AA699C8E104335EB00D41692 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input.h; sourceTree = "<group>"; };
 		AA699C8F104335EB00D41692 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
+		AA9765D310440B1B005C3F5F /* OIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OIS.framework; path = ../../../Library/Frameworks/OIS.framework; sourceTree = SOURCE_ROOT; };
 		AAAA63041042D8DE00A475D5 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = ../../../Library/Frameworks/Ogre.framework; sourceTree = SOURCE_ROOT; };
 		AAD6AB33103D5A1A00F445AD /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = ../../OgreSDK/Dependencies/Cg.framework; sourceTree = SOURCE_ROOT; };
 		AAD6AC2C103D5A7700F445AD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -60,6 +64,7 @@
 				AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */,
 				AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */,
 				AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */,
+				AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +113,7 @@
 		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AA9765D310440B1B005C3F5F /* OIS.framework */,
 				AAAA63041042D8DE00A475D5 /* Ogre.framework */,
 				AAD6AB33103D5A1A00F445AD /* Cg.framework */,
 				AAD6AC30103D5B5A00F445AD /* libois.a */,
