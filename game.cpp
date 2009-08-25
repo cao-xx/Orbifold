@@ -14,6 +14,8 @@ Game::Game() {
 	m_state = STARTUP;
 }
 
+Game::~Game(){}
+
 GameState Game::getCurrentState() {
 	return m_state;
 }

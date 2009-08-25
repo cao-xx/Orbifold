@@ -1,10 +1,17 @@
+/*
+Author: Christian Pehle
+*/
+
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 	#include <Carbon/Carbon.h>
 #endif
 
-#include <Ogre.h>
+#include "input.h"
+#include "game.h"
 
+#include <Ogre.h>
+#include "OgreWindowEventUtilities.h"
 
 
 #define MANUALLY_CREATE_WINDOW 1
@@ -67,6 +74,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT){
 #else
 int main(int argc, char **argv){
 #endif
+
 	Ogre::Root *ogre=initOgre();
 
 #if MANUALLY_CREATE_WINDOW
@@ -77,12 +85,23 @@ int main(int argc, char **argv){
 	ogre->getRenderSystem()->setConfigOption("Video Mode","800 x 600 @ 16-bit colour");
 	Ogre::RenderWindow* window = ogre->initialise(true, "Simple Ogre App");
 #endif
-
+		
+		
 	Ogre::SceneManager* sceneMgr = ogre->createSceneManager(Ogre::ST_GENERIC);
 
 	Ogre::Camera *cam=createCamera(sceneMgr,window);
 	sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(cam);
 
+	// Input Handler	
+	unsigned long hWnd;
+	window->getCustomAttribute("WINDOW", &hWnd);
+	
+	// set up input handler
+		
+	Game *game = new Game();
+	InputHandler *handler = new InputHandler(game, hWnd);
+	game->requestStateChange(GAME);
+		
 	int running=1000;
 	while(running--)
 	{
@@ -91,6 +110,9 @@ int main(int argc, char **argv){
 		printf("%d\n",running);
 	}
 
+	
+	delete handler;
+	delete game;
 	delete ogre;
 	return 0;
 }
