@@ -13,7 +13,7 @@
 PlayState* PlayState::mPlayState;
 
 void PlayState::enter(Ogre::RenderWindow* window) {
-	mGame = Game::getSingeltonPtr();
+	mGame = Game::getSingletonPtr();
 	mRoot = Ogre::Root::getSingletonPtr();
 	mOverlayManager = Ogre::OverlayManager::getSingletonPtr();
 	mRenderWindow = window;
@@ -29,7 +29,7 @@ void PlayState::exit() {
 	this->hideOverlays();
 	mSceneManager->clearScene();
 	mSceneManager->destroyAllCameras();
-	mRenderWindow->removeAllViewPorts();
+	mRenderWindow->removeAllViewports();
 }
 
 // A lot of stubs.
@@ -52,9 +52,9 @@ void PlayState::keyReleased(const OIS::KeyEvent &evt) {
 
 void PlayState::mouseMoved(const OIS::MouseEvent &evt) {
 	const OIS::MouseState &mouseState = evt.state;
-	// Update Mousepointer on Screen.
-	mMousePointer->setTop(mouseState.abY);
-	mMousePointer->setLeft(mouseState.abX);
+	// Update Mousepointer on Screen, might be smoother if moved by relative change.
+	mMousePointer->setTop(mouseState.Y.abs);
+	mMousePointer->setLeft(mouseState.X.abs);
 }
 
 void PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {}
@@ -80,5 +80,7 @@ Ogre::Camera* PlayState::createCamera(Ogre::SceneManager *sceneMgr, Ogre::Render
 	return cam;
 }
 
-
+PlayState::~PlayState()
+{
+ //TODO
 }

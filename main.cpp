@@ -97,11 +97,13 @@ int main(int argc, char **argv){
 	
 	// set up input handler
 		
-	Game *game = new Game();
+	Game *game = Game::getSingletonPtr();
+	game->startGame();
+	/*
 	InputHandler *handler = InputHandler::getSingletonPtr();
 	handler->initialise(window);
 	game->requestStateChange(GAME);
-		
+
 	int running=1000;
 	while(running--)
 	{
@@ -110,8 +112,9 @@ int main(int argc, char **argv){
 		printf("%d\n",running);
 	}
 
-	
-	delete handler;
+	*/
+	 
+	//delete handler;
 	delete game;
 	delete ogre;
 	return 0;

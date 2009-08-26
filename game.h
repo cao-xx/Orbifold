@@ -9,24 +9,23 @@
 
 #pragma once
 
-//#include <vector>
-//#include <map>
+
 
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
 #include "input.h"
 
-
-
 typedef enum {
 	STARTUP,
 	GUI,
 	LOADING,
+	PAUSE,
 	CANCEL_LOADING,
 	GAME,
 	SHUTDOWN
 } State;
+
 
 class GameState;
 
@@ -84,7 +83,8 @@ public:
 	virtual ~Game();
 	
 	void startGame(GameState *State);
-	
+	void startGame();
+		
 	bool requestStateChange(State state);
 	bool lockState();
 	bool unlockState();
@@ -93,5 +93,5 @@ public:
 	void setFrameTime(float ms);
 	inline float getFrameTime() {return flFrameTime;};
 		
-	static Game* getSingeltonPtr();
+	static Game* getSingletonPtr();
 };

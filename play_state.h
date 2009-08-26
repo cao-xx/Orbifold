@@ -14,9 +14,9 @@
 #include "game_state.h"
 #include "pause_state.h"
 
+
 class PlayState : public GameState {
 public:
-	PlayState () {};
 	~PlayState();
 	
 	void enter(Ogre::RenderWindow* window);
@@ -32,15 +32,19 @@ public:
 	void mouseMoved(const OIS::MouseEvent &evt);
 	void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-
+	
+	static PlayState* getSingletonPtr();
 private:
+	PlayState();
+	static PlayState *mPlayState;
+	
 	Ogre::Root *mRoot;
 	Ogre::Camera *mCamera;
 	Ogre::SceneManager *mSceneManager;
 	Ogre::RenderWindow *mRenderWindow;
 	Ogre::Viewport *mViewport;
 	Ogre::OverlayManager *mOverlayManager;
-	// Overlays should be extended (need to integrate proper GUI anyway)
+	// There will be more Overlays.
 	Ogre::Overlay *mMouseOverlay;
 	Ogre::OverlayElement *mMousePointer;
 	

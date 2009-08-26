@@ -9,3 +9,24 @@
 
 #include "intro_state.h"
 
+IntroState* IntroState::mIntroState;
+
+void IntroState::enter(){
+	mRoot = Ogre::Root::getSingletonPtr();
+	mOverlayManager = Ogre::OverlayManager::getSingletonPtr();
+	mSceneManager = mRoot->getSceneManager("ST_GENERIC");
+	mCamera = mSceneManager->createCamera("IntroCamera");
+	mViewport = mRenderWindow->addViewport(mCamera);
+	
+	mIntroOverlay = mOverlayManager->getByName("Overlay/IntroState");
+	mIntroOverlay->show();
+}
+
+void IntroState::exit() {
+	mIntroOverlay->hide();
+	mSceneManager->clearScene();
+	mSceneManager->destroyAllCameras();
+	mRenderWindow->removeAllViewports();
+}
+
+IntroState::~IntroState(){}

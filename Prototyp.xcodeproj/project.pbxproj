@@ -15,9 +15,6 @@
 		AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
 		AA97667C1044249E005C3F5F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA97667B1044249E005C3F5F /* OpenAL.framework */; };
 		AAA679651044A74400B85DD7 /* game_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA679641044A74400B85DD7 /* game_state.cpp */; };
-		AAA679761045441D00B85DD7 /* play_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA679751045441D00B85DD7 /* play_state.cpp */; };
-		AAA6797C1045464200B85DD7 /* pause_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA6797B1045464200B85DD7 /* pause_state.cpp */; };
-		AAA67C0E1045638D00B85DD7 /* intro_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA67C0D1045638D00B85DD7 /* intro_state.cpp */; };
 		AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAA63041042D8DE00A475D5 /* Ogre.framework */; };
 		AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AB33103D5A1A00F445AD /* Cg.framework */; };
 		AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC2C103D5A7700F445AD /* IOKit.framework */; };
@@ -56,12 +53,6 @@
 		AA97667B1044249E005C3F5F /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
 		AAA679631044A74400B85DD7 /* game_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_state.h; sourceTree = "<group>"; };
 		AAA679641044A74400B85DD7 /* game_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_state.cpp; sourceTree = "<group>"; };
-		AAA679741045441D00B85DD7 /* play_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = play_state.h; sourceTree = "<group>"; };
-		AAA679751045441D00B85DD7 /* play_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = play_state.cpp; sourceTree = "<group>"; };
-		AAA6797A1045464200B85DD7 /* pause_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pause_state.h; sourceTree = "<group>"; };
-		AAA6797B1045464200B85DD7 /* pause_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pause_state.cpp; sourceTree = "<group>"; };
-		AAA67C0C1045638D00B85DD7 /* intro_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intro_state.h; sourceTree = "<group>"; };
-		AAA67C0D1045638D00B85DD7 /* intro_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = intro_state.cpp; sourceTree = "<group>"; };
 		AAAA63041042D8DE00A475D5 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = ../../../Library/Frameworks/Ogre.framework; sourceTree = SOURCE_ROOT; };
 		AAD6AB33103D5A1A00F445AD /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = ../../OgreSDK/Dependencies/Cg.framework; sourceTree = SOURCE_ROOT; };
 		AAD6AC2C103D5A7700F445AD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -115,12 +106,6 @@
 				20286C2BFDCF999611CA2CEA /* main.cpp */,
 				AA699C8E104335EB00D41692 /* input.h */,
 				AA699C8F104335EB00D41692 /* input.cpp */,
-				AAA679741045441D00B85DD7 /* play_state.h */,
-				AAA679751045441D00B85DD7 /* play_state.cpp */,
-				AAA6797A1045464200B85DD7 /* pause_state.h */,
-				AAA6797B1045464200B85DD7 /* pause_state.cpp */,
-				AAA67C0C1045638D00B85DD7 /* intro_state.h */,
-				AAA67C0D1045638D00B85DD7 /* intro_state.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -205,9 +190,6 @@
 				AA699C8C104334EB00D41692 /* game.cpp in Sources */,
 				AA699C90104335EB00D41692 /* input.cpp in Sources */,
 				AAA679651044A74400B85DD7 /* game_state.cpp in Sources */,
-				AAA679761045441D00B85DD7 /* play_state.cpp in Sources */,
-				AAA6797C1045464200B85DD7 /* pause_state.cpp in Sources */,
-				AAA67C0E1045638D00B85DD7 /* intro_state.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

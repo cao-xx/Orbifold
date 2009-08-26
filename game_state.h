@@ -22,7 +22,7 @@
 
 class GameState {
 public:
-	~GameState() {}
+	~GameState(){};
 		
 	virtual void enter();
 	virtual void exit();
@@ -36,5 +36,5 @@ public:
 	virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 protected:
-	GameState() {}
+	GameState() {};
 };

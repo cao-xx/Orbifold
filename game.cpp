@@ -7,6 +7,10 @@
  *
  */
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+	#include <Carbon/Carbon.h>
+#endif
+
 #include "game_state.h"
 #include "play_state.h"
 #include "intro_state.h"
@@ -14,17 +18,18 @@
 
 #include "game.h"
 
+#include <Ogre.h>
 #include "OgreStringConverter.h"
 #include <OgreWindowEventUtilities.h>
 
-Game* mGame;
+Game* Game::mGame;
 
 Game::Game() :
 	mRoot(0),
 	mInput(0),
-	mIntroState(0),
-	mPlayState(0),
-	mPauseState(0),
+//	mIntroState(0),
+//	mPlayState(0),
+//	mPauseState(0),
 	bShutdown(false) {
 }
 
@@ -37,17 +42,18 @@ Game::~Game() {
 	
 	if(mInput)
 		delete mInput;
-	if(mIntroState)
-		delete mIntroState;
-	if(mPlayState)
-		delete mPlayState;
-	if(mPauseState)
-		delete mPauseState;
+//	if(mIntroState)
+//		delete mIntroState;
+//	if(mPlayState)
+//		delete mPlayState;
+//	if(mPauseState)
+//		delete mPauseState;
 	if(mRoot)
 		delete mRoot;
 }
 
-void Game::startGame(GameState* gameState) {
+//void Game::startGame(GameState* gameState) {
+void Game::startGame(){
 	// Initialise Ogre and any Resources.
 	mRoot = this->initOgre();
 	
@@ -59,9 +65,9 @@ void Game::startGame(GameState* gameState) {
 	}
 	
 	//Setup states
-	mIntroState = IntroState::getSingletonPtr();
-	mPlayState = PlayState::getSingletonPtr();
-	mPauseState = PauseState::getSingletonPtr();
+//	mIntroState = IntroState::getSingletonPtr();
+//	mPlayState = PlayState::getSingletonPtr();
+//	mPauseState = PauseState::getSingletonPtr();
 	
 	//Setup input
 	mInput = InputHandler::getSingletonPtr();
@@ -70,14 +76,14 @@ void Game::startGame(GameState* gameState) {
 	mInput->addMouseListener(this, "Game");
 	
 	// change to first state
-	m_state = STARTUP;
-	this->requestStateChange(STARTUP);
-	
-	while (!bShutdown) {
+	// m_state = STARTUP;
+	// this->requestStateChange(STARTUP);
+	int running = 1000;
+	while (running--) {
 		// Update InputHandler
 		mInput->capture();
 		// Update current state
-		mCurrentState->update();
+		// mCurrentState->update();
 		// Render next frame
 		mRoot->renderOneFrame();
 		// make Windows happy
@@ -137,6 +143,7 @@ bool Game::lockState() {
 
 //this is kind of a hack
 GameState* Game::getState(State state) {
+	// I didn't implement all State classes yet.
 	switch (state) {
 		case STARTUP:
 			return mIntroState;
@@ -160,6 +167,8 @@ GameState* Game::getState(State state) {
 			return mCurrentState;
 			break;
 	}
+	// paranoid compiler
+	return mCurrentState;
 }
 
 

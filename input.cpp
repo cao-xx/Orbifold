@@ -11,7 +11,7 @@
 #include "OgreStringConverter.h"
 #include "game.h"
 
-InputHandler* mInputHandler;
+InputHandler* InputHandler::mInputHandler;
 
 InputHandler::InputHandler() : 
 	mMouse(0),

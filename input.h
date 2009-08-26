@@ -30,7 +30,7 @@ class InputHandler :
 		OIS::Mouse *mMouse;
 		OIS::Keyboard *mKeyboard;
 	
-		static InputHandler *InputHandler;
+		static InputHandler *mInputHandler;
 	
 		unsigned long m_hWnd;
 		//Game *m_game;
