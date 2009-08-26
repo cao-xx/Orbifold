@@ -17,7 +17,7 @@
 
 class PlayState : public GameState {
 public:
-	~PlayState();
+	//~PlayState();
 	
 	void enter(Ogre::RenderWindow* window);
 	void exit();
@@ -35,7 +35,7 @@ public:
 	
 	static PlayState* getSingletonPtr();
 private:
-	PlayState();
+	PlayState() {}
 	static PlayState *mPlayState;
 	
 	Ogre::Root *mRoot;

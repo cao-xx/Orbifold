@@ -28,7 +28,7 @@ Game::Game() :
 	mRoot(0),
 	mInput(0),
 //	mIntroState(0),
-//	mPlayState(0),
+    mPlayState(0),
 //	mPauseState(0),
 	bShutdown(false) {
 }
@@ -66,7 +66,7 @@ void Game::startGame(){
 	
 	//Setup states
 //	mIntroState = IntroState::getSingletonPtr();
-//	mPlayState = PlayState::getSingletonPtr();
+	mPlayState = PlayState::getSingletonPtr();
 //	mPauseState = PauseState::getSingletonPtr();
 	
 	//Setup input
@@ -76,14 +76,14 @@ void Game::startGame(){
 	mInput->addMouseListener(this, "Game");
 	
 	// change to first state
-	// m_state = STARTUP;
-	// this->requestStateChange(STARTUP);
+	m_state = GAME;
+	this->requestStateChange(GAME);
 	int running = 1000;
 	while (running--) {
 		// Update InputHandler
 		mInput->capture();
 		// Update current state
-		// mCurrentState->update();
+		mCurrentState->update();
 		// Render next frame
 		mRoot->renderOneFrame();
 		// make Windows happy

@@ -75,7 +75,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT){
 #else
 int main(int argc, char **argv){
 #endif
-
+/*
 	Ogre::Root *ogre=initOgre();
 
 #if MANUALLY_CREATE_WINDOW
@@ -96,7 +96,7 @@ int main(int argc, char **argv){
 	// Input Handler	
 	
 	// set up input handler
-		
+*/		
 	Game *game = Game::getSingletonPtr();
 	game->startGame();
 	/*
@@ -116,7 +116,7 @@ int main(int argc, char **argv){
 	 
 	//delete handler;
 	delete game;
-	delete ogre;
+	//delete ogre;
 	return 0;
 }
 

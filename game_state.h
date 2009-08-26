@@ -22,19 +22,19 @@
 
 class GameState {
 public:
-	~GameState(){};
+	~GameState(){}
 		
-	virtual void enter();
-	virtual void exit();
+	virtual void enter(Ogre::RenderWindow *window) = 0;
+	virtual void exit() = 0;
 		
-	virtual void update();
+	virtual void update() = 0;
 		
-	virtual void keyPressed(const OIS::KeyEvent &evt);
-	virtual void keyReleased(const OIS::KeyEvent &evt);
+	virtual void keyPressed(const OIS::KeyEvent &evt) = 0;
+	virtual void keyReleased(const OIS::KeyEvent &evt) = 0;
 	
-	virtual void mouseMoved(const OIS::MouseEvent &evt);
-	virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-	virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+	virtual void mouseMoved(const OIS::MouseEvent &evt) = 0;
+	virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
+	virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
 protected:
 	GameState() {};
 };

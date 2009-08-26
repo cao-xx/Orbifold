@@ -8,7 +8,10 @@
  */
 
 #include "play_state.h"
+#include "game_state.h"
 #include <OgreTextureUnitState.h>
+
+class GameState;
 
 PlayState* PlayState::mPlayState;
 
@@ -20,13 +23,13 @@ void PlayState::enter(Ogre::RenderWindow* window) {
 	mSceneManager = mRoot->getSceneManager("ST_GENERIC");
 	
 	mCamera = this->createCamera(mSceneManager, mRenderWindow);	
-	this->createOverlays();
+	//this->createOverlays();
 	
 }
 
 
 void PlayState::exit() {
-	this->hideOverlays();
+	//this->hideOverlays();
 	mSceneManager->clearScene();
 	mSceneManager->destroyAllCameras();
 	mRenderWindow->removeAllViewports();
@@ -35,11 +38,9 @@ void PlayState::exit() {
 // A lot of stubs.
 void PlayState::pause() {}
 void PlayState::resume() {}
+void PlayState::update() {}
 
 
-void PlayState::update() {
-	
-}
 
 void PlayState::keyPressed(const OIS::KeyEvent &evt) {}
 void PlayState::keyReleased(const OIS::KeyEvent &evt) {
@@ -62,8 +63,8 @@ void PlayState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 
 
 
-void createOverlays() {}
-void hideOverlays() {}
+//void createOverlays() {}
+//void hideOverlays() {}
 
 Ogre::Camera* PlayState::createCamera(Ogre::SceneManager *sceneMgr, Ogre::RenderWindow *window) {
 	Ogre::Camera* cam = sceneMgr->createCamera("SimpleCamera");
@@ -80,7 +81,9 @@ Ogre::Camera* PlayState::createCamera(Ogre::SceneManager *sceneMgr, Ogre::Render
 	return cam;
 }
 
-PlayState::~PlayState()
-{
- //TODO
+
+PlayState* PlayState::getSingletonPtr() {
+	if(!mPlayState)
+		mPlayState = new PlayState();
+	return mPlayState;
 }
