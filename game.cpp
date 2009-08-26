@@ -40,16 +40,22 @@ Game::~Game() {
 		mStates.pop_back();
 	} */
 	
-	if(mInput)
+	if(mInput) {
 		delete mInput;
+		mInput = 0;
+	}
 //	if(mIntroState)
 //		delete mIntroState;
-//	if(mPlayState)
-//		delete mPlayState;
+	if(mPlayState) {
+		delete mPlayState;
+		mPlayState = 0;
+	}
 //	if(mPauseState)
 //		delete mPauseState;
-	if(mRoot)
+	if(mRoot) {
 		delete mRoot;
+		mRoot = 0;
+	}
 }
 
 //void Game::startGame(GameState* gameState) {
@@ -68,7 +74,7 @@ void Game::startGame(){
 //	mIntroState = IntroState::getSingletonPtr();
 	mPlayState = PlayState::getSingletonPtr();
 //	mPauseState = PauseState::getSingletonPtr();
-	
+	//mCurrentState = mPlayState;
 	//Setup input
 	mInput = InputHandler::getSingletonPtr();
 	mInput->initialise(mRenderWindow);
@@ -76,7 +82,7 @@ void Game::startGame(){
 	mInput->addMouseListener(this, "Game");
 	
 	// change to first state
-	m_state = GAME;
+	m_state = STARTUP;
 	this->requestStateChange(GAME);
 	int running = 1000;
 	while (running--) {
