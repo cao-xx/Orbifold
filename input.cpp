@@ -13,7 +13,7 @@
 
 InputHandler* InputHandler::mInputHandler;
 
-InputHandler::InputHandler() : 
+InputHandler::InputHandler() :
 	mMouse(0),
 	mKeyboard(0),
 	mInputSystem(0) {
@@ -26,7 +26,7 @@ void InputHandler::initialise(Ogre::RenderWindow *window) {
 		unsigned long hWnd;
 		// TODO: Might be platform dependent
 		window->getCustomAttribute("WINDOW", &hWnd);
-		
+
 		// we got the window handle, insert it into a parameter list.
 		OIS::ParamList pl;
 		pl.insert(OIS::ParamList::value_type("WINDOW", Ogre::StringConverter::toString(hWnd)));
@@ -37,13 +37,13 @@ void InputHandler::initialise(Ogre::RenderWindow *window) {
 		if ( mInputSystem->getNumberOfDevices(OIS::OISMouse) > 0) {
 			mMouse = static_cast<OIS::Mouse*>(mInputSystem->createInputObject(OIS::OISMouse, true));
 			mMouse->setEventCallback(this);
-			
+
 			// get window metrics and set initial mouse region
 			unsigned int width, height, depth;
 			int left, top;
 			window->getMetrics(width, height, depth, left, top);
-			
-			this->setWindowDimensions(width, height);			
+
+			this->setWindowDimensions(width, height);
 		}
 		// and buffered keyboard
 		if ( mInputSystem->getNumberOfDevices(OIS::OISKeyboard) > 0) {
@@ -60,9 +60,9 @@ InputHandler::~InputHandler() {
 			mInputSystem->destroyInputObject(mMouse);
 		if (mKeyboard)
 			mInputSystem->destroyInputObject(mKeyboard);
-		
+
 		OIS::InputManager::destroyInputSystem(mInputSystem);
-		
+
 		//clear listeners
 		mKeyListeners.clear();
 		mMouseListeners.clear();
@@ -182,7 +182,7 @@ bool InputHandler::keyPressed(const OIS::KeyEvent &e) {
         if(!itKeyListener->second->keyPressed(e))
 			break;
     }
-	
+
     return true;
 }
 
@@ -193,7 +193,7 @@ bool InputHandler::keyReleased(const OIS::KeyEvent &e) {
         if(!itKeyListener->second->keyReleased(e))
 			break;
     }
-	
+
     return true;
 }
 
@@ -204,7 +204,7 @@ bool InputHandler::mouseMoved(const OIS::MouseEvent &e) {
         if(!itMouseListener->second->mouseMoved(e))
 			break;
     }
-	
+
     return true;
 }
 
@@ -215,7 +215,7 @@ bool InputHandler::mousePressed(const OIS::MouseEvent &e, OIS::MouseButtonID id)
         if(!itMouseListener->second->mousePressed(e, id))
 			break;
     }
-	
+
     return true;
 }
 
@@ -226,7 +226,7 @@ bool InputHandler::mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id
         if(!itMouseListener->second->mouseReleased(e, id))
 			break;
     }
-	
+
     return true;
 }
 

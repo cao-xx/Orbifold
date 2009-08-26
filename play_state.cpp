@@ -21,10 +21,10 @@ void PlayState::enter(Ogre::RenderWindow* window) {
 	mOverlayManager = Ogre::OverlayManager::getSingletonPtr();
 	mRenderWindow = window;
 	mSceneManager = mRoot->getSceneManager("ST_GENERIC");
-	
-	mCamera = this->createCamera(mSceneManager, mRenderWindow);	
+
+	mCamera = this->createCamera(mSceneManager, mRenderWindow);
 	//this->createOverlays();
-	
+
 }
 
 
@@ -47,7 +47,7 @@ void PlayState::keyReleased(const OIS::KeyEvent &evt) {
 	if (evt.key == OIS::KC_SPACE) {
 		mGame->requestStateChange(PAUSE);
 	} else if(evt.key == OIS::KC_ESCAPE) {
-		mGame->requestStateChange(SHUTDOWN);		
+		mGame->requestStateChange(SHUTDOWN);
 	}
 }
 
@@ -72,12 +72,12 @@ Ogre::Camera* PlayState::createCamera(Ogre::SceneManager *sceneMgr, Ogre::Render
 	cam->lookAt(Ogre::Vector3(0.0f,0.0f,0.0f));
 	cam->setNearClipDistance(5.0f);
 	cam->setFarClipDistance(5000.0f);
-	
+
 	Ogre::Viewport* v = window->addViewport(cam);
 	v->setBackgroundColour(Ogre::ColourValue(0.5,0.5,0.5));
-	
+
 	cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
-	
+
 	return cam;
 }
 

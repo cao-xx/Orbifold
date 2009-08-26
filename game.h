@@ -29,10 +29,10 @@ typedef enum {
 
 class GameState;
 
-class Game : 
+class Game :
 	public OIS::KeyListener,
 	public OIS::MouseListener {
-	
+
 private:
 	Game();
 	/*Different Game States, probably should be replaced
@@ -42,49 +42,49 @@ private:
 	GameState *mPlayState;
 	GameState *mPauseState;
 	GameState *mCurrentState;
-	
+
 	GameState* getState(State state);
-	
+
 	// state variables
 	State m_state;
 	bool m_locked;
-		
 
-	
+
+
 	static Game *mGame;
-	
+
 	/* Directly Ogre related */
 	Ogre::Root *mRoot;
 	Ogre::RenderWindow *mRenderWindow;
-		
+
 	Ogre::Root* initOgre();
 	bool configureGame();
 	void initResources();
-	
+
 	/* Inputhandling */
-	
+
 	InputHandler *mInput;
-		
+
 	bool mouseMoved(const OIS::MouseEvent &evt);
 	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-	
+
 	bool keyPressed(const OIS::KeyEvent &evt);
 	bool keyReleased(const OIS::KeyEvent &evt);
-	
+
 	// are we shutting down?
 	bool bShutdown;
 	// time since last frame
 	float flFrameTime;
-	
-	
-	
-public:	
+
+
+
+public:
 	virtual ~Game();
-	
+
 	void startGame(GameState *State);
 	void startGame();
-		
+
 	bool requestStateChange(State state);
 	bool lockState();
 	bool unlockState();
@@ -92,6 +92,6 @@ public:
 
 	void setFrameTime(float ms);
 	inline float getFrameTime() {return flFrameTime;};
-		
+
 	static Game* getSingletonPtr();
 };

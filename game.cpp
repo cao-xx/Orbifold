@@ -39,7 +39,7 @@ Game::~Game() {
 		mStates.back()->exit();
 		mStates.pop_back();
 	} */
-	
+
 	if(mInput) {
 		delete mInput;
 		mInput = 0;
@@ -62,14 +62,14 @@ Game::~Game() {
 void Game::startGame(){
 	// Initialise Ogre and any Resources.
 	mRoot = this->initOgre();
-	
+
 	if(!this->configureGame()) {
 		throw Ogre::Exception(Ogre::Exception::ERR_INTERNAL_ERROR,
 							  "Error -- Couldn't Configure RenderWindow",
 							  "Prototyp -- Error");
 		return;
 	}
-	
+
 	//Setup states
 //	mIntroState = IntroState::getSingletonPtr();
 	mPlayState = PlayState::getSingletonPtr();
@@ -80,7 +80,7 @@ void Game::startGame(){
 	mInput->initialise(mRenderWindow);
 	mInput->addKeyListener(this, "Game");
 	mInput->addMouseListener(this, "Game");
-	
+
 	// change to first state
 	m_state = STARTUP;
 	this->requestStateChange(GAME);
@@ -93,9 +93,9 @@ void Game::startGame(){
 		// Render next frame
 		mRoot->renderOneFrame();
 		// make Windows happy
-		Ogre::WindowEventUtilities::messagePump();		
+		Ogre::WindowEventUtilities::messagePump();
 	}
-	
+
 }
 
 void Game::initResources(){
@@ -104,9 +104,9 @@ void Game::initResources(){
 	resources.initialiseAllResourceGroups();
 }
 
-Ogre::Root* Game::initOgre(){	
+Ogre::Root* Game::initOgre(){
 	Ogre::Root* ogre = new Ogre::Root();
-	
+
 #if defined(_DEBUG)
 	ogre->loadPlugin("RenderSystem_GL_d");
 #else
@@ -114,24 +114,24 @@ Ogre::Root* Game::initOgre(){
 #endif
 	Ogre::RenderSystemList *rs = NULL;
 	Ogre::RenderSystemList::iterator r_it;
-	
+
 	rs = ogre->getAvailableRenderers();
 	r_it = rs->begin();
-	
+
 	if(rs && rs->size() && rs->at(0)->getName().compare("RenderSystem_GL")){
 		Ogre::RenderSystem * r=rs->at(0);
 		ogre->setRenderSystem(r);
 	}else{
 		exit(1);
 	}
-	
-	this->initResources();	
+
+	this->initResources();
 	return ogre;
 }
 
 bool Game::configureGame() {
 	mRoot->initialise(false);
-	mRenderWindow = mRoot->createRenderWindow("Prototyp", 800, 600, false, NULL);	
+	mRenderWindow = mRoot->createRenderWindow("Prototyp", 800, 600, false, NULL);
 	return true;
 }
 
