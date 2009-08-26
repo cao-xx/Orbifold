@@ -6,7 +6,8 @@
  *  Copyright 2009 Universität Heidelberg. All rights reserved.
  *
  */
-#pragma once
+#ifndef IntroState_H
+#define IntroState_H
 
 #include "play_state.h"
 #include "game_state.h"
@@ -41,3 +42,4 @@ private:
 	
 	static IntroState *mIntroState;
 };
+#endif

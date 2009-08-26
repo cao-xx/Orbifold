@@ -7,12 +7,16 @@
  *
  */
 
-#pragma once
-
+#ifndef GAME_H
+#define GAME_H
 
 
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
+
+#include <OgreRoot.h>
+#include <OgreConfigFile.h>
+#include <OgreRenderWindow.h>
 
 #include "input.h"
 
@@ -95,3 +99,4 @@ public:
 
 	static Game* getSingletonPtr();
 };
+#endif

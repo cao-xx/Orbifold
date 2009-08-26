@@ -6,7 +6,8 @@
  *  Copyright 2009 Universität Heidelberg. All rights reserved.
  *
  */
-#pragma once
+#ifndef GameState_H
+#define GameState_H
 
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
@@ -38,3 +39,4 @@ public:
 protected:
 	GameState() {};
 };
+#endif

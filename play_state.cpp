@@ -8,10 +8,8 @@
  */
 
 #include "play_state.h"
-#include "game_state.h"
 #include <OgreTextureUnitState.h>
 
-class GameState;
 
 PlayState* PlayState::mPlayState;
 

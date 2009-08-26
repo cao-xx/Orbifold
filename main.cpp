@@ -14,16 +14,11 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT){
 int main(int argc, char **argv){
 #endif
 
-	Ogre::Root *ogre=initOgre();
-
-	      		
-	Ogre::SceneManager* sceneMgr = ogre->createSceneManager(Ogre::ST_GENERIC);
 
 	Game *game = Game::getSingletonPtr();
 	game->startGame();
 
 	delete game;
-	delete ogre;
 	return 0;
 }
 

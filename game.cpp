@@ -7,20 +7,17 @@
  *
  */
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+/*#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 	#include <Carbon/Carbon.h>
 #endif
-
+*/
 #include "game_state.h"
 #include "play_state.h"
 #include "intro_state.h"
 #include "pause_state.h"
-
 #include "game.h"
-
-#include <Ogre.h>
-#include "OgreStringConverter.h"
 #include <OgreWindowEventUtilities.h>
+#include <Ogre.h>
 
 Game* Game::mGame;
 
@@ -70,6 +67,7 @@ void Game::startGame(){
 		return;
 	}
 
+	mRoot->createSceneManager(Ogre::ST_GENERIC, "ST_GENERIC");
 	//Setup states
 //	mIntroState = IntroState::getSingletonPtr();
 	mPlayState = PlayState::getSingletonPtr();
@@ -119,7 +117,7 @@ Ogre::Root* Game::initOgre(){
 	r_it = rs->begin();
 
 	if(rs && rs->size() && rs->at(0)->getName().compare("RenderSystem_GL")){
-		Ogre::RenderSystem * r=rs->at(0);
+		Ogre::RenderSystem *r=rs->at(0);
 		ogre->setRenderSystem(r);
 	}else{
 		exit(1);

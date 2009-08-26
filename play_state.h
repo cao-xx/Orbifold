@@ -6,8 +6,8 @@
  *  Copyright 2009 Universität Heidelberg. All rights reserved.
  *
  */
-
-#pragma once
+#ifndef PlayState_H
+#define PlayState_H
 
 #include <OgreCamera.h>
 
@@ -17,7 +17,7 @@
 
 class PlayState : public GameState {
 public:
-	//~PlayState();
+  //~PlayState();
 
 	void enter(Ogre::RenderWindow* window);
 	void exit();
@@ -55,3 +55,4 @@ private:
 	Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
 
 };
+#endif

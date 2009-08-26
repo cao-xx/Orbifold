@@ -7,15 +7,14 @@
  *
  */
 
-#pragma once
+#ifndef InputManager_H
+#define InputManager_H
 
-
-#include <OIS/OISEvents.h>
 #include <OIS/OISInputManager.h>
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
-#include "OgreRenderWindow.h"
+#include <OgreRenderWindow.h>
 
 class Game;
 
@@ -46,6 +45,7 @@ class InputHandler :
 
 	public:
 		~InputHandler();
+
 		//void initialise(Game *game, Ogre::RenderWindow *window);
 		void initialise(Ogre::RenderWindow *window);
 		void setWindowDimensions(int width, int height);
@@ -83,3 +83,4 @@ class InputHandler :
 
 		static InputHandler* getSingletonPtr();
 };
+#endif
