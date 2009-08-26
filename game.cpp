@@ -97,6 +97,20 @@ void Game::startGame(){
 }
 
 void Game::initResources(){
+  // Load resource path from config file
+  Ogre::ConfigFile cf;
+  cf.load("resources.cfg");
+  
+  // Iterate through all settings in the file
+  Ogre::ConfigFile::SectionIterator itSection = cf.getSectionIterator();
+  
+  String sSection, sType, sArch;
+  while(itSection.hasMoreElements()) {
+    sSection = itSection.peekNextKey();
+    
+    Ogre::ConfigFile::SettingsMultMap *mapSettings = itSection.getNext();
+    Ogre::ConfigFile::SettingsMultMap::iterator itSettings = mapSettings->begin();
+  }
 	Ogre::ResourceGroupManager &resources=Ogre::ResourceGroupManager::getSingleton();
 	resources.addResourceLocation("data","FileSystem");
 	resources.initialiseAllResourceGroups();
