@@ -12,6 +12,7 @@ Author: Christian Pehle
 
 #include <Ogre.h>
 #include "OgreWindowEventUtilities.h"
+#include <OgreException.h>
 
 
 #define MANUALLY_CREATE_WINDOW 1
@@ -93,13 +94,12 @@ int main(int argc, char **argv){
 	sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(cam);
 
 	// Input Handler	
-	unsigned long hWnd;
-	window->getCustomAttribute("WINDOW", &hWnd);
 	
 	// set up input handler
 		
 	Game *game = new Game();
-	InputHandler *handler = new InputHandler(game, hWnd);
+	InputHandler *handler = InputHandler::getSingletonPtr();
+	handler->initialise(window);
 	game->requestStateChange(GAME);
 		
 	int running=1000;
