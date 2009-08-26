@@ -18,34 +18,30 @@
 #include "input.h"
 
 
-/*typedef enum {
+typedef enum {
 	STARTUP,
 	GUI,
 	LOADING,
 	CANCEL_LOADING,
 	GAME,
 	SHUTDOWN
-} GameState;
-*/
+} State;
+
  
 class Game : 
-	public OIS::KeyListener,
+	OIS::KeyListener,
 	OIS::MouseListener
 {
 
-public:
-	
+public:	
 	virtual ~Game();
 	
-	void startGame(GameState *gameState);
+	void startGame(State *State);
 	
-	void changeState(GameState *gameState);
-	void pushState(GameState *gameState());
-	void popState();
-	bool requestStateChange(GameState state);
+	bool requestStateChange(State state);
 	bool lockState();
 	bool unlockState();
-	GameState getCurrentState();
+	State getCurrentState();
 
 	void setFrameTime(float ms);
 	inline float getFrameTime() {return flFrameTime;};	
@@ -73,11 +69,11 @@ protected:
 	GameState *mIntroState;
 	GameState *mPlaystate;
 	GameState *mPauseState;
-	
+	GameState *mCurrentState;
+
 	bool bShutdown;
 	
 	float flFrameTime;
 	
-	std::vector<GameState*> mStates;
 	static Game *mGame;
 };

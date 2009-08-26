@@ -58,7 +58,23 @@ void Game::startGame(GameState *gameState) {
 	
 	//Setup input
 	mInput = InputHandler::getSingletonPtr();
+	mInput->initialise(mRenderWindow);
+	mInput->addKeyListener(this, "Game");
+	mInput->addMouseListener(this, "Game");
 	
+	// change to first state
+	this->changeState(gameState);
+	
+	while (!bShutdown) {
+		// Update InputHandler
+		mInput->capture();
+		// Update current state
+		mStates.back()->update();
+		// Render next frame
+		mRoot->renderOneFrame();
+		// make Windows happy
+		Ogre::WindowEventUtilities::messagePump();		
+	}
 	
 }
 
@@ -99,8 +115,8 @@ bool Game::configureGame() {
 	return true;
 }
 
-GameState Game::getCurrentState() {
-	return m_state;
+State Game::getCurrentState() {
+	return mState;
 }
 
 bool Game::lockState() {
@@ -133,13 +149,45 @@ bool Game::requestStateChange(GameState newState) {
 }
 
 void Game::setFrameTime(float ms) {
-	m_frame_time = ms;
+	flFrameTime = ms;
 }
 
-/*Game* Game::getSingletonPtr( void ){
+/* Another variant would be to give the InputHandler a Reference to the Game Object
+ and let the CurrentState be public (maybe protected by a Mutex) so that the InputHandler
+ can call the CurrentState directly.
+ */
+bool Game::keyPressed(const OIS::KeyEvent &evt) {
+	//Call KeyPressed of CurrentState
+	mCurrentState->keyPressed(evt);
+	return true;
+}
+
+bool Game::keyReleased(const OIS::KeyEvent &evt) {
+	//Call keyReleased of CurrentState
+	mCurrentState->keyReleased(evt);
+	return true;
+}
+
+bool Game::mouseMoved(const OIS::MouseEvent &evt) {
+	// You get the picture
+	mCurrentState->mouseMoved(evt);
+	return true;
+}
+
+bool Game::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
+	mCurrentState->mousePressed(evt);
+	return true;
+}
+
+bool Game::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
+	mCurrentState->mousePressed(evt);
+	return true;
+}
+
+Game* Game::getSingletonPtr(){
 	if (!mGame) {
 		mGame = new Game();
 	}
 	return mGame;
 }
-*/
+
