@@ -13,6 +13,7 @@
 PlayState* PlayState::mPlayState;
 
 void PlayState::enter(Ogre::RenderWindow* window) {
+	mGame = Game::getSingeltonPtr();
 	mRoot = Ogre::Root::getSingletonPtr();
 	mOverlayManager = Ogre::OverlayManager::getSingletonPtr();
 	mRenderWindow = window;
@@ -43,9 +44,9 @@ void PlayState::update() {
 void PlayState::keyPressed(const OIS::KeyEvent &evt) {}
 void PlayState::keyReleased(const OIS::KeyEvent &evt) {
 	if (evt.key == OIS::KC_SPACE) {
-		this->requestStateChange(PAUSE);
+		mGame->requestStateChange(PAUSE);
 	} else if(evt.key == OIS::KC_ESCAPE) {
-		this->requestStateChange(SHUTDOWN);		
+		mGame->requestStateChange(SHUTDOWN);		
 	}
 }
 

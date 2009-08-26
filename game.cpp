@@ -7,10 +7,17 @@
  *
  */
 
-#include "game.h"
-#include "OgreStringConverter.h"
+#include "game_state.h"
+#include "play_state.h"
+#include "intro_state.h"
+#include "pause_state.h"
 
-Game* Game::mGame;
+#include "game.h"
+
+#include "OgreStringConverter.h"
+#include <OgreWindowEventUtilities.h>
+
+Game* mGame;
 
 Game::Game() :
 	mRoot(0),
@@ -23,10 +30,10 @@ Game::Game() :
 
 
 Game::~Game() {
-	while (!mStates.empty()) {
+	/*while (!mStates.empty()) {
 		mStates.back()->exit();
 		mStates.pop_back();
-	}
+	} */
 	
 	if(mInput)
 		delete mInput;
@@ -40,7 +47,7 @@ Game::~Game() {
 		delete mRoot;
 }
 
-void Game::startGame(GameState *gameState) {
+void Game::startGame(GameState* gameState) {
 	// Initialise Ogre and any Resources.
 	mRoot = this->initOgre();
 	
@@ -63,13 +70,14 @@ void Game::startGame(GameState *gameState) {
 	mInput->addMouseListener(this, "Game");
 	
 	// change to first state
-	this->changeState(gameState);
+	m_state = STARTUP;
+	this->requestStateChange(STARTUP);
 	
 	while (!bShutdown) {
 		// Update InputHandler
 		mInput->capture();
 		// Update current state
-		mStates.back()->update();
+		mCurrentState->update();
 		// Render next frame
 		mRoot->renderOneFrame();
 		// make Windows happy
@@ -116,7 +124,7 @@ bool Game::configureGame() {
 }
 
 State Game::getCurrentState() {
-	return mState;
+	return m_state;
 }
 
 bool Game::lockState() {
@@ -124,12 +132,42 @@ bool Game::lockState() {
 		return m_locked = true;
 	else
 		return false;
+	return false;
 }
 
-bool Game::requestStateChange(GameState newState) {
+//this is kind of a hack
+GameState* Game::getState(State state) {
+	switch (state) {
+		case STARTUP:
+			return mIntroState;
+			break;
+		case GUI:
+			return mIntroState;
+			break;
+		case LOADING:
+			return mIntroState;
+			break;
+		case CANCEL_LOADING:
+			return mIntroState;
+			break;
+		case GAME:
+			return mPlayState;
+			break;
+		case SHUTDOWN:
+			return mPauseState;
+			break;
+		default:
+			return mCurrentState;
+			break;
+	}
+}
+
+
+bool Game::requestStateChange(State newState) {
 	if (m_state == STARTUP) {
 		m_locked = false;
 		m_state = newState;
+		mCurrentState = this->getState(newState);
 
 		return true;
 	}
@@ -142,6 +180,7 @@ bool Game::requestStateChange(GameState newState) {
 	if ((m_state == GUI || m_state == GAME || m_state == LOADING || m_state == CANCEL_LOADING) &&
 		(newState != STARTUP) && (newState != m_state)) {
 		m_state = newState;
+		mCurrentState = this->getState(newState);
 		return true;
 	}
 	else
@@ -175,12 +214,12 @@ bool Game::mouseMoved(const OIS::MouseEvent &evt) {
 }
 
 bool Game::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
-	mCurrentState->mousePressed(evt);
+	mCurrentState->mousePressed(evt, id);
 	return true;
 }
 
 bool Game::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
-	mCurrentState->mousePressed(evt);
+	mCurrentState->mousePressed(evt, id);
 	return true;
 }
 

@@ -44,6 +44,8 @@ private:
 	Ogre::Overlay *mMouseOverlay;
 	Ogre::OverlayElement *mMousePointer;
 	
+	Game *mGame;
+	
 	void createOverlays();
 	void hideOverlays();
 	Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);

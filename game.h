@@ -18,6 +18,7 @@
 #include "input.h"
 
 
+
 typedef enum {
 	STARTUP,
 	GUI,
@@ -27,33 +28,44 @@ typedef enum {
 	SHUTDOWN
 } State;
 
- 
+class GameState;
+
 class Game : 
-	OIS::KeyListener,
-	OIS::MouseListener
-{
-
-public:	
-	virtual ~Game();
+	public OIS::KeyListener,
+	public OIS::MouseListener {
 	
-	void startGame(State *State);
-	
-	bool requestStateChange(State state);
-	bool lockState();
-	bool unlockState();
-	State getCurrentState();
-
-	void setFrameTime(float ms);
-	inline float getFrameTime() {return flFrameTime;};	
-	static Game* getSingeltonPtr();
-
-protected:
+private:
 	Game();
+	/*Different Game States, probably should be replaced
+	 by something more flexible.
+	 */
+	GameState *mIntroState;
+	GameState *mPlayState;
+	GameState *mPauseState;
+	GameState *mCurrentState;
 	
+	GameState* getState(State state);
+	
+	// state variables
+	State m_state;
+	bool m_locked;
+		
+
+	
+	static Game *mGame;
+	
+	/* Directly Ogre related */
+	Ogre::Root *mRoot;
+	Ogre::RenderWindow *mRenderWindow;
+		
 	Ogre::Root* initOgre();
 	bool configureGame();
 	void initResources();
 	
+	/* Inputhandling */
+	
+	InputHandler *mInput;
+		
 	bool mouseMoved(const OIS::MouseEvent &evt);
 	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
@@ -61,19 +73,25 @@ protected:
 	bool keyPressed(const OIS::KeyEvent &evt);
 	bool keyReleased(const OIS::KeyEvent &evt);
 	
-	Ogre::Root *mRoot;
-	Ogre::RenderWindow *mRenderWindow;
-	InputHandler *mInput;
-	
-	
-	GameState *mIntroState;
-	GameState *mPlaystate;
-	GameState *mPauseState;
-	GameState *mCurrentState;
-
+	// are we shutting down?
 	bool bShutdown;
-	
+	// time since last frame
 	float flFrameTime;
 	
-	static Game *mGame;
+	
+	
+public:	
+	virtual ~Game();
+	
+	void startGame(GameState *State);
+	
+	bool requestStateChange(State state);
+	bool lockState();
+	bool unlockState();
+	State getCurrentState();
+
+	void setFrameTime(float ms);
+	inline float getFrameTime() {return flFrameTime;};
+		
+	static Game* getSingeltonPtr();
 };
