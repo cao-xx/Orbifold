@@ -51,5 +51,5 @@ env.Program(
    target = 'main',
    # Replace these with your source files of course
    source = [
-       'main.cpp', 'game.cpp', 'input.cpp', 'game_state.cpp', 'play_state.cpp'])
+       'Main.cpp', 'Game.cpp', 'Input.cpp', 'GameState.cpp', 'PlayState.cpp'])
 
