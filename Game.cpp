@@ -1,5 +1,5 @@
 /*
- *  game.cpp
+ *  Game.cpp
  *  Prototyp
  *
  *  Created by Christian Pehle on 24.08.09.
@@ -11,11 +11,11 @@
 	#include <Carbon/Carbon.h>
 #endif
 */
-#include "game_state.h"
-#include "play_state.h"
-#include "intro_state.h"
-#include "pause_state.h"
-#include "game.h"
+#include "GameState.h"
+#include "PlayState.h"
+#include "IntroState.h"
+#include "PauseState.h"
+#include "Game.h"
 #include <OgreWindowEventUtilities.h>
 #include <Ogre.h>
 
@@ -98,7 +98,7 @@ void Game::startGame(){
 
 void Game::initResources(){
   // Load resource path from config file
-  Ogre::ConfigFile cf;
+  /*Ogre::ConfigFile cf;
   cf.load("resources.cfg");
   
   // Iterate through all settings in the file
@@ -110,7 +110,7 @@ void Game::initResources(){
     
     Ogre::ConfigFile::SettingsMultMap *mapSettings = itSection.getNext();
     Ogre::ConfigFile::SettingsMultMap::iterator itSettings = mapSettings->begin();
-  }
+    } */
 	Ogre::ResourceGroupManager &resources=Ogre::ResourceGroupManager::getSingleton();
 	resources.addResourceLocation("data","FileSystem");
 	resources.initialiseAllResourceGroups();

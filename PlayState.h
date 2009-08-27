@@ -1,5 +1,5 @@
 /*
- *  play_state.h
+ *  PlayState.h
  *  Prototyp
  *
  *  Created by Christian Pehle on 26.08.09.
@@ -11,8 +11,8 @@
 
 #include <OgreCamera.h>
 
-#include "game_state.h"
-#include "pause_state.h"
+#include "GameState.h"
+#include "PauseState.h"
 
 
 class PlayState : public GameState {

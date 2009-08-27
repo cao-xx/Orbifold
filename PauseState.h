@@ -1,5 +1,5 @@
 /*
- *  pause_state.h
+ *  PauseState.h
  *  Prototyp
  *
  *  Created by Christian Pehle on 26.08.09.

@@ -1,5 +1,5 @@
 /*
- *  game_state.h
+ *  GameState.h
  *  Prototyp
  *
  *  Created by Christian Pehle on 26.08.09.
@@ -18,8 +18,8 @@
 #include <OgreOverlayManager.h>
 #include <OgreStringConverter.h>
 
-#include "game.h"
-#include "input.h"
+#include "Game.h"
+#include "Input.h"
 
 class GameState {
 public:

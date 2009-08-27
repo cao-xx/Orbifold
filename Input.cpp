@@ -1,5 +1,5 @@
 /*
- *  input.cpp
+ *  Input.cpp
  *  Prototyp
  *
  *  Created by Christian Pehle on 24.08.09.
@@ -7,9 +7,9 @@
  *
  */
 
-#include "input.h"
+#include "Input.h"
 #include "OgreStringConverter.h"
-#include "game.h"
+#include "Game.h"
 
 InputHandler* InputHandler::mInputHandler;
 

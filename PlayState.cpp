@@ -1,5 +1,5 @@
 /*
- *  play_state.cpp
+ *  PlayState.cpp
  *  Prototyp
  *
  *  Created by Christian Pehle on 26.08.09.
@@ -7,7 +7,7 @@
  *
  */
 
-#include "play_state.h"
+#include "PlayState.h"
 #include <OgreTextureUnitState.h>
 
 

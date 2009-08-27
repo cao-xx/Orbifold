@@ -1,5 +1,5 @@
 /*
- *  game_state.cpp
+ *  GameState.cpp
  *  Prototyp
  *
  *  Created by Christian Pehle on 26.08.09.
@@ -7,6 +7,6 @@
  *
  */
 
-#include "game_state.h"
+#include "GameState.h"
 
 

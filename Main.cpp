@@ -3,7 +3,7 @@ Author: Christian Pehle
 */
 
 
-#include "game.h"
+#include "Game.h"
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

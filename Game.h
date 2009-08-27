@@ -1,5 +1,5 @@
 /*
- *  game.h
+ *  Game.h
  *  Prototyp
  *
  *  Created by Christian Pehle on 24.08.09.
@@ -18,7 +18,7 @@
 #include <OgreConfigFile.h>
 #include <OgreRenderWindow.h>
 
-#include "input.h"
+#include "Input.h"
 
 typedef enum {
 	STARTUP,

@@ -1,5 +1,5 @@
 /*
- *  intro_state.h
+ *  IntroState.h
  *  Prototyp
  *
  *  Created by Christian Pehle on 26.08.09.
@@ -9,8 +9,8 @@
 #ifndef IntroState_H
 #define IntroState_H
 
-#include "play_state.h"
-#include "game_state.h"
+#include "PlayState.h"
+#include "GameState.h"
 
 class IntroState : public GameState {
 public:
