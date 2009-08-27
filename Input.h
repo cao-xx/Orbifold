@@ -1,5 +1,5 @@
 /*
- *  input.h
+ *  Input.h
  *  Prototyp
  *
  *  Created by Christian Pehle on 24.08.09.
@@ -22,65 +22,69 @@ class InputHandler :
 	public OIS::MouseListener,
 	public OIS::KeyListener
 {
-	private :
-		InputHandler();
+public:
 
-		OIS::InputManager *mInputSystem;
-		OIS::Mouse *mMouse;
-		OIS::Keyboard *mKeyboard;
+  void static initialise(Ogre::RenderWindow *window);
+  void static shutdown();
 
-		static InputHandler *mInputHandler;
+  void capture();
+  void updateWindowDimensions(int height, int width);
 
-		unsigned long m_hWnd;
-		//Game *m_game;
+  //Mouse
+ 
+  void addMouseListener(OIS::MouseListener *mouseListener, const std::string& instanceName);
+  void removeMouseListener(const std::string& instanceName);
+  void removeMouseListener(OIS::MouseListener *mouseListener);
+  void removeAllMouseListeners();
 
-		std::map<std::string, OIS::KeyListener*> mKeyListeners;
-		std::map<std::string, OIS::MouseListener*> mMouseListeners;
+  //Keyboard
 
-		std::map<std::string, OIS::KeyListener*>::iterator itKeyListener;
-		std::map<std::string, OIS::MouseListener*>::iterator itMouseListener;
+  void addKeyListener(OIS::KeyListener *keyListener, const std::string& instanceName);
+  void removeKeyListener(const std::string& instanceName);
+  void removeKeyListener(OIS::KeyListener *keyListener);
+  void removeAllKeyListeners();
+  
+  //
 
-		std::map<std::string, OIS::KeyListener*>::iterator itKeyListenerEnd;
-		std::map<std::string, OIS::MouseListener*>::iterator itMouseListenerEnd;
+  void removeAllListeners();  
+  
+  //Callbacks
 
-	public:
-		~InputHandler();
+  bool mouseMoved(const OIS::MouseEvent &evt);
+  bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID);
+  bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID);
+  
+  bool keyPressed(const OIS::KeyEvent &evt);
+  bool keyReleased(const OIS::KeyEvent &evt);
 
-		//void initialise(Game *game, Ogre::RenderWindow *window);
-		void initialise(Ogre::RenderWindow *window);
-		void setWindowDimensions(int width, int height);
-		void capture();
+  //
 
-		// Listeners
+  OIS::Mouse* getMouse();
+  OIS::Keyboard* getKeyboard();  
 
-		// MouseListener
-		void addMouseListener(OIS::MouseListener *mouseListener, const std::string& instanceName);
-		void removeMouseListener(const std::string& instanceName);
-		void removeMouseListener(OIS::MouseListener *mouseListener);
-		void removeAllMouseListeners();
+protected:
 
-		bool mouseMoved(const OIS::MouseEvent &evt);
-		bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID);
-		bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID);
+  static Input* instance;
 
-		//Keylistener
-		void addKeyListener(OIS::KeyListener *keyListener, const std::string& instanceName);
-		void removeKeyListener(const std::string& instanceName);
-		void removeKeyListener(OIS::KeyListener *keyListener);
-		void removeAllKeyListeners();
+  OIS::InputManager *inputsystem;
+  OIS::Mouse *mouse;
+  OIS::Keyboard *keyboard;
 
-		bool keyPressed(const OIS::KeyEvent &evt);
-		bool keyReleased(const OIS::KeyEvent &evt);
+  std::map<std::string, OIS::KeyListener*> keyListeners;
+  std::map<std::string, OIS::MouseListener*> mouseListeners;
+  
+  std::map<std::string, OIS::KeyListener*>::iterator itKeyListener;
+  std::map<std::string, OIS::MouseListener*>::iterator itMouseListener;
 
-		//
+  std::map<std::string, OIS::KeyListener*>::iterator itKeyListenerEnd;
+  std::map<std::string, OIS::MouseListener*>::iterator itMouseListenerEnd;
 
-		void removeAllListeners();
+private:
 
-		//
+  InputHandler();
+  ~InputHandler();
 
-		OIS::Mouse* getMouse();
-		OIS::Keyboard* getKeyboard();
+  unsigned long hWnd;
 
-		static InputHandler* getSingletonPtr();
 };
 #endif
