@@ -27,11 +27,13 @@ public:
   void static initialise(Ogre::RenderWindow *window);
   void static shutdown();
 
+  InputHandler* getSingletonPtr();
+
   void capture();
   void updateWindowDimensions(int height, int width);
 
   //Mouse
- 
+
   void addMouseListener(OIS::MouseListener *mouseListener, const std::string& instanceName);
   void removeMouseListener(const std::string& instanceName);
   void removeMouseListener(OIS::MouseListener *mouseListener);
@@ -43,24 +45,24 @@ public:
   void removeKeyListener(const std::string& instanceName);
   void removeKeyListener(OIS::KeyListener *keyListener);
   void removeAllKeyListeners();
-  
+
   //
 
-  void removeAllListeners();  
-  
+  void removeAllListeners();
+
   //Callbacks
 
   bool mouseMoved(const OIS::MouseEvent &evt);
   bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID);
   bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID);
-  
+
   bool keyPressed(const OIS::KeyEvent &evt);
   bool keyReleased(const OIS::KeyEvent &evt);
 
   //
 
   OIS::Mouse* getMouse();
-  OIS::Keyboard* getKeyboard();  
+  OIS::Keyboard* getKeyboard();
 
 protected:
 
@@ -72,7 +74,7 @@ protected:
 
   std::map<std::string, OIS::KeyListener*> keyListeners;
   std::map<std::string, OIS::MouseListener*> mouseListeners;
-  
+
   std::map<std::string, OIS::KeyListener*>::iterator itKeyListener;
   std::map<std::string, OIS::MouseListener*>::iterator itMouseListener;
 
@@ -83,8 +85,6 @@ private:
 
   InputHandler();
   ~InputHandler();
-
-  unsigned long hWnd;
 
 };
 #endif
