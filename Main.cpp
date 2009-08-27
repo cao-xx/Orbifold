@@ -13,12 +13,8 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT){
 #else
 int main(int argc, char **argv){
 #endif
+  Game::start();
 
-
-	Game *game = Game::getSingletonPtr();
-	game->startGame();
-
-	delete game;
-	return 0;
+  return 0;
 }
 

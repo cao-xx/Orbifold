@@ -27,7 +27,7 @@ public:
   void static initialise(Ogre::RenderWindow *window);
   void static shutdown();
 
-  InputHandler* getSingletonPtr();
+  static InputHandler* getSingleton();
 
   void capture();
   void updateWindowDimensions(int height, int width);
@@ -66,12 +66,15 @@ public:
 
 protected:
 
-  static Input* instance;
+  static InputHandler* instance;
 
   OIS::InputManager *inputsystem;
   OIS::Mouse *mouse;
   OIS::Keyboard *keyboard;
-
+	
+  void initMouse(Ogre::RenderWindow* window);
+  void initKeyboard();
+  
   std::map<std::string, OIS::KeyListener*> keyListeners;
   std::map<std::string, OIS::MouseListener*> mouseListeners;
 

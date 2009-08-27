@@ -25,17 +25,9 @@
 
 #include "Input.h"
 
-typedef enum {
-	STARTUP,
-	GUI,
-	LOADING,
-	PAUSE,
-	CANCEL_LOADING,
-	GAME,
-	SHUTDOWN
-} Status;
 
-class GameState;
+//class GameState;
+class InputHandler;
 
 class Game :
   public OIS::KeyListener,
@@ -54,28 +46,23 @@ protected:
   
   Ogre::Root* ogre;
   Ogre::RenderWindow* window;
-  InputManager* input;
-  GameState* state;
+  InputHandler* input;
+  //GameState* state;
   
   static Game* getSingleton();
 
-  void init();
+  void initialise();
   void initOgreRoot();
   void initOgreResources();
   void initRenderWindow();
   void initInput();
 
+  Ogre::Camera* Game::createCamera(Ogre::SceneManager *, Ogre::RenderWindow *);
+
 private:
   Game();
   ~Game();
-
-
-
-
-	/* Inputhandling */
-
-	InputHandler *mInput;
-
+	  
 	bool mouseMoved(const OIS::MouseEvent &evt);
 	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
@@ -88,9 +75,7 @@ private:
 	// time since last frame
 	float flFrameTime;
 
-
-
-public:
+	  /*
 	bool requestStateChange(State state);
 	bool lockState();
 	bool unlockState();
@@ -98,6 +83,6 @@ public:
 
 	void setFrameTime(float ms);
 	inline float getFrameTime() {return flFrameTime;};
-
+*/
 };
 #endif

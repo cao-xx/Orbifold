@@ -36,7 +36,7 @@ InputHandler::~InputHandler() {
 
 InputHandler* InputHandler::instance = 0;
 
-InputHandler* InputHandler::getSingletonPtr() {
+InputHandler* InputHandler::getSingleton() {
   if(!instance)
     instance = new InputHandler();
   return instance;
@@ -45,7 +45,7 @@ InputHandler* InputHandler::getSingletonPtr() {
 // InputHandler::initialise : Set up a buffered Mouse and Keyboard.
 void InputHandler::initialise(Ogre::RenderWindow *window) {
 
-  InputHandler* hdl = InputHandler::getSingletonPtr();
+  InputHandler* hdl = InputHandler::getSingleton();
 
   // get window handle
 
@@ -62,28 +62,34 @@ void InputHandler::initialise(Ogre::RenderWindow *window) {
   hdl->inputsystem = OIS::InputManager::createInputSystem(pl);
 
   // if possible create a buffered mouse
-
-  if (hdl->inputsystem->getNumberOfDevices(OIS::OISMouse) > 0) {
-    hdl->mouse = static_cast<OIS::Mouse*>(mInputSystem->createInputObject(OIS::OISMouse, true));
-    hdl->mouse->setEventCallback(this);
-
-    // get window metrics and set initial mouse region
-
-    unsigned int width, height, depth;
-    int left, top;
-    window->getMetrics(width, height, depth, left, top);
-
-    hdl->updateWindowDimensions(width, height);
-  }
+	hdl->initMouse(window);
+	hdl->initKeyboard();
 
   // and create a buffered keyboard
 
-  if ( mInputSystem->getNumberOfDevices(OIS::OISKeyboard) > 0) {
-    hdl->keyboard = static_cast<OIS::Keyboard*>(mInputSystem->createInputObject(OIS::OISKeyboard, true));
-    mKeyboard->setEventCallback(this);
-  }
 }
 
+void InputHandler::initMouse(Ogre::RenderWindow *window){
+	if (this->inputsystem->getNumberOfDevices(OIS::OISMouse) > 0) {
+		this->mouse = static_cast<OIS::Mouse*>(this->inputsystem->createInputObject(OIS::OISMouse, true));
+		this->mouse->setEventCallback(this);
+		
+		// get window metrics and set initial mouse region
+		
+		unsigned int width, height, depth;
+		int left, top;
+		window->getMetrics(width, height, depth, left, top);
+		
+		this->updateWindowDimensions(width, height);
+	}
+}
+
+void InputHandler::initKeyboard() {
+	if ( this->inputsystem->getNumberOfDevices(OIS::OISKeyboard) > 0) {
+		this->keyboard = static_cast<OIS::Keyboard*>(this->inputsystem->createInputObject(OIS::OISKeyboard, true));
+		this->keyboard->setEventCallback(this);
+	}
+}
 
 void InputHandler::capture() {
   this->mouse->capture();
