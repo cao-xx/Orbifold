@@ -16,7 +16,6 @@
 
 #include <OgreRenderWindow.h>
 
-class Game;
 
 class InputHandler :
 	public OIS::MouseListener,

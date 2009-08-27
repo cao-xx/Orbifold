@@ -26,8 +26,6 @@
 #include "Input.h"
 
 
-//class GameState;
-class InputHandler;
 
 class Game :
   public OIS::KeyListener,
