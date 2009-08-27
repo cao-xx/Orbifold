@@ -15,6 +15,7 @@
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
 		AABE88011047048A0090CB0C /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88001047048A0090CB0C /* Main.cpp */; };
+		AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88E81047216F0090CB0C /* PlayState.cpp */; };
 		AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AB33103D5A1A00F445AD /* Cg.framework */; };
 		AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC2C103D5A7700F445AD /* IOKit.framework */; };
 		AAD6AC31103D5B5A00F445AD /* libois.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC30103D5B5A00F445AD /* libois.a */; };
@@ -51,6 +52,9 @@
 		AABE87FD1047047F0090CB0C /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		AABE87FE1047047F0090CB0C /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
 		AABE88001047048A0090CB0C /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
+		AABE88AB10471DDF0090CB0C /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		AABE88E81047216F0090CB0C /* PlayState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayState.cpp; sourceTree = "<group>"; };
+		AABE88E91047216F0090CB0C /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayState.h; sourceTree = "<group>"; };
 		AAD6AB33103D5A1A00F445AD /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = ../../OgreSDK/Dependencies/Cg.framework; sourceTree = SOURCE_ROOT; };
 		AAD6AC2C103D5A7700F445AD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		AAD6AC30103D5B5A00F445AD /* libois.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libois.a; path = ../../OgreSDK/Dependencies/lib/Release/libois.a; sourceTree = SOURCE_ROOT; };
@@ -96,6 +100,9 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AABE88E81047216F0090CB0C /* PlayState.cpp */,
+				AABE88E91047216F0090CB0C /* PlayState.h */,
+				AABE88AB10471DDF0090CB0C /* GameState.h */,
 				AABE88001047048A0090CB0C /* Main.cpp */,
 				AABE87FD1047047F0090CB0C /* Input.cpp */,
 				AABE87FE1047047F0090CB0C /* Input.h */,
@@ -184,6 +191,7 @@
 				AABE87FC104704710090CB0C /* Game.cpp in Sources */,
 				AABE87FF1047047F0090CB0C /* Input.cpp in Sources */,
 				AABE88011047048A0090CB0C /* Main.cpp in Sources */,
+				AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

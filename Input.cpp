@@ -27,6 +27,7 @@ InputHandler::~InputHandler() {
       this->inputsystem->destroyInputObject(this->mouse);
     if(this->keyboard)
       this->inputsystem->destroyInputObject(this->keyboard);
+	this->inputsystem->destroyInputSystem(this->inputsystem);
   }
 
   this->keyListeners.clear();

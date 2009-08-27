@@ -58,8 +58,8 @@ protected:
   Ogre::Camera* Game::createCamera(Ogre::SceneManager *, Ogre::RenderWindow *);
 
 private:
-  Game();
-  ~Game();
+	Game();
+	~Game();
 	  
 	bool mouseMoved(const OIS::MouseEvent &evt);
 	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);

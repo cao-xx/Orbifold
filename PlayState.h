@@ -12,47 +12,55 @@
 #include <OgreCamera.h>
 
 #include "GameState.h"
-#include "PauseState.h"
+//#include "PauseState.h"
 
 
 class PlayState : public GameState {
+
 public:
-  //~PlayState();
 
-	void enter(Ogre::RenderWindow* window);
-	void exit();
+  static void enter(Ogre::RenderWindow* window);
+  static void exit();
 
-	void pause();
-	void resume();
-	void update();
+  void pause();
+  void resume();
 
-	void keyPressed(const OIS::KeyEvent &evt);
-	void keyReleased(const OIS::KeyEvent &evt);
+  // Update
+  static void update();
+  static void update(float ms);
 
-	void mouseMoved(const OIS::MouseEvent &evt);
-	void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-	void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  static PlayState* getSingleton();
 
-	static PlayState* getSingletonPtr();
+  // 	
+  void keyPressed(const OIS::KeyEvent &evt);
+  void keyReleased(const OIS::KeyEvent &evt);
+
+  void mouseMoved(const OIS::MouseEvent &evt);
+  void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+
+protected:
+
+  static PlayState* instance;
+
+  Ogre::Root *ogre;
+  Ogre::RenderWindow *window;
+  Ogre::SceneManager *scene;
+  Ogre::Camera *camera;
+  Ogre::OverlayManager *overlayMgr;
+  Ogre::Overlay *mouseOverlay;
+  Ogre::OverlayElement *mousePointer;
+
+  Game *game;
+	
+  void createOverlays();
+  void hideOverlays();
+  Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
+
 private:
-	PlayState() {}
-	static PlayState *mPlayState;
 
-	Ogre::Root *mRoot;
-	Ogre::Camera *mCamera;
-	Ogre::SceneManager *mSceneManager;
-	Ogre::RenderWindow *mRenderWindow;
-	Ogre::Viewport *mViewport;
-	Ogre::OverlayManager *mOverlayManager;
-	// There will be more Overlays.
-	Ogre::Overlay *mMouseOverlay;
-	Ogre::OverlayElement *mMousePointer;
-
-	Game *mGame;
-
-	void createOverlays();
-	void hideOverlays();
-	Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
+  PlayState();
+  ~PlayState();
 
 };
 #endif

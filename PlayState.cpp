@@ -11,26 +11,56 @@
 #include <OgreTextureUnitState.h>
 
 
-PlayState* PlayState::mPlayState;
+PlayState::PlayState() {
+  this->ogre = 0;
+  this->window = 0;
+  this->scene = 0;
+  this->game = 0;
+  this->overlayMgr = 0;
+  this->mouseOverlay = 0;
+  this->mousePointer = 0;
+}
+
+PlayState::~PlayState() {
+  if(this->instance) {
+    delete this->instance;
+  }
+}
+
+
+PlayState* PlayState::instance = 0;
+
+
+PlayState* PlayState::getSingleton() {
+  if(!instance) {
+    instance = new Playstate();
+  }
+  return instance;
+}
+
 
 void PlayState::enter(Ogre::RenderWindow* window) {
-	mGame = Game::getSingletonPtr();
-	mRoot = Ogre::Root::getSingletonPtr();
-	mOverlayManager = Ogre::OverlayManager::getSingletonPtr();
-	mRenderWindow = window;
-	mSceneManager = mRoot->getSceneManager("ST_GENERIC");
 
-	mCamera = this->createCamera(mSceneManager, mRenderWindow);
-	//this->createOverlays();
+  PlayState* state = PlayState::getSingleton();
+  state->ogre = Ogre::Root::getSingletonPtr();
+  state->window = window;
+  state->game = Game::getSingleton();
+
+  state->overlayMgr = Ogre::OverlayManager::getSingletonPtr();
+  
+  state->scene = state->ogre->getSceneManager("ST_GENERIC");
+
+  state->camera = state->createCamera(state->scene, state->window);
 
 }
 
 
 void PlayState::exit() {
+  PlayState* state = PlayState::getSingleton();
 	//this->hideOverlays();
-	mSceneManager->clearScene();
-	mSceneManager->destroyAllCameras();
-	mRenderWindow->removeAllViewports();
+  state->scene->clearScene();
+  state->scene->destroyAllCameras();
+  state->window->removeAllViewports();
 }
 
 // A lot of stubs.
@@ -43,17 +73,17 @@ void PlayState::update() {}
 void PlayState::keyPressed(const OIS::KeyEvent &evt) {}
 void PlayState::keyReleased(const OIS::KeyEvent &evt) {
 	if (evt.key == OIS::KC_SPACE) {
-		mGame->requestStateChange(PAUSE);
+	  //mGame->requestStateChange(PAUSE);
 	} else if(evt.key == OIS::KC_ESCAPE) {
-		mGame->requestStateChange(SHUTDOWN);
+	  //this->game->requestStateChange(SHUTDOWN);
 	}
 }
 
 void PlayState::mouseMoved(const OIS::MouseEvent &evt) {
-	const OIS::MouseState &mouseState = evt.state;
-	// Update Mousepointer on Screen, might be smoother if moved by relative change.
-	mMousePointer->setTop(mouseState.Y.abs);
-	mMousePointer->setLeft(mouseState.X.abs);
+  //const OIS::MouseState &mouseState = evt.state;
+  // Update Mousepointer on Screen, might be smoother if moved by relative change.
+  // mMousePointer->setTop(mouseState.Y.abs);
+  // mMousePointer->setLeft(mouseState.X.abs);
 }
 
 void PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {}
@@ -77,11 +107,4 @@ Ogre::Camera* PlayState::createCamera(Ogre::SceneManager *sceneMgr, Ogre::Render
 	cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
 
 	return cam;
-}
-
-
-PlayState* PlayState::getSingletonPtr() {
-	if(!mPlayState)
-		mPlayState = new PlayState();
-	return mPlayState;
 }
