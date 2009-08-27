@@ -7,16 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D0C4E900486CD37000505A6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 20286C2BFDCF999611CA2CEA /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
-		AA699C8C104334EB00D41692 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA699C8A104334EB00D41692 /* game.cpp */; };
-		AA699C90104335EB00D41692 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA699C8F104335EB00D41692 /* input.cpp */; };
 		AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
 		AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
 		AA97667C1044249E005C3F5F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA97667B1044249E005C3F5F /* OpenAL.framework */; };
-		AAA679651044A74400B85DD7 /* game_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA679641044A74400B85DD7 /* game_state.cpp */; };
-		AAA67DBE10459D7F00B85DD7 /* play_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAA67DBC10459D7F00B85DD7 /* play_state.cpp */; };
 		AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAA63041042D8DE00A475D5 /* Ogre.framework */; };
+		AABE87DE1046C0ED0090CB0C /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87DB1046C0ED0090CB0C /* Application.cpp */; };
+		AABE87DF1046C0ED0090CB0C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87DD1046C0ED0090CB0C /* main.cpp */; };
 		AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AB33103D5A1A00F445AD /* Cg.framework */; };
 		AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC2C103D5A7700F445AD /* IOKit.framework */; };
 		AAD6AC31103D5B5A00F445AD /* libois.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC30103D5B5A00F445AD /* libois.a */; };
@@ -42,21 +39,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		20286C2BFDCF999611CA2CEA /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D0C4E970486CD37000505A6 /* Prototyp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA699C8A104334EB00D41692 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
-		AA699C8B104334EB00D41692 /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
-		AA699C8E104335EB00D41692 /* input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input.h; sourceTree = "<group>"; };
-		AA699C8F104335EB00D41692 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		AA9765D310440B1B005C3F5F /* OIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OIS.framework; path = ../../../Library/Frameworks/OIS.framework; sourceTree = SOURCE_ROOT; };
 		AA97667B1044249E005C3F5F /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
-		AAA679631044A74400B85DD7 /* game_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_state.h; sourceTree = "<group>"; };
-		AAA679641044A74400B85DD7 /* game_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_state.cpp; sourceTree = "<group>"; };
-		AAA67DBC10459D7F00B85DD7 /* play_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = play_state.cpp; sourceTree = "<group>"; };
-		AAA67DBD10459D7F00B85DD7 /* play_state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = play_state.h; sourceTree = "<group>"; };
 		AAAA63041042D8DE00A475D5 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = ../../../Library/Frameworks/Ogre.framework; sourceTree = SOURCE_ROOT; };
+		AABE87DB1046C0ED0090CB0C /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../CHAOs/Application.cpp; sourceTree = SOURCE_ROOT; };
+		AABE87DC1046C0ED0090CB0C /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../CHAOs/Application.h; sourceTree = SOURCE_ROOT; };
+		AABE87DD1046C0ED0090CB0C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../CHAOs/main.cpp; sourceTree = SOURCE_ROOT; };
+		AABE87F91046C2640090CB0C /* InputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
 		AAD6AB33103D5A1A00F445AD /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = ../../OgreSDK/Dependencies/Cg.framework; sourceTree = SOURCE_ROOT; };
 		AAD6AC2C103D5A7700F445AD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		AAD6AC30103D5B5A00F445AD /* libois.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libois.a; path = ../../OgreSDK/Dependencies/lib/Release/libois.a; sourceTree = SOURCE_ROOT; };
@@ -102,15 +94,10 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AAA67DBC10459D7F00B85DD7 /* play_state.cpp */,
-				AAA67DBD10459D7F00B85DD7 /* play_state.h */,
-				AA699C8A104334EB00D41692 /* game.cpp */,
-				AAA679631044A74400B85DD7 /* game_state.h */,
-				AAA679641044A74400B85DD7 /* game_state.cpp */,
-				AA699C8B104334EB00D41692 /* game.h */,
-				20286C2BFDCF999611CA2CEA /* main.cpp */,
-				AA699C8E104335EB00D41692 /* input.h */,
-				AA699C8F104335EB00D41692 /* input.cpp */,
+				AABE87F91046C2640090CB0C /* InputManager.h */,
+				AABE87DB1046C0ED0090CB0C /* Application.cpp */,
+				AABE87DC1046C0ED0090CB0C /* Application.h */,
+				AABE87DD1046C0ED0090CB0C /* main.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -191,11 +178,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D0C4E900486CD37000505A6 /* main.cpp in Sources */,
-				AA699C8C104334EB00D41692 /* game.cpp in Sources */,
-				AA699C90104335EB00D41692 /* input.cpp in Sources */,
-				AAA679651044A74400B85DD7 /* game_state.cpp in Sources */,
-				AAA67DBE10459D7F00B85DD7 /* play_state.cpp in Sources */,
+				AABE87DE1046C0ED0090CB0C /* Application.cpp in Sources */,
+				AABE87DF1046C0ED0090CB0C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

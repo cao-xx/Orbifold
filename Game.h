@@ -10,6 +10,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#if WIN32
+#elif LINUX
+#else
+#include <Carbon/Carbon.h>
+#endif
 
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
@@ -30,40 +35,42 @@ typedef enum {
 	SHUTDOWN
 } State;
 
-
 class GameState;
 
 class Game :
-	public OIS::KeyListener,
-	public OIS::MouseListener {
+  public OIS::KeyListener,
+  public OIS::MouseListener {
+  
+public:
+  
+  void static start();
+  
+  void static stop();
+  
+protected:
+  
+  static Game* instance;
+	  
+  bool running;
+
+  State state;
+  
+  Ogre::Root* ogre;
+  Ogre::RenderWindow* window;
+
+  static Game* getSingleton();
+
+  void initOgreRoot();
+
+  void initOgreResources();
 
 private:
-	Game();
-	/*Different Game States, probably should be replaced
-	 by something more flexible.
-	 */
-	GameState *mIntroState;
-	GameState *mPlayState;
-	GameState *mPauseState;
-	GameState *mCurrentState;
+  Game();
+  ~Game();
 
-	GameState* getState(State state);
-
-	// state variables
-	State m_state;
-	bool m_locked;
+  GameState* getState(State state);
 
 
-
-	static Game *mGame;
-
-	/* Directly Ogre related */
-	Ogre::Root *mRoot;
-	Ogre::RenderWindow *mRenderWindow;
-
-	Ogre::Root* initOgre();
-	bool configureGame();
-	void initResources();
 
 	/* Inputhandling */
 
@@ -84,11 +91,6 @@ private:
 
 
 public:
-	virtual ~Game();
-
-	void startGame(GameState *State);
-	void startGame();
-
 	bool requestStateChange(State state);
 	bool lockState();
 	bool unlockState();
@@ -97,6 +99,5 @@ public:
 	void setFrameTime(float ms);
 	inline float getFrameTime() {return flFrameTime;};
 
-	static Game* getSingletonPtr();
 };
 #endif

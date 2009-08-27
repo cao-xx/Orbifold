@@ -7,7 +7,7 @@
  *
  */
 
-#include "intro_state.h"
+#include "IntroState.h"
 
 IntroState* IntroState::mIntroState;
 
