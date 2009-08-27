@@ -14,20 +14,21 @@
 #include "GameState.h"
 //#include "PauseState.h"
 
+class Game;
 
 class PlayState : public GameState {
 
 public:
 
-  static void enter(Ogre::RenderWindow* window);
-  static void exit();
+  void enter(Game* game, Ogre::RenderWindow* window);
+  void exit();
 
   void pause();
   void resume();
 
   // Update
-  static void update();
-  static void update(float ms);
+  void update();
+  void update(float ms);
 
   static PlayState* getSingleton();
 

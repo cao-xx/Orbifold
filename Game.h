@@ -25,7 +25,7 @@
 
 #include "Input.h"
 
-
+class GameState;
 
 class Game :
   public OIS::KeyListener,
@@ -45,7 +45,7 @@ protected:
   Ogre::Root* ogre;
   Ogre::RenderWindow* window;
   InputHandler* input;
-  //GameState* state;
+  GameState* state;
   
   static Game* getSingleton();
 

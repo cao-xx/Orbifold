@@ -8,8 +8,10 @@
  */
 
 #include "PlayState.h"
+#include "Game.h"
 #include <OgreTextureUnitState.h>
 
+class Game;
 
 PlayState::PlayState() {
   this->ogre = 0;
@@ -33,18 +35,18 @@ PlayState* PlayState::instance = 0;
 
 PlayState* PlayState::getSingleton() {
   if(!instance) {
-    instance = new Playstate();
+    instance = new PlayState();
   }
   return instance;
 }
 
 
-void PlayState::enter(Ogre::RenderWindow* window) {
+void PlayState::enter(Game* game, Ogre::RenderWindow* window) {
 
   PlayState* state = PlayState::getSingleton();
   state->ogre = Ogre::Root::getSingletonPtr();
   state->window = window;
-  state->game = Game::getSingleton();
+  state->game = game;
 
   state->overlayMgr = Ogre::OverlayManager::getSingletonPtr();
   

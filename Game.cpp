@@ -7,8 +7,8 @@
  *
  */
 
-//#include "GameState.h"
-//#include "PlayState.h"
+#include "GameState.h"
+#include "PlayState.h"
 //#include "IntroState.h"
 //#include "PauseState.h"
 #include "Game.h"
@@ -54,13 +54,15 @@ void Game::start(){
   game->running = true;
 
   Ogre::SceneManager* scene = game->ogre->createSceneManager(Ogre::ST_GENERIC);
-  Ogre::Camera *cam = game->createCamera(scene,game->window);
-  scene->getRootSceneNode()->createChildSceneNode()->attachObject(cam);
+  // Ogre::Camera *cam = game->createCamera(scene,game->window);
+
+  game->state = PlayState::getSingleton();
+  game->state->enter(game, game->window);
 
   int running = 1000;
   while(running--) {
     game->input->capture();
-    //game->state->update();
+    game->state->update();
     game->ogre->renderOneFrame();
     Ogre::WindowEventUtilities::messagePump();
   }	

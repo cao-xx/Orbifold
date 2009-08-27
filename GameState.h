@@ -18,14 +18,15 @@
 #include <OgreOverlayManager.h>
 #include <OgreStringConverter.h>
 
+#include "Game.h"
 
 class GameState {
 
 public:
-	static virtual void enter(Ogre::RenderWindow *window) = 0;
-	static virtual void exit() = 0;
+	virtual void enter(Game* game, Ogre::RenderWindow *window) = 0;
+	virtual void exit() = 0;
 		
-	static virtual void update() = 0;
+	virtual void update() = 0;
 		
 	virtual void keyPressed(const OIS::KeyEvent &evt) = 0;
 	virtual void keyReleased(const OIS::KeyEvent &evt) = 0;
@@ -34,8 +35,8 @@ public:
 	virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
 	virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
 
-private:
-	GameState();
-	~GameState();
+protected:
+	GameState(){}
+	~GameState(){}
 };
 #endif
