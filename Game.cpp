@@ -7,10 +7,6 @@
  *
  */
 
-/*#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-	#include <Carbon/Carbon.h>
-#endif
-*/
 #include "GameState.h"
 #include "PlayState.h"
 #include "IntroState.h"
@@ -19,133 +15,118 @@
 #include <OgreWindowEventUtilities.h>
 #include <Ogre.h>
 
-Game* Game::mGame;
 
-Game::Game() :
-	mRoot(0),
-	mInput(0),
-//	mIntroState(0),
-    mPlayState(0),
-//	mPauseState(0),
-	bShutdown(false) {
+
+Game::Game() {
+  this->running = false;
+  
+  this->ogre = 0;
+  this->window = 0;
+  this->state = 0;
 }
-
 
 Game::~Game() {
-	/*while (!mStates.empty()) {
-		mStates.back()->exit();
-		mStates.pop_back();
-	} */
-
-	if(mInput) {
-		delete mInput;
-		mInput = 0;
-	}
-//	if(mIntroState)
-//		delete mIntroState;
-	if(mPlayState) {
-		delete mPlayState;
-		mPlayState = 0;
-	}
-//	if(mPauseState)
-//		delete mPauseState;
-	if(mRoot) {
-		delete mRoot;
-		mRoot = 0;
-	}
+  if(!this->instance) {
+    if(this->running)
+      Game::stop();
+  delete this->instance;
+  }
+  if(!this->ogre)
+    delete this->ogre;
 }
 
-//void Game::startGame(GameState* gameState) {
-void Game::startGame(){
-	// Initialise Ogre and any Resources.
-	mRoot = this->initOgre();
+Game* Game::instance = 0;
 
-	if(!this->configureGame()) {
-		throw Ogre::Exception(Ogre::Exception::ERR_INTERNAL_ERROR,
-							  "Error -- Couldn't Configure RenderWindow",
-							  "Prototyp -- Error");
-		return;
-	}
-
-	mRoot->createSceneManager(Ogre::ST_GENERIC, "ST_GENERIC");
-	//Setup states
-//	mIntroState = IntroState::getSingletonPtr();
-	mPlayState = PlayState::getSingletonPtr();
-//	mPauseState = PauseState::getSingletonPtr();
-	//mCurrentState = mPlayState;
-	//Setup input
-	mInput = InputHandler::getSingletonPtr();
-	mInput->initialise(mRenderWindow);
-	mInput->addKeyListener(this, "Game");
-	mInput->addMouseListener(this, "Game");
-
-	// change to first state
-	m_state = STARTUP;
-	this->requestStateChange(GAME);
-	int running = 1000;
-	while (running--) {
-		// Update InputHandler
-		mInput->capture();
-		// Update current state
-		mCurrentState->update();
-		// Render next frame
-		mRoot->renderOneFrame();
-		// make Windows happy
-		Ogre::WindowEventUtilities::messagePump();
-	}
-
+Game* Game::getSingleton() {
+  if (!instance) {
+    instance = new Game();
+  }
+  return instance;
 }
 
-void Game::initResources(){
-  // Load resource path from config file
-  /*Ogre::ConfigFile cf;
-  cf.load("resources.cfg");
+
+
+void Game::start(){
+
+  Game* game = Game::getSingleton();
   
-  // Iterate through all settings in the file
-  Ogre::ConfigFile::SectionIterator itSection = cf.getSectionIterator();
-  
-  String sSection, sType, sArch;
-  while(itSection.hasMoreElements()) {
-    sSection = itSection.peekNextKey();
-    
-    Ogre::ConfigFile::SettingsMultMap *mapSettings = itSection.getNext();
-    Ogre::ConfigFile::SettingsMultMap::iterator itSettings = mapSettings->begin();
-    } */
-	Ogre::ResourceGroupManager &resources=Ogre::ResourceGroupManager::getSingleton();
-	resources.addResourceLocation("data","FileSystem");
-	resources.initialiseAllResourceGroups();
+  game->init();
+  game->running = true;
+
+  Ogre::SceneManager* scene = game->ogre->createSceneManager(Ogre::ST_GENERIC);
+  Ogre::Camera* cam = game->createCamera(scene,window);
+  scene->getRootSceneNode()->createChildSceneNode()->attachObject(cam);
+
+  int running = 1000;
+  while(running--) {
+    game->input->capture();
+    game->state->update();
+    game->ogre->renderOneFrame();
+    Ogre::WindowEventUtilities::messagePump();
+  }	
 }
 
-Ogre::Root* Game::initOgre(){
-	Ogre::Root* ogre = new Ogre::Root();
 
-#if defined(_DEBUG)
-	ogre->loadPlugin("RenderSystem_GL_d");
+void Game::init(){
+  this->initOgreRoot();
+  this->initOgreResources();
+  this->initRenderWindow();
+  this->initInput();
+}
+
+void Game::initInput() {
+  this->input = InputHandler::getSingletonPtr();
+  if(!this->window)
+    return;
+  this->input->initialise(this->window);
+  this->input->addMouseListener(this, "Game");
+  this->input->addKeyListener(this,"Game");
+}
+
+void Game::initOgreResources() 
+  if(!this->ogre)
+    return;
+
+  Ogre::ResourceGroupManager &resources = Ogre::ResourceGroupManager::getSingleton();
+  
+  resources.addResourceLocation("data","FileSystem");
+  resources.initialiseAllResourceGroups();
+}
+
+
+void Game::initRenderWindow() {
+  if(!this->ogre)
+    return;
+  this->ogre->initialise(false);
+  this->window = this->ogre->createRenderWindow("Prototyp", 800, 600, false, NULL); 
+}
+
+
+void Game::initOgreRoot() {
+  this->ogre = new Ogre::Root();
+
+#ifdef _DEBUG
+  ogre->loadPlugin("RenderSystem_GL_d");
 #else
-	ogre->loadPlugin("RenderSystem_GL");
+  ogre->loadPlugin("RenderSystem_GL");
 #endif
-	Ogre::RenderSystemList *rs = NULL;
-	Ogre::RenderSystemList::iterator r_it;
+  Ogre::RenderSystemList *rs = NULL;
+  Ogre::RenderSystemList::iterator r_it;
 
-	rs = ogre->getAvailableRenderers();
-	r_it = rs->begin();
+  rs = ogre->getAvailableRenderers();
+  r_it = rs->begin();
 
-	if(rs && rs->size() && rs->at(0)->getName().compare("RenderSystem_GL")){
-		Ogre::RenderSystem *r=rs->at(0);
-		ogre->setRenderSystem(r);
-	}else{
-		exit(1);
-	}
-
-	this->initResources();
-	return ogre;
+  if(rs && rs->size() && rs->at(0)->getName().compare("RenderSystem_GL")){
+    Ogre::RenderSystem *r=rs->at(0);
+    ogre->setRenderSystem(r);
+  }else{
+    exit(1);
+  }
 }
 
-bool Game::configureGame() {
-	mRoot->initialise(false);
-	mRenderWindow = mRoot->createRenderWindow("Prototyp", 800, 600, false, NULL);
-	return true;
-}
+
+
+
 
 State Game::getCurrentState() {
 	return m_state;
@@ -249,11 +230,3 @@ bool Game::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
 	mCurrentState->mousePressed(evt, id);
 	return true;
 }
-
-Game* Game::getSingletonPtr(){
-	if (!mGame) {
-		mGame = new Game();
-	}
-	return mGame;
-}
-

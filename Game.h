@@ -33,7 +33,7 @@ typedef enum {
 	CANCEL_LOADING,
 	GAME,
 	SHUTDOWN
-} State;
+} Status;
 
 class GameState;
 
@@ -43,8 +43,7 @@ class Game :
   
 public:
   
-  void static start();
-  
+  void static start(); 
   void static stop();
   
 protected:
@@ -52,23 +51,24 @@ protected:
   static Game* instance;
 	  
   bool running;
-
-  State state;
   
   Ogre::Root* ogre;
   Ogre::RenderWindow* window;
-
+  InputManager* input;
+  GameState* state;
+  
   static Game* getSingleton();
 
+  void init();
   void initOgreRoot();
-
   void initOgreResources();
+  void initRenderWindow();
+  void initInput();
 
 private:
   Game();
   ~Game();
 
-  GameState* getState(State state);
 
 
 
