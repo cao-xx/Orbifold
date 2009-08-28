@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
+		AA8DFC1C10483B7600DCB1B5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8DFC1B10483B7600DCB1B5 /* OpenAL.framework */; };
+		AA8DFC361048491600DCB1B5 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8DFC351048491600DCB1B5 /* Ogg.framework */; };
 		AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
 		AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
-		AA97667C1044249E005C3F5F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA97667B1044249E005C3F5F /* OpenAL.framework */; };
 		AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAA63041042D8DE00A475D5 /* Ogre.framework */; };
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
@@ -44,8 +45,9 @@
 		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D0C4E970486CD37000505A6 /* Prototyp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA8DFC1B10483B7600DCB1B5 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
+		AA8DFC351048491600DCB1B5 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../../../Library/Frameworks/Ogg.framework; sourceTree = SOURCE_ROOT; };
 		AA9765D310440B1B005C3F5F /* OIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OIS.framework; path = ../../../Library/Frameworks/OIS.framework; sourceTree = SOURCE_ROOT; };
-		AA97667B1044249E005C3F5F /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
 		AAAA63041042D8DE00A475D5 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = ../../../Library/Frameworks/Ogre.framework; sourceTree = SOURCE_ROOT; };
 		AABE87FA104704710090CB0C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -71,7 +73,8 @@
 				AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */,
 				AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */,
 				AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */,
-				AA97667C1044249E005C3F5F /* OpenAL.framework in Frameworks */,
+				AA8DFC1C10483B7600DCB1B5 /* OpenAL.framework in Frameworks */,
+				AA8DFC361048491600DCB1B5 /* Ogg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +126,8 @@
 		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				AA97667B1044249E005C3F5F /* OpenAL.framework */,
+				AA8DFC351048491600DCB1B5 /* Ogg.framework */,
+				AA8DFC1B10483B7600DCB1B5 /* OpenAL.framework */,
 				AA9765D310440B1B005C3F5F /* OIS.framework */,
 				AAAA63041042D8DE00A475D5 /* Ogre.framework */,
 				AAD6AB33103D5A1A00F445AD /* Cg.framework */,
