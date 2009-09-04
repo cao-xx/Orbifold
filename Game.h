@@ -10,43 +10,63 @@
 #ifndef GAME_H
 #define GAME_H
 
-#if WIN32
-#elif LINUX
-#else
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 #include <Carbon/Carbon.h>
 #endif
 
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
-#include <OgreRoot.h>
-#include <OgreConfigFile.h>
-#include <OgreRenderWindow.h>
+#include <Ogre/OgreRoot.h>
+#include <Ogre/OgreConfigFile.h>
+#include <Ogre/OgreRenderWindow.h>
+#include <Ogre/OgreWindowEventUtilities.h>
 
 #include "Input.h"
 
 class GameState;
 
 class Game :
+public Ogre::WindowEventListener,
   public OIS::KeyListener,
   public OIS::MouseListener {
-  
-public:
-  
-  void static start(); 
+
+ public:
+
+  void static start();
   void static stop();
-  
-protected:
-  
+
+  // Callbacks for Inputhandling
+  bool mouseMoved(const OIS::MouseEvent &evt);
+  bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+
+  bool keyPressed(const OIS::KeyEvent &evt);
+  bool keyReleased(const OIS::KeyEvent &evt);
+
+  // Callbacks for Windowhandling
+  void windowResized(Ogre::RenderWindow* rw);
+  void windowMoved(Ogre::RenderWindow* rw);
+  bool windowClosing(Ogre::RenderWindow* rw);
+  void windowClosed(Ogre::RenderWindow* rw);
+  void windowFocusChange(Ogre::RenderWindow* rw);
+
+  // State handling
+  GameState* getCurrentState();
+  bool requestStateChange(GameState* s);
+
+
+ protected:
+
   static Game* instance;
-	  
+
   bool running;
-  
+
   Ogre::Root* ogre;
   Ogre::RenderWindow* window;
   InputHandler* input;
   GameState* state;
-  
+
   static Game* getSingleton();
 
   void initialise();
@@ -54,33 +74,20 @@ protected:
   void initOgreResources();
   void initRenderWindow();
   void initInput();
+  void initState();
 
-  Ogre::Camera* Game::createCamera(Ogre::SceneManager *, Ogre::RenderWindow *);
+  void locateResources();
+  void loadResources();
 
-private:
-	Game();
-	~Game();
-	  
-	bool mouseMoved(const OIS::MouseEvent &evt);
-	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  void reconfigure(const Ogre::String& renderer, Ogre::NameValuePairList& options);
 
-	bool keyPressed(const OIS::KeyEvent &evt);
-	bool keyReleased(const OIS::KeyEvent &evt);
+  void shutdown();
+  void shutdownInput();
 
-	// are we shutting down?
-	bool bShutdown;
-	// time since last frame
-	float flFrameTime;
 
-	  /*
-	bool requestStateChange(State state);
-	bool lockState();
-	bool unlockState();
-	State getCurrentState();
+ private:
+  Game();
+  ~Game();
 
-	void setFrameTime(float ms);
-	inline float getFrameTime() {return flFrameTime;};
-*/
 };
 #endif

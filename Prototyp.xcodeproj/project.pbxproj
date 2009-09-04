@@ -7,22 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
-		AA8DFC1C10483B7600DCB1B5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8DFC1B10483B7600DCB1B5 /* OpenAL.framework */; };
-		AA8DFC361048491600DCB1B5 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8DFC351048491600DCB1B5 /* Ogg.framework */; };
-		AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
-		AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9765D310440B1B005C3F5F /* OIS.framework */; };
-		AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAA63041042D8DE00A475D5 /* Ogre.framework */; };
+		AA2146DD105116F500607FF4 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146DC105116F500607FF4 /* Ogre.framework */; };
+		AA2146DF105116F500607FF4 /* OIS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146DE105116F500607FF4 /* OIS.framework */; };
+		AA2146E51051171700607FF4 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146E41051171700607FF4 /* Cg.framework */; };
+		AA2146E91051174900607FF4 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146E81051174900607FF4 /* Carbon.framework */; };
+		AA2146EE1051175D00607FF4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146ED1051175D00607FF4 /* IOKit.framework */; };
+		AA2148C210515F6A00607FF4 /* media.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148BF10515F6A00607FF4 /* media.cfg */; };
+		AA2148C310515F6A00607FF4 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C010515F6A00607FF4 /* plugins.cfg */; };
+		AA2148C410515F6A00607FF4 /* Resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C110515F6A00607FF4 /* Resources.cfg */; };
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
 		AABE88011047048A0090CB0C /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88001047048A0090CB0C /* Main.cpp */; };
 		AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88E81047216F0090CB0C /* PlayState.cpp */; };
-		AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AB33103D5A1A00F445AD /* Cg.framework */; };
-		AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC2C103D5A7700F445AD /* IOKit.framework */; };
-		AAD6AC31103D5B5A00F445AD /* libois.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD6AC30103D5B5A00F445AD /* libois.a */; };
-		AAD6AD03103D613B00F445AD /* Cg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAD6AB33103D5A1A00F445AD /* Cg.framework */; };
-		AAD6AD05103D614F00F445AD /* IOKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAD6AC2C103D5A7700F445AD /* IOKit.framework */; };
-		AAD6AD09103D949500F445AD /* libois.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAD6AC30103D5B5A00F445AD /* libois.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,34 +28,31 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AA9765FC10440BE4005C3F5F /* OIS.framework in CopyFiles */,
-				AAD6AD09103D949500F445AD /* libois.a in CopyFiles */,
-				AAD6AD05103D614F00F445AD /* IOKit.framework in CopyFiles */,
-				AAD6AD03103D613B00F445AD /* Cg.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D0C4E970486CD37000505A6 /* Prototyp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA8DFC1B10483B7600DCB1B5 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
-		AA8DFC351048491600DCB1B5 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../../../Library/Frameworks/Ogg.framework; sourceTree = SOURCE_ROOT; };
-		AA9765D310440B1B005C3F5F /* OIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OIS.framework; path = ../../../Library/Frameworks/OIS.framework; sourceTree = SOURCE_ROOT; };
-		AAAA63041042D8DE00A475D5 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = ../../../Library/Frameworks/Ogre.framework; sourceTree = SOURCE_ROOT; };
+		AA2146DC105116F500607FF4 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = /Users/Christian/Library/Frameworks/Ogre.framework; sourceTree = "<absolute>"; };
+		AA2146DE105116F500607FF4 /* OIS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OIS.framework; path = /Users/Christian/Library/Frameworks/OIS.framework; sourceTree = "<absolute>"; };
+		AA2146E41051171700607FF4 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = /Library/Frameworks/Cg.framework; sourceTree = "<absolute>"; };
+		AA2146E81051174900607FF4 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		AA2146ED1051175D00607FF4 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		AA21485E105156E000607FF4 /* Utils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = Utils.h; sourceTree = "<group>"; };
+		AA2148BF10515F6A00607FF4 /* media.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = media.cfg; sourceTree = "<group>"; };
+		AA2148C010515F6A00607FF4 /* plugins.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plugins.cfg; sourceTree = "<group>"; };
+		AA2148C110515F6A00607FF4 /* Resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Resources.cfg; sourceTree = "<group>"; };
 		AABE87FA104704710090CB0C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 		AABE87FD1047047F0090CB0C /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		AABE87FE1047047F0090CB0C /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
 		AABE88001047048A0090CB0C /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
 		AABE88AB10471DDF0090CB0C /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		AABE88E81047216F0090CB0C /* PlayState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayState.cpp; sourceTree = "<group>"; };
 		AABE88E91047216F0090CB0C /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayState.h; sourceTree = "<group>"; };
-		AAD6AB33103D5A1A00F445AD /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = ../../OgreSDK/Dependencies/Cg.framework; sourceTree = SOURCE_ROOT; };
-		AAD6AC2C103D5A7700F445AD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		AAD6AC30103D5B5A00F445AD /* libois.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libois.a; path = ../../OgreSDK/Dependencies/lib/Release/libois.a; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,14 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAD6AC31103D5B5A00F445AD /* libois.a in Frameworks */,
-				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
-				AAD6AB34103D5A1A00F445AD /* Cg.framework in Frameworks */,
-				AAD6AC2D103D5A7700F445AD /* IOKit.framework in Frameworks */,
-				AAAA63051042D8DE00A475D5 /* Ogre.framework in Frameworks */,
-				AA9765D410440B1B005C3F5F /* OIS.framework in Frameworks */,
-				AA8DFC1C10483B7600DCB1B5 /* OpenAL.framework in Frameworks */,
-				AA8DFC361048491600DCB1B5 /* Ogg.framework in Frameworks */,
+				AA2146DD105116F500607FF4 /* Ogre.framework in Frameworks */,
+				AA2146DF105116F500607FF4 /* OIS.framework in Frameworks */,
+				AA2146E51051171700607FF4 /* Cg.framework in Frameworks */,
+				AA2146E91051174900607FF4 /* Carbon.framework in Frameworks */,
+				AA2146EE1051175D00607FF4 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +101,7 @@
 				AABE87FE1047047F0090CB0C /* Input.h */,
 				AABE87FA104704710090CB0C /* Game.cpp */,
 				AABE87FB104704710090CB0C /* Game.h */,
+				AA21485E105156E000607FF4 /* Utils.h */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -118,6 +109,9 @@
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA2148BF10515F6A00607FF4 /* media.cfg */,
+				AA2148C010515F6A00607FF4 /* plugins.cfg */,
+				AA2148C110515F6A00607FF4 /* Resources.cfg */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 			);
 			name = Resources;
@@ -126,14 +120,11 @@
 		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				AA8DFC351048491600DCB1B5 /* Ogg.framework */,
-				AA8DFC1B10483B7600DCB1B5 /* OpenAL.framework */,
-				AA9765D310440B1B005C3F5F /* OIS.framework */,
-				AAAA63041042D8DE00A475D5 /* Ogre.framework */,
-				AAD6AB33103D5A1A00F445AD /* Cg.framework */,
-				AAD6AC30103D5B5A00F445AD /* libois.a */,
-				AAD6AC2C103D5A7700F445AD /* IOKit.framework */,
-				20286C33FDCF999611CA2CEA /* Carbon.framework */,
+				AA2146DC105116F500607FF4 /* Ogre.framework */,
+				AA2146DE105116F500607FF4 /* OIS.framework */,
+				AA2146E41051171700607FF4 /* Cg.framework */,
+				AA2146E81051174900607FF4 /* Carbon.framework */,
+				AA2146ED1051175D00607FF4 /* IOKit.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -182,6 +173,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2148C210515F6A00607FF4 /* media.cfg in Resources */,
+				AA2148C310515F6A00607FF4 /* plugins.cfg in Resources */,
+				AA2148C410515F6A00607FF4 /* Resources.cfg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +205,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies\"",
 					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+					"\"$(SRCROOT)/../../Library/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -227,6 +222,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies/lib/Release\"",
+					"\"$(SRCROOT)/../OgreSDK/Dependencies/lib/Release\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Prototyp;
@@ -242,6 +238,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies\"",
 					"\"$(SRCROOT)/../../../Library/Frameworks\"",
+					"\"$(SRCROOT)/../../Library/Frameworks\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -255,6 +252,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies/lib/Release\"",
+					"\"$(SRCROOT)/../OgreSDK/Dependencies/lib/Release\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Prototyp;

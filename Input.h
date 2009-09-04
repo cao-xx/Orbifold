@@ -14,12 +14,12 @@
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
-#include <OgreRenderWindow.h>
+#include <Ogre/OgreRenderWindow.h>
 
 
 class InputHandler :
-	public OIS::MouseListener,
-	public OIS::KeyListener
+  public OIS::MouseListener,
+  public OIS::KeyListener
 {
 public:
 
@@ -70,10 +70,10 @@ protected:
   OIS::InputManager *inputsystem;
   OIS::Mouse *mouse;
   OIS::Keyboard *keyboard;
-	
+
   void initMouse(Ogre::RenderWindow* window);
   void initKeyboard();
-  
+
   std::map<std::string, OIS::KeyListener*> keyListeners;
   std::map<std::string, OIS::MouseListener*> mouseListeners;
 

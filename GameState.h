@@ -12,31 +12,37 @@
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
-#include <OgreRoot.h>
-#include <OgreRenderWindow.h>
-#include <OgreOverlayElement.h>
-#include <OgreOverlayManager.h>
-#include <OgreStringConverter.h>
+#include <Ogre/OgreRoot.h>
+#include <Ogre/OgreRenderWindow.h>
+#include <Ogre/OgreOverlayElement.h>
+#include <Ogre/OgreOverlayManager.h>
+#include <Ogre/OgreStringConverter.h>
 
 #include "Game.h"
 
 class GameState {
 
 public:
-	virtual void enter(Game* game, Ogre::RenderWindow *window) = 0;
-	virtual void exit() = 0;
-		
-	virtual void update() = 0;
-		
-	virtual void keyPressed(const OIS::KeyEvent &evt) = 0;
-	virtual void keyReleased(const OIS::KeyEvent &evt) = 0;
-	
-	virtual void mouseMoved(const OIS::MouseEvent &evt) = 0;
-	virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
-	virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
+  virtual void enter(Game* game, Ogre::RenderWindow *window) = 0;
+  virtual void exit() = 0;
+
+  virtual void update() = 0;
+
+  virtual void keyPressed(const OIS::KeyEvent &evt) = 0;
+  virtual void keyReleased(const OIS::KeyEvent &evt) = 0;
+
+  virtual void mouseMoved(const OIS::MouseEvent &evt) = 0;
+  virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
+  virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
+
+  virtual void windowResized(Ogre::RenderWindow* rw) = 0;
+  virtual void windowMoved(Ogre::RenderWindow* rw) = 0;
+  virtual bool windowClosing(Ogre::RenderWindow* rw) = 0;
+  virtual void windowClosed(Ogre::RenderWindow* rw) = 0;
+  virtual void windowFocusChange(Ogre::RenderWindow* rw) = 0;
 
 protected:
-	GameState(){}
-	~GameState(){}
+  GameState(){}
+  ~GameState(){}
 };
 #endif

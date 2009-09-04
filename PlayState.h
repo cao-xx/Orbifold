@@ -9,7 +9,7 @@
 #ifndef PlayState_H
 #define PlayState_H
 
-#include <OgreCamera.h>
+#include <Ogre/OgreCamera.h>
 
 #include "GameState.h"
 //#include "PauseState.h"
@@ -32,13 +32,20 @@ public:
 
   static PlayState* getSingleton();
 
-  // 	
+  //
   void keyPressed(const OIS::KeyEvent &evt);
   void keyReleased(const OIS::KeyEvent &evt);
 
   void mouseMoved(const OIS::MouseEvent &evt);
   void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
   void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+
+  //
+  void windowResized(Ogre::RenderWindow* rw);
+  void windowMoved(Ogre::RenderWindow* rw);
+  bool windowClosing(Ogre::RenderWindow* rw);
+  void windowClosed(Ogre::RenderWindow* rw);
+  void windowFocusChange(Ogre::RenderWindow* rw);
 
 protected:
 
@@ -53,7 +60,7 @@ protected:
   Ogre::OverlayElement *mousePointer;
 
   Game *game;
-	
+
   void createOverlays();
   void hideOverlays();
   Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
