@@ -124,7 +124,7 @@ namespace Orbifold {
   // A lot of stubs.
   void MenuState::pause() {}
   void MenuState::resume() {}
-  void MenuState::update() {}
+  void MenuState::update() {this->tray->update();}
   
   
   

@@ -12,12 +12,11 @@
 		AA2146E51051171700607FF4 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146E41051171700607FF4 /* Cg.framework */; };
 		AA2146E91051174900607FF4 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146E81051174900607FF4 /* Carbon.framework */; };
 		AA2146EE1051175D00607FF4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146ED1051175D00607FF4 /* IOKit.framework */; };
-		AA2148C210515F6A00607FF4 /* media.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148BF10515F6A00607FF4 /* media.cfg */; };
 		AA2148C310515F6A00607FF4 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C010515F6A00607FF4 /* plugins.cfg */; };
-		AA2148C410515F6A00607FF4 /* Resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C110515F6A00607FF4 /* Resources.cfg */; };
 		AA2149411051851300607FF4 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA2149401051851300607FF4 /* Map.cpp */; };
 		AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21498610528D8E00607FF4 /* MenuState.cpp */; };
 		AA214A031052C68300607FF4 /* Trays.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA214A021052C68300607FF4 /* Trays.cpp */; };
+		AA214A791052E2DF00607FF4 /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA214A781052E2DF00607FF4 /* resources.cfg */; };
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
 		AABE88011047048A0090CB0C /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88001047048A0090CB0C /* Main.cpp */; };
@@ -45,15 +44,14 @@
 		AA2146E81051174900607FF4 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		AA2146ED1051175D00607FF4 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		AA21485E105156E000607FF4 /* Utils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = Utils.h; sourceTree = "<group>"; };
-		AA2148BF10515F6A00607FF4 /* media.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = media.cfg; sourceTree = "<group>"; };
 		AA2148C010515F6A00607FF4 /* plugins.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plugins.cfg; sourceTree = "<group>"; };
-		AA2148C110515F6A00607FF4 /* Resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Resources.cfg; sourceTree = "<group>"; };
 		AA21493F1051851300607FF4 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		AA2149401051851300607FF4 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		AA2149691051A63400607FF4 /* Trays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trays.h; sourceTree = "<group>"; };
 		AA21498510528D8E00607FF4 /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
 		AA21498610528D8E00607FF4 /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
 		AA214A021052C68300607FF4 /* Trays.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trays.cpp; sourceTree = "<group>"; };
+		AA214A781052E2DF00607FF4 /* resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resources.cfg; sourceTree = "<group>"; };
 		AABE87FA104704710090CB0C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 		AABE87FD1047047F0090CB0C /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
@@ -124,9 +122,8 @@
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA2148BF10515F6A00607FF4 /* media.cfg */,
+				AA214A781052E2DF00607FF4 /* resources.cfg */,
 				AA2148C010515F6A00607FF4 /* plugins.cfg */,
-				AA2148C110515F6A00607FF4 /* Resources.cfg */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 			);
 			name = Resources;
@@ -191,9 +188,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA2148C210515F6A00607FF4 /* media.cfg in Resources */,
 				AA2148C310515F6A00607FF4 /* plugins.cfg in Resources */,
-				AA2148C410515F6A00607FF4 /* Resources.cfg in Resources */,
+				AA214A791052E2DF00607FF4 /* resources.cfg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

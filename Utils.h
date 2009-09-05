@@ -38,5 +38,8 @@ std::string macBundlePath()
   
 #endif
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+
+#endif
 }
 #endif

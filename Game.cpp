@@ -8,7 +8,7 @@
  */
 
 #include "GameState.h"
-#include "PlayState.h"
+#include "MenuState.h"
 //#include "IntroState.h"
 //#include "PauseState.h"
 #include "Game.h"
@@ -59,8 +59,10 @@ void Game::start(){
   
   game->running = true;
 
-  game->requestStateChange(PlayState::getSingleton());
+  //game->requestStateChange(PlayState::getSingleton());
 
+  game->requestStateChange(MenuState::getSingleton());
+    
   int running = 1000;
   while(running--) {
     game->input->capture();
@@ -121,7 +123,7 @@ void Game::initOgreResources() {
 void Game::locateResources() {
   Ogre::ConfigFile cf;
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-  cf.load(macBundlePath()+"/Contents/Resources/Resources.cfg");
+  cf.load(macBundlePath()+"/Contents/Resources/resources.cfg");
 #else
   cf.load("resources.cfg");
 #endif

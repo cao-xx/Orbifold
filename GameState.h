@@ -48,17 +48,7 @@ public:
 protected:
   GameState(){}
   ~GameState(){}
-  
-  virtual void locateResources() {}
-  virtual void loadResources() {}
-  virtual void unloadResources() {
-    Ogre::ResourceGroupManager::ResourceManagerIterator resMgrs =
-    Ogre::ResourceGroupManager::getSingleton().getResourceManagerIterator();
-    while (resMgrs.hasMoreElements()) {
-      resMgrs.getNext()->unloadUnreferencedResources();
-    }
-  }
-  
+    
 };
   
 }
