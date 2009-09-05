@@ -24,6 +24,16 @@
 
 #include "Input.h"
 
+namespace Orbifold {
+
+enum GState{
+	INTRO,
+	MENU,
+	LOADING,
+	INGAME,
+	SHUTDOWN,
+};
+
 class GameState;
 
 class Game :
@@ -31,7 +41,7 @@ public Ogre::WindowEventListener,
   public OIS::KeyListener,
   public OIS::MouseListener {
 
- public:
+public:
 
   void static start();
   void static stop();
@@ -43,6 +53,9 @@ public Ogre::WindowEventListener,
 
   bool keyPressed(const OIS::KeyEvent &evt);
   bool keyReleased(const OIS::KeyEvent &evt);
+	  
+  OIS::Mouse* getMouse();
+  OIS::Keyboard* getKeyboard();
 
   // Callbacks for Windowhandling
   void windowResized(Ogre::RenderWindow* rw);
@@ -54,9 +67,9 @@ public Ogre::WindowEventListener,
   // State handling
   GameState* getCurrentState();
   bool requestStateChange(GameState* s);
+  bool requestStateChange(GState s);
 
-
- protected:
+protected:
 
   static Game* instance;
 
@@ -79,15 +92,17 @@ public Ogre::WindowEventListener,
   void locateResources();
   void loadResources();
 
-  void reconfigure(const Ogre::String& renderer, Ogre::NameValuePairList& options);
+  //void reconfigure(const Ogre::String& renderer, Ogre::NameValuePairList& options);
 
   void shutdown();
   void shutdownInput();
 
 
  private:
-  Game();
+   Game();
   ~Game();
 
 };
+	
+}
 #endif

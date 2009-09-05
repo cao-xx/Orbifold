@@ -11,10 +11,10 @@
 #ifndef Utils_H
 #define Utils_H
 
-
+namespace Orbifold {
+  
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 #include <CoreFoundation/CoreFoundation.h>
-
 /*
  * This function will return the appropriate working directory depending
  * on the platform. For Windows, a blank string will suffice. For OS X,
@@ -35,8 +35,8 @@ std::string macBundlePath()
 	CFRelease(cfStringRef);
 	return std::string(path);
 }
+  
 #endif
 
-
-
+}
 #endif

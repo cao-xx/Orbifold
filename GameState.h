@@ -12,6 +12,7 @@
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
+
 #include <Ogre/OgreRoot.h>
 #include <Ogre/OgreRenderWindow.h>
 #include <Ogre/OgreOverlayElement.h>
@@ -19,6 +20,9 @@
 #include <Ogre/OgreStringConverter.h>
 
 #include "Game.h"
+
+namespace Orbifold {
+
 
 class GameState {
 
@@ -40,9 +44,22 @@ public:
   virtual bool windowClosing(Ogre::RenderWindow* rw) = 0;
   virtual void windowClosed(Ogre::RenderWindow* rw) = 0;
   virtual void windowFocusChange(Ogre::RenderWindow* rw) = 0;
-
+  
 protected:
   GameState(){}
   ~GameState(){}
+  
+  virtual void locateResources() {}
+  virtual void loadResources() {}
+  virtual void unloadResources() {
+    Ogre::ResourceGroupManager::ResourceManagerIterator resMgrs =
+    Ogre::ResourceGroupManager::getSingleton().getResourceManagerIterator();
+    while (resMgrs.hasMoreElements()) {
+      resMgrs.getNext()->unloadUnreferencedResources();
+    }
+  }
+  
 };
+  
+}
 #endif

@@ -10,7 +10,7 @@
 #include "Input.h"
 #include <Ogre/OgreStringConverter.h>
 
-
+namespace Orbifold {
 
 InputHandler::InputHandler() {
   this->inputsystem = 0;
@@ -249,5 +249,7 @@ bool InputHandler::mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id
   }
 
   return true;
+}
+  
 }
 

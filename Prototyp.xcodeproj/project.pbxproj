@@ -15,6 +15,9 @@
 		AA2148C210515F6A00607FF4 /* media.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148BF10515F6A00607FF4 /* media.cfg */; };
 		AA2148C310515F6A00607FF4 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C010515F6A00607FF4 /* plugins.cfg */; };
 		AA2148C410515F6A00607FF4 /* Resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C110515F6A00607FF4 /* Resources.cfg */; };
+		AA2149411051851300607FF4 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA2149401051851300607FF4 /* Map.cpp */; };
+		AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21498610528D8E00607FF4 /* MenuState.cpp */; };
+		AA214A031052C68300607FF4 /* Trays.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA214A021052C68300607FF4 /* Trays.cpp */; };
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
 		AABE88011047048A0090CB0C /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88001047048A0090CB0C /* Main.cpp */; };
@@ -45,6 +48,12 @@
 		AA2148BF10515F6A00607FF4 /* media.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = media.cfg; sourceTree = "<group>"; };
 		AA2148C010515F6A00607FF4 /* plugins.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plugins.cfg; sourceTree = "<group>"; };
 		AA2148C110515F6A00607FF4 /* Resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Resources.cfg; sourceTree = "<group>"; };
+		AA21493F1051851300607FF4 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		AA2149401051851300607FF4 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		AA2149691051A63400607FF4 /* Trays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trays.h; sourceTree = "<group>"; };
+		AA21498510528D8E00607FF4 /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
+		AA21498610528D8E00607FF4 /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
+		AA214A021052C68300607FF4 /* Trays.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trays.cpp; sourceTree = "<group>"; };
 		AABE87FA104704710090CB0C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 		AABE87FD1047047F0090CB0C /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
@@ -93,6 +102,7 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				AA2149691051A63400607FF4 /* Trays.h */,
 				AABE88E81047216F0090CB0C /* PlayState.cpp */,
 				AABE88E91047216F0090CB0C /* PlayState.h */,
 				AABE88AB10471DDF0090CB0C /* GameState.h */,
@@ -102,6 +112,11 @@
 				AABE87FA104704710090CB0C /* Game.cpp */,
 				AABE87FB104704710090CB0C /* Game.h */,
 				AA21485E105156E000607FF4 /* Utils.h */,
+				AA21493F1051851300607FF4 /* Map.h */,
+				AA2149401051851300607FF4 /* Map.cpp */,
+				AA21498510528D8E00607FF4 /* MenuState.h */,
+				AA21498610528D8E00607FF4 /* MenuState.cpp */,
+				AA214A021052C68300607FF4 /* Trays.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -156,6 +171,9 @@
 /* Begin PBXProject section */
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Orbifold;
+			};
 			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "Prototyp" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
@@ -190,6 +208,9 @@
 				AABE87FF1047047F0090CB0C /* Input.cpp in Sources */,
 				AABE88011047048A0090CB0C /* Main.cpp in Sources */,
 				AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */,
+				AA2149411051851300607FF4 /* Map.cpp in Sources */,
+				AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */,
+				AA214A031052C68300607FF4 /* Trays.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +285,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0.1;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

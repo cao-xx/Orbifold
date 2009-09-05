@@ -19,12 +19,11 @@
 
 
 
-
+namespace Orbifold {
 
 
 Game::Game() {
   this->running = false;
-
   this->ogre = 0;
   this->window = 0;
   this->input = 0;
@@ -55,12 +54,12 @@ void Game::start(){
   Game* game = Game::getSingleton();
 
   game->initialise();
+  
+  
+  
   game->running = true;
 
-  Ogre::SceneManager* scene = game->ogre->createSceneManager(Ogre::ST_GENERIC, "ST_GENERIC");
-
-  game->state = PlayState::getSingleton();
-  game->state->enter(game, game->window);
+  game->requestStateChange(PlayState::getSingleton());
 
   int running = 1000;
   while(running--) {
@@ -157,6 +156,8 @@ void Game::initRenderWindow() {
     return;
   this->ogre->initialise(false);
   this->window = this->ogre->createRenderWindow("Prototyp", 800, 600, false, NULL);
+  // register game to receive window events.
+  Ogre::WindowEventUtilities::addWindowEventListener(this->window, this);
 }
 
 void Game::initInput() {
@@ -176,43 +177,7 @@ GameState* Game::getCurrentState() {
   return this->state;
 }
 
-// bool Game::lockState() {
-// 	if (m_locked == false)
-// 		return m_locked = true;
-// 	else
-// 		return false;
-// 	return false;
-// }
 
-// //this is kind of a hack
-// GameState* Game::getState(State state) {
-// 	// I didn't implement all State classes yet.
-// 	switch (state) {
-// 		case STARTUP:
-// 			return mIntroState;
-// 			break;
-// 		case GUI:
-// 			return mIntroState;
-// 			break;
-// 		case LOADING:
-// 			return mIntroState;
-// 			break;
-// 		case CANCEL_LOADING:
-// 			return mIntroState;
-// 			break;
-// 		case GAME:
-// 			return mPlayState;
-// 			break;
-// 		case SHUTDOWN:
-// 			return mPauseState;
-// 			break;
-// 		default:
-// 			return mCurrentState;
-// 			break;
-// 	}
-// 	// paranoid compiler
-// 	return mCurrentState;
-// }
 
 
 bool Game::requestStateChange(GameState* nstate) {
@@ -223,7 +188,6 @@ bool Game::requestStateChange(GameState* nstate) {
     pstate->exit();
   }
 
-  // this is done by exit(), too but just in case
   this->window->removeAllViewports();
 
   if(nstate) {
@@ -237,49 +201,49 @@ bool Game::requestStateChange(GameState* nstate) {
 
 
 // Input Handling
-/* Another variant would be to give the InputHandler a Reference to the Game Object
- * and let the current state be public (maybe protected by a Mutex) so that the
- * InputHandler can call the current state directly.
- */
 bool Game::keyPressed(const OIS::KeyEvent &evt) {
   //Call KeyPressed of CurrentState
-  //this->state->keyPressed(evt);
+  this->state->keyPressed(evt);
   return true;
 }
 
 bool Game::keyReleased(const OIS::KeyEvent &evt) {
   //Call keyReleased of CurrentState
-  //this->state->keyReleased(evt);
+  this->state->keyReleased(evt);
   return true;
 }
 
 bool Game::mouseMoved(const OIS::MouseEvent &evt) {
   // You get the picture
-  //this->state->mouseMoved(evt);
+  this->state->mouseMoved(evt);
   return true;
 }
 
 bool Game::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
-  //this->state->mousePressed(evt, id);
+  this->state->mousePressed(evt, id);
   return true;
 }
 
 bool Game::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
-  //this->state->mousePressed(evt, id);
+  this->state->mousePressed(evt, id);
   return true;
 }
 
-
+  OIS::Mouse* Game::getMouse() {
+    return this->input->getMouse();
+  }
+  
+  OIS::Keyboard* Game::getKeyboard() {
+    return this->input->getKeyboard(); 
+  }
+  
+  
 // Window Handling
 void Game::windowResized(Ogre::RenderWindow* rw) {
   //
   if (this->state)
     this->state->windowResized(rw);
   this->input->updateWindowDimensions(rw->getWidth(),rw->getHeight());
-  //this does nothing more then:
-  //const OIS::MouseState& ms = this->input->mouse->getMouseState();
-  //ms.width = rw->getWidth();
-  //ms.height = rw->getHeight();
 }
 
 void Game::windowMoved(Ogre::RenderWindow* rw) {
@@ -292,7 +256,7 @@ bool Game::windowClosing(Ogre::RenderWindow* rw) {
     return state->windowClosing(rw);
   return true;
 }
-
+	
 void Game::windowClosed(Ogre::RenderWindow* rw) {
   if (state)
     state->windowClosed(rw);
@@ -308,4 +272,6 @@ void Game::shutdown(){}
 void Game::stop() {
   Game* game = Game::getSingleton();
   game->running = false;
+}
+  
 }

@@ -11,6 +11,8 @@
 #include "Game.h"
 #include <Ogre/OgreTextureUnitState.h>
 
+namespace Orbifold {
+  
 class Game;
 
 PlayState::PlayState() {
@@ -42,28 +44,35 @@ PlayState* PlayState::getSingleton() {
 
 
 void PlayState::enter(Game* game, Ogre::RenderWindow* window) {
-
+	
   PlayState* state = PlayState::getSingleton();
   state->ogre = Ogre::Root::getSingletonPtr();
   state->window = window;
   state->game = game;
 
   state->overlayMgr = Ogre::OverlayManager::getSingletonPtr();
-
-  state->scene = state->ogre->getSceneManager("ST_GENERIC");
-
-  state->camera = state->createCamera(state->scene, state->window);
-
+  state->createSceneManager();
+  state->setupView();
 }
 
 
 void PlayState::exit() {
-  PlayState* state = PlayState::getSingleton();
-  //this->hideOverlays();
-  state->scene->clearScene();
-  state->scene->destroyAllCameras();
-  state->window->removeAllViewports();
+	PlayState* state = PlayState::getSingleton();
+	if (state->scene) state->scene->clearScene();
+	if (contentSetup) state->cleanupContent();
+	contentSetup = false;
+	if (resourcesLoaded) state->unloadResources();
+	resourcesLoaded = false;
+	if (state->scene) state->ogre->destroySceneManager(state->scene);
+	state->scene = 0;
 }
+
+void PlayState::setupContent(){}
+void PlayState::cleanupContent(){}
+
+void PlayState::locateResources(){}
+void PlayState::loadResources(){}
+void PlayState::unloadResources(){}
 
 // A lot of stubs.
 void PlayState::pause() {}
@@ -102,17 +111,21 @@ void PlayState::windowFocusChange(Ogre::RenderWindow* rw) {}
 //void createOverlays() {}
 //void hideOverlays() {}
 
-Ogre::Camera* PlayState::createCamera(Ogre::SceneManager *sceneMgr, Ogre::RenderWindow *window) {
-  Ogre::Camera* cam = sceneMgr->createCamera("SimpleCamera");
-  cam->setPosition(Ogre::Vector3(0.0f,0.0f,500.0f));
-  cam->lookAt(Ogre::Vector3(0.0f,0.0f,0.0f));
-  cam->setNearClipDistance(5.0f);
-  cam->setFarClipDistance(5000.0f);
-
-  Ogre::Viewport* v = window->addViewport(cam);
-  v->setBackgroundColour(Ogre::ColourValue(0.5,0.5,0.5));
-
-  cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
-
-  return cam;
+void PlayState::createSceneManager() {
+	this->scene = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
 }
+
+void PlayState::setupView() {
+	Ogre::Camera* cam = this->scene->createCamera("SimpleCamera");
+	cam->setPosition(Ogre::Vector3(0.0f,0.0f,500.0f));
+	cam->lookAt(Ogre::Vector3(0.0f,0.0f,0.0f));
+	cam->setNearClipDistance(5.0f);
+	cam->setFarClipDistance(5000.0f);
+	
+	Ogre::Viewport* v = this->window->addViewport(cam);
+	v->setBackgroundColour(Ogre::ColourValue(0.5,0.5,0.5));
+	cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
+}
+
+}
+

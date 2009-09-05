@@ -16,6 +16,7 @@
 
 #include <Ogre/OgreRenderWindow.h>
 
+namespace Orbifold {
 
 class InputHandler :
   public OIS::MouseListener,
@@ -89,4 +90,6 @@ private:
   ~InputHandler();
 
 };
+  
+}
 #endif
