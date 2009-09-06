@@ -44,7 +44,7 @@ namespace Orbifold {
     state->window = window;
     state->game = game;
     
-    locateResources();
+    //locateResources();
     
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential");
     

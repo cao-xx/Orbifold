@@ -63,7 +63,7 @@ void Game::start(){
 
   game->requestStateChange(MenuState::getSingleton());
     
-  int running = 1000;
+  int running = 10000;
   while(running--) {
     game->input->capture();
     game->state->update();
@@ -80,8 +80,9 @@ void Game::start(){
 
 void Game::initialise(){
   this->initOgreRoot();
-  this->initOgreResources();
+  // RenderWindow has to be initialised before Materialscripts are parsed
   this->initRenderWindow();
+  this->initOgreResources();
   this->initInput();
   this->initState();
 }
