@@ -63,8 +63,7 @@ void Game::start(){
 
   game->requestStateChange(MenuState::getSingleton());
     
-  int running = 10000;
-  while(running--) {
+  while(game->running) {
     game->input->capture();
     game->state->update();
     game->ogre->renderOneFrame();
@@ -255,6 +254,7 @@ void Game::windowMoved(Ogre::RenderWindow* rw) {
 }
 
 bool Game::windowClosing(Ogre::RenderWindow* rw) {
+  this->running = false;
   if (state)
     return state->windowClosing(rw);
   return true;

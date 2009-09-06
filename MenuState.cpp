@@ -202,6 +202,10 @@ namespace Orbifold {
   void MenuState::buttonHit(SdkButton* b) {
     if (b->getName() == "StartStop") {
       this->game->requestStateChange(PlayState::getSingleton());
+    } else if (b->getName() == "Quit") {
+      this->game->stop();
+    } else {
+      ;
     }
   }
   
