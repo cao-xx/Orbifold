@@ -32,12 +32,12 @@ public:
 
   virtual void update() = 0;
 
-  virtual void keyPressed(const OIS::KeyEvent &evt) = 0;
-  virtual void keyReleased(const OIS::KeyEvent &evt) = 0;
+  virtual bool keyPressed(const OIS::KeyEvent &evt) = 0;
+  virtual bool keyReleased(const OIS::KeyEvent &evt) = 0;
 
-  virtual void mouseMoved(const OIS::MouseEvent &evt) = 0;
-  virtual void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
-  virtual void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
+  virtual bool mouseMoved(const OIS::MouseEvent &evt) = 0;
+  virtual bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
+  virtual bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) = 0;
 
   virtual void windowResized(Ogre::RenderWindow* rw) = 0;
   virtual void windowMoved(Ogre::RenderWindow* rw) = 0;

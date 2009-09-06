@@ -7,6 +7,7 @@
  *
  */
 
+#include "PlayState.h"
 #include "MenuState.h"
 #include "Game.h"
 
@@ -48,7 +49,7 @@ namespace Orbifold {
     
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential");
     
-    state->tray = new SdkTrayManager("BrowserControls", state->window, state->game->getMouse(), state);
+    state->tray = new SdkTrayManager("BrowserControls", state->window, state->game->getMouse(), this);
     state->tray->showBackdrop("SdkTrays/Bands");
     state->tray->getTrayContainer(TL_NONE)->hide();
     
@@ -58,7 +59,7 @@ namespace Orbifold {
     Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
     
     setupWidgets();
-    windowResized(state->window);
+    state->windowResized(state->window);
   }
   
 
@@ -128,24 +129,37 @@ namespace Orbifold {
   
   
   
-  void MenuState::keyPressed(const OIS::KeyEvent &evt) {}
-  void MenuState::keyReleased(const OIS::KeyEvent &evt) {
+  bool MenuState::keyPressed(const OIS::KeyEvent &evt) {return true;}
+  bool MenuState::keyReleased(const OIS::KeyEvent &evt) {
     if (evt.key == OIS::KC_SPACE) {
       //mGame->requestStateChange(PAUSE);
     } else if(evt.key == OIS::KC_ESCAPE) {
       //this->game->requestStateChange(SHUTDOWN);
     }
+    return true;
   }
   
-  void MenuState::mouseMoved(const OIS::MouseEvent &evt) {
+  bool MenuState::mouseMoved(const OIS::MouseEvent &evt) {
     //const OIS::MouseState &mouseState = evt.state;
     // Update Mousepointer on Screen, might be smoother if moved by relative change.
     // mMousePointer->setTop(mouseState.Y.abs);
     // mMousePointer->setLeft(mouseState.X.abs);
+    if(this->tray->injectMouseMove(evt))
+      return true;
+    return true;
   }
   
-  void MenuState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {}
-  void MenuState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {}
+  bool MenuState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
+    if(this->tray->injectMouseDown(evt, id))
+      return true;
+    return true;
+  }
+  
+  bool MenuState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
+    if(this->tray->injectMouseUp(evt, id))
+      return true;
+    return true;
+  }
   
   
   void MenuState::windowResized(Ogre::RenderWindow* rw) {}
@@ -153,5 +167,14 @@ namespace Orbifold {
   bool MenuState::windowClosing(Ogre::RenderWindow* rw) {return true;}
   void MenuState::windowClosed(Ogre::RenderWindow* rw) {}
   void MenuState::windowFocusChange(Ogre::RenderWindow* rw) {}
+  
+  
+  void MenuState::buttonHit(SdkButton* b) {
+    this->tray->destroyAllWidgets();
+  }
+  
+  void MenuState::yesNoDialogClosed(const Ogre::DisplayString& question, bool yesHit){;}
+  void MenuState::itemSelected(SelectMenu* menu){;}
+  void MenuState::sliderMoved(Slider* slider){;}
   
 }

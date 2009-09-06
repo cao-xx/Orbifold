@@ -81,31 +81,33 @@ void PlayState::update() {}
 
 
 
-void PlayState::keyPressed(const OIS::KeyEvent &evt) {}
-void PlayState::keyReleased(const OIS::KeyEvent &evt) {
-  if (evt.key == OIS::KC_SPACE) {
-    //mGame->requestStateChange(PAUSE);
-  } else if(evt.key == OIS::KC_ESCAPE) {
-    //this->game->requestStateChange(SHUTDOWN);
+  bool PlayState::keyPressed(const OIS::KeyEvent &evt) {return true;}
+  bool PlayState::keyReleased(const OIS::KeyEvent &evt) {
+    if (evt.key == OIS::KC_SPACE) {
+      //mGame->requestStateChange(PAUSE);
+    } else if(evt.key == OIS::KC_ESCAPE) {
+      //this->game->requestStateChange(SHUTDOWN);
+    }
+      return true;
   }
-}
 
-void PlayState::mouseMoved(const OIS::MouseEvent &evt) {
+  bool PlayState::mouseMoved(const OIS::MouseEvent &evt) {
   //const OIS::MouseState &mouseState = evt.state;
   // Update Mousepointer on Screen, might be smoother if moved by relative change.
   // mMousePointer->setTop(mouseState.Y.abs);
   // mMousePointer->setLeft(mouseState.X.abs);
-}
+    return true;
+  }
 
-void PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {}
-void PlayState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {}
+  bool PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
+  bool PlayState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
 
 
-void PlayState::windowResized(Ogre::RenderWindow* rw) {}
-void PlayState::windowMoved(Ogre::RenderWindow* rw) {}
-bool PlayState::windowClosing(Ogre::RenderWindow* rw) {return true;}
-void PlayState::windowClosed(Ogre::RenderWindow* rw) {}
-void PlayState::windowFocusChange(Ogre::RenderWindow* rw) {}
+  void PlayState::windowResized(Ogre::RenderWindow* rw) {}
+  void PlayState::windowMoved(Ogre::RenderWindow* rw) {}
+  bool PlayState::windowClosing(Ogre::RenderWindow* rw) {return true;}
+  void PlayState::windowClosed(Ogre::RenderWindow* rw) {}
+  void PlayState::windowFocusChange(Ogre::RenderWindow* rw) {}
 
 
 //void createOverlays() {}

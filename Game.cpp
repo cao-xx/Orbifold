@@ -80,7 +80,7 @@ void Game::start(){
 
 void Game::initialise(){
   this->initOgreRoot();
-  // RenderWindow has to be initialised before Materialscripts are parsed
+  // RenderWindow has to be initialised before Materialscripts are parsed!
   this->initRenderWindow();
   this->initOgreResources();
   this->initInput();
@@ -228,7 +228,7 @@ bool Game::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
 }
 
 bool Game::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
-  this->state->mousePressed(evt, id);
+  this->state->mouseReleased(evt, id);
   return true;
 }
 

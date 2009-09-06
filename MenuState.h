@@ -38,12 +38,12 @@ public:
   static MenuState* getSingleton();
   
   //
-  void keyPressed(const OIS::KeyEvent &evt);
-  void keyReleased(const OIS::KeyEvent &evt);
+  bool keyPressed(const OIS::KeyEvent &evt);
+  bool keyReleased(const OIS::KeyEvent &evt);
   
-  void mouseMoved(const OIS::MouseEvent &evt);
-  void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-  void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  bool mouseMoved(const OIS::MouseEvent &evt);
+  bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
   
   //
   void windowResized(Ogre::RenderWindow* rw);
@@ -51,6 +51,12 @@ public:
   bool windowClosing(Ogre::RenderWindow* rw);
   void windowClosed(Ogre::RenderWindow* rw);
   void windowFocusChange(Ogre::RenderWindow* rw);
+  
+  //
+  virtual void yesNoDialogClosed(const Ogre::DisplayString& question, bool yesHit);
+  virtual void buttonHit(SdkButton* b);
+  virtual void itemSelected(SelectMenu* menu);
+  virtual void sliderMoved(Slider* slider);
   
 protected:
   

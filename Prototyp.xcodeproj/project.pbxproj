@@ -14,7 +14,6 @@
 		AA2148C310515F6A00607FF4 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA2148C010515F6A00607FF4 /* plugins.cfg */; };
 		AA2149411051851300607FF4 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA2149401051851300607FF4 /* Map.cpp */; };
 		AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21498610528D8E00607FF4 /* MenuState.cpp */; };
-		AA214A031052C68300607FF4 /* Trays.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA214A021052C68300607FF4 /* Trays.cpp */; };
 		AA214A791052E2DF00607FF4 /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA214A781052E2DF00607FF4 /* resources.cfg */; };
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
@@ -49,7 +48,6 @@
 		AA2149691051A63400607FF4 /* Trays.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trays.h; sourceTree = "<group>"; };
 		AA21498510528D8E00607FF4 /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
 		AA21498610528D8E00607FF4 /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
-		AA214A021052C68300607FF4 /* Trays.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Trays.cpp; sourceTree = "<group>"; };
 		AA214A781052E2DF00607FF4 /* resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resources.cfg; sourceTree = "<group>"; };
 		AABE87FA104704710090CB0C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
@@ -114,7 +112,6 @@
 				AA2149401051851300607FF4 /* Map.cpp */,
 				AA21498510528D8E00607FF4 /* MenuState.h */,
 				AA21498610528D8E00607FF4 /* MenuState.cpp */,
-				AA214A021052C68300607FF4 /* Trays.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -206,7 +203,6 @@
 				AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */,
 				AA2149411051851300607FF4 /* Map.cpp in Sources */,
 				AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */,
-				AA214A031052C68300607FF4 /* Trays.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

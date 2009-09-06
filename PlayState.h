@@ -35,12 +35,12 @@ public:
   static PlayState* getSingleton();
 
   //
-  void keyPressed(const OIS::KeyEvent &evt);
-  void keyReleased(const OIS::KeyEvent &evt);
+  bool keyPressed(const OIS::KeyEvent &evt);
+  bool keyReleased(const OIS::KeyEvent &evt);
 
-  void mouseMoved(const OIS::MouseEvent &evt);
-  void mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-  void mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  bool mouseMoved(const OIS::MouseEvent &evt);
+  bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+  bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 
   //
   void windowResized(Ogre::RenderWindow* rw);
