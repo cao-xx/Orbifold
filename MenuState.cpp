@@ -22,6 +22,8 @@ namespace Orbifold {
     this->scene = 0;
     this->game = 0;
     this->tray = 0;
+    this->contentSetup = false;
+    this->firstEntry = true;
   }
   
   MenuState::~MenuState() {
@@ -39,7 +41,7 @@ namespace Orbifold {
     return instance;
   }
   
-  void MenuState::enter(Game* game, Ogre::RenderWindow* window) {
+  void MenuState::initialise(Game* game, Ogre::RenderWindow* window) {
     MenuState* state = MenuState::getSingleton();
     state->ogre = Ogre::Root::getSingletonPtr();
     state->window = window;
@@ -61,6 +63,43 @@ namespace Orbifold {
     setupWidgets();
     state->windowResized(state->window);
   }
+  
+  void MenuState::shutdown() {
+    MenuState* state = MenuState::getSingleton();
+    if (state->scene) state->scene->clearScene();
+    if (contentSetup) state->cleanupContent();
+    state->contentSetup = false;
+    if (resourcesLoaded) state->unloadResources();
+    state->resourcesLoaded = false;
+    if (state->scene) state->ogre->destroySceneManager(state->scene);
+    state->scene = 0;
+  } 
+  
+  
+  void MenuState::enter(Game* game, Ogre::RenderWindow* window) {
+    
+    MenuState* state = MenuState::getSingleton();
+    
+    if (!firstEntry) {
+    //create dummy scene and modify controls
+      state->createDummyScene();
+      state->tray->showBackdrop("SdkTrays/Bands");
+      state->tray->showAll();
+    } else {
+      state->initialise(game, window);
+      firstEntry = false;
+    }
+  }
+  
+  void MenuState::exit() {
+    
+    MenuState* state = MenuState::getSingleton();
+    
+    state->tray->showBackdrop("SdkTrays/Shade");
+    state->tray->hideAll();
+    state->destroyDummyScene();
+  }
+  
   
 
   void MenuState::setupWidgets() {
@@ -91,29 +130,20 @@ namespace Orbifold {
 }
 
   void MenuState::createDummyScene() {
-  this->window->removeAllViewports();
-  Ogre::SceneManager* sm = this->ogre->createSceneManager(Ogre::ST_GENERIC, "DummyScene");
-  Ogre::Camera* cam = sm->createCamera("DummyCamera");
-  Ogre::Viewport* vp = this->window->addViewport(cam);
-}
+    this->window->removeAllViewports();
+    Ogre::SceneManager* sm = this->ogre->createSceneManager(Ogre::ST_GENERIC, "DummyScene");
+    Ogre::Camera* cam = sm->createCamera("DummyCamera");
+    Ogre::Viewport* vp = this->window->addViewport(cam);
+  }
 
   void MenuState::destroyDummyScene() {
-  this->window->removeAllViewports();
-  this->ogre->destroySceneManager(this->ogre->getSceneManager("DummyScene"));
-}
+    this->window->removeAllViewports();
+    this->ogre->destroySceneManager(this->ogre->getSceneManager("DummyScene")); 
+  }
   
   // Mouse / Keyboardhandling
   
-  void MenuState::exit() {
-    MenuState* state = MenuState::getSingleton();
-    if (state->scene) state->scene->clearScene();
-    if (contentSetup) state->cleanupContent();
-    contentSetup = false;
-    if (resourcesLoaded) state->unloadResources();
-    resourcesLoaded = false;
-    if (state->scene) state->ogre->destroySceneManager(state->scene);
-    state->scene = 0;
-  }
+  
   
   void MenuState::setupContent(){}
   void MenuState::cleanupContent(){}
@@ -170,7 +200,9 @@ namespace Orbifold {
   
   
   void MenuState::buttonHit(SdkButton* b) {
-    this->tray->destroyAllWidgets();
+    if (b->getName() == "StartStop") {
+      this->game->requestStateChange(PlayState::getSingleton());
+    }
   }
   
   void MenuState::yesNoDialogClosed(const Ogre::DisplayString& question, bool yesHit){;}

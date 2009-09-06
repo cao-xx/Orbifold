@@ -8,6 +8,7 @@
  */
 
 #include "PlayState.h"
+#include "MenuState.h"
 #include "Game.h"
 #include <Ogre/OgreTextureUnitState.h>
 
@@ -99,7 +100,10 @@ void PlayState::update() {}
     return true;
   }
 
-  bool PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
+  bool PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
+    this->game->requestStateChange(MenuState::getSingleton());
+    return true;
+  }
   bool PlayState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
 
 
