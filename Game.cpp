@@ -58,14 +58,19 @@ void Game::start(){
   
   
   game->running = true;
+  game->timer = new Ogre::Timer();
+  
 
   //game->requestStateChange(PlayState::getSingleton());
 
   game->requestStateChange(MenuState::getSingleton());
-    
+   
+  game->timer->reset();
+
   while(game->running) {
     game->input->capture();
     game->state->update();
+    game->timer->reset();
     game->ogre->renderOneFrame();
     Ogre::WindowEventUtilities::messagePump();
   }
@@ -79,6 +84,7 @@ void Game::start(){
 
 void Game::initialise(){
   this->initOgreRoot();
+  this->initPlugins();
   // RenderWindow has to be initialised before Materialscripts are parsed!
   this->initRenderWindow();
   this->initOgreResources();
@@ -113,47 +119,13 @@ void Game::initOgreRoot() {
   }
 }
 
-void Game::initOgreResources() {
-  if(!this->ogre)
-    return;
-  this->locateResources();
-  this->loadResources();
-}
-
-void Game::locateResources() {
-  Ogre::ConfigFile cf;
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-  cf.load(macBundlePath()+"/Contents/Resources/resources.cfg");
-#else
-  cf.load("resources.cfg");
-#endif
-
-  Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
-  Ogre::String sec, type, arch;
-
-
-  while (seci.hasMoreElements()) {
-    sec = seci.peekNextKey();
-    Ogre::ConfigFile::SettingsMultiMap* settings = seci.getNext();
-    Ogre::ConfigFile::SettingsMultiMap::iterator i;
-    for (i = settings->begin(); i != settings->end(); i++) {
-      type = i->first;
-      arch = i->second;
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-      if (!Ogre::StringUtil::startsWith(arch, "/", false)) {
-	arch = Ogre::String(macBundlePath() + "/" + arch);
-      }
-#endif
-      Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch,type,sec);
-    }
+  void Game::initPlugins() {
+    // necessary for TerrainManager
+    this->ogre->loadPlugin("Plugin_OctreeSceneManager");
+  
   }
-}
 
-void Game::loadResources() {
-  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-}
-
-void Game::initRenderWindow() {
+  void Game::initRenderWindow() {
   if(!this->ogre)
     return;
   this->ogre->initialise(false);
@@ -161,7 +133,48 @@ void Game::initRenderWindow() {
   // register game to receive window events.
   Ogre::WindowEventUtilities::addWindowEventListener(this->window, this);
 }
-
+  
+  void Game::initOgreResources() {
+    if(!this->ogre)
+      return;
+    this->locateResources();
+    this->loadResources();
+  }
+  
+  void Game::locateResources() {
+    Ogre::ConfigFile cf;
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+    cf.load(macBundlePath()+"/Contents/Resources/resources.cfg");
+#else
+    cf.load("resources.cfg");
+#endif
+    
+    Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
+    Ogre::String sec, type, arch;
+    
+    
+    while (seci.hasMoreElements()) {
+      sec = seci.peekNextKey();
+      Ogre::ConfigFile::SettingsMultiMap* settings = seci.getNext();
+      Ogre::ConfigFile::SettingsMultiMap::iterator i;
+      for (i = settings->begin(); i != settings->end(); i++) {
+        type = i->first;
+        arch = i->second;
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+        if (!Ogre::StringUtil::startsWith(arch, "/", false)) {
+          arch = Ogre::String(macBundlePath() + "/" + arch);
+        }
+#endif
+        Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch,type,sec);
+      }
+    }
+  }
+  
+  void Game::loadResources() {
+    Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+  }
+  
+  
 void Game::initInput() {
   this->input = InputHandler::getSingleton();
   if(!this->window)

@@ -21,9 +21,7 @@ PlayState::PlayState() {
   this->window = 0;
   this->scene = 0;
   this->game = 0;
-  this->overlayMgr = 0;
-  this->mouseOverlay = 0;
-  this->mousePointer = 0;
+  this->camRaySceneQuery = 0;
 }
 
 PlayState::~PlayState() {
@@ -51,9 +49,10 @@ void PlayState::enter(Game* game, Ogre::RenderWindow* window) {
   state->window = window;
   state->game = game;
 
-  state->overlayMgr = Ogre::OverlayManager::getSingletonPtr();
-  state->createSceneManager();
+  this->velocity = Ogre::Vector3(0,0,0);
+  //state->createSceneManager();
   state->setupView();
+  state->setupContent();
 }
 
 
@@ -68,7 +67,40 @@ void PlayState::exit() {
 	state->scene = 0;
 }
 
-void PlayState::setupContent(){}
+void PlayState::setupContent(){
+  
+  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Scene");  
+  
+  Ogre::Plane waterPlane;
+  
+  // Set ambient light
+  this->scene->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+
+  // create light
+  Ogre::Light* l = this->scene->createLight("MainLight");
+  
+  l->setPosition(20,80,50);
+  
+  Ogre::ColourValue fadeColour(0.93, 0.86, 0.76);
+  this->scene->setFog(Ogre::FOG_LINEAR, fadeColour, .001, 500, 1000);
+  this->window->getViewport(0)->setBackgroundColour(fadeColour);  
+
+  std::string terrain_config("terrain.cfg");
+  this->scene->setWorldGeometry(terrain_config);
+  if (this->ogre->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_INFINITE_FAR_PLANE)) {
+    this->camera->setFarClipDistance(0);
+  }
+  
+  // Define the required skyplane
+  Ogre::Plane plane;
+  plane.d = 5000;
+  plane.normal = -Ogre::Vector3::UNIT_Y;
+  
+  this->camera->setPosition(707,2500,528);
+  this->camera->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));
+  
+  camRaySceneQuery = this->scene->createRayQuery(Ogre::Ray(this->camera->getPosition(), -Ogre::Vector3::UNIT_Y));
+}
 void PlayState::cleanupContent(){}
 
 void PlayState::locateResources(){}
@@ -78,18 +110,56 @@ void PlayState::unloadResources(){}
 // A lot of stubs.
 void PlayState::pause() {}
 void PlayState::resume() {}
-void PlayState::update() {}
+void PlayState::update() {
+  
+  // get time since last Update
+  unsigned long tslu = this->game->timer->getMilliseconds();
+  
+  this->camera->setPosition(this->camera->getPosition()+tslu*this->velocity);
+  static Ogre::Ray updateRay;
+  updateRay.setOrigin(this->camera->getPosition());
+  updateRay.setDirection(-Ogre::Vector3::UNIT_Y);
+  camRaySceneQuery->setRay(updateRay);
+  Ogre::RaySceneQueryResult& qryResult = camRaySceneQuery->execute();
+  Ogre::RaySceneQueryResult::iterator i = qryResult.begin();
+  if (i != qryResult.end() && i->worldFragment) {
+    this->camera->setPosition(this->camera->getPosition().x,
+                              i->worldFragment->singleIntersection.y + 10,
+                              this->camera->getPosition().z);
+    }
+  
+}
 
 
 
-  bool PlayState::keyPressed(const OIS::KeyEvent &evt) {return true;}
+  bool PlayState::keyPressed(const OIS::KeyEvent &evt) {
+    if (evt.key == OIS::KC_RIGHT) {
+      this->velocity.x += 1;
+    } else if(evt.key == OIS::KC_LEFT) {
+      this->velocity.x -= 1;
+    } else if (evt.key == OIS::KC_UP) {
+      this->velocity.z += 1;
+    } else if (evt.key == OIS::KC_DOWN) {
+      this->velocity.z -= 1;
+    }
+    
+    return true;
+  }
   bool PlayState::keyReleased(const OIS::KeyEvent &evt) {
     if (evt.key == OIS::KC_SPACE) {
       //mGame->requestStateChange(PAUSE);
     } else if(evt.key == OIS::KC_ESCAPE) {
       //this->game->requestStateChange(SHUTDOWN);
-    }
-      return true;
+    } else if (evt.key == OIS::KC_RIGHT) {
+      this->velocity.x -= 1;
+    } else if(evt.key == OIS::KC_LEFT) {
+      this->velocity.x += 1;
+    } else if (evt.key == OIS::KC_UP) {
+      this->velocity.z -= 1;
+    } else if (evt.key == OIS::KC_DOWN) {
+      this->velocity.z += 1;
+    }      
+    return true;
   }
 
   bool PlayState::mouseMoved(const OIS::MouseEvent &evt) {
@@ -117,20 +187,22 @@ void PlayState::update() {}
 //void createOverlays() {}
 //void hideOverlays() {}
 
-void PlayState::createSceneManager() {
-	this->scene = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
-}
 
 void PlayState::setupView() {
-	Ogre::Camera* cam = this->scene->createCamera("SimpleCamera");
-	cam->setPosition(Ogre::Vector3(0.0f,0.0f,500.0f));
-	cam->lookAt(Ogre::Vector3(0.0f,0.0f,0.0f));
-	cam->setNearClipDistance(5.0f);
-	cam->setFarClipDistance(5000.0f);
+  
+  this->scene = this->ogre->createSceneManager("TerrainSceneManager");
+	Ogre::Camera* cam = this->scene->createCamera("PlayerCamera");
+	
+  cam->setPosition(Ogre::Vector3(128,25,128));
+	cam->lookAt(Ogre::Vector3(0,0,-300));
+	
+  cam->setNearClipDistance(1);
+	cam->setFarClipDistance(1000);
 	
 	Ogre::Viewport* v = this->window->addViewport(cam);
-	v->setBackgroundColour(Ogre::ColourValue(0.5,0.5,0.5));
+	//v->setBackgroundColour(Ogre::ColourValue(0.5,0.0,0.5));
 	cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
+  this->camera = cam;
 }
 
 }

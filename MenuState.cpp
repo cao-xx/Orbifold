@@ -51,7 +51,7 @@ namespace Orbifold {
     
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential");
     
-    state->tray = new SdkTrayManager("BrowserControls", state->window, state->game->getMouse(), this);
+    state->tray = new SdkTrayManager("MainMenuControls", state->window, state->game->getMouse(), this);
     state->tray->showBackdrop("SdkTrays/Bands");
     state->tray->getTrayContainer(TL_NONE)->hide();
     

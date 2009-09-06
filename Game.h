@@ -45,6 +45,8 @@ public:
 
   void static start();
   void static stop();
+	  
+	  Ogre::Timer* timer;
 
   // Callbacks for Inputhandling
   bool mouseMoved(const OIS::MouseEvent &evt);
@@ -84,8 +86,10 @@ protected:
 
   void initialise();
   void initOgreRoot();
-  void initOgreResources();
+  void initPlugins();
   void initRenderWindow();
+  void initOgreResources();
+  
   void initInput();
   void initState();
 

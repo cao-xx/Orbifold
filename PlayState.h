@@ -57,9 +57,11 @@ protected:
   Ogre::RenderWindow *window;
   Ogre::SceneManager *scene;
   Ogre::Camera *camera;
-  Ogre::OverlayManager *overlayMgr;
-  Ogre::Overlay *mouseOverlay;
-  Ogre::OverlayElement *mousePointer;
+  
+  Ogre::Vector3 velocity;
+
+  Ogre::RaySceneQuery *camRaySceneQuery;
+  
 
   Game *game;
 
@@ -80,7 +82,7 @@ protected:
 
   void createOverlays();
   void hideOverlays();
-  Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
+  //Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
 	
 
 
