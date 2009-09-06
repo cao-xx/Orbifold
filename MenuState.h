@@ -25,6 +25,9 @@ class MenuState : public GameState, public SdkTrayListener {
   
 public:
   
+  void initialise(Game* game, Ogre::RenderWindow* window);
+  void shutdown();
+  
   void enter(Game* game, Ogre::RenderWindow* window);
   void exit();
   
@@ -75,6 +78,7 @@ protected:
   
   bool contentSetup;
   bool resourcesLoaded;
+  bool firstEntry;
   
   void setupContent();
   void cleanupContent();
