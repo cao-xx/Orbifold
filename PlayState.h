@@ -59,6 +59,7 @@ protected:
   Ogre::Camera *camera;
   
   Ogre::Vector3 velocity;
+  Ogre::Radian spin;
 
   Ogre::RaySceneQuery *camRaySceneQuery;
   

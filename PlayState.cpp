@@ -115,7 +115,8 @@ void PlayState::update() {
   // get time since last Update
   unsigned long tslu = this->game->timer->getMilliseconds();
   
-  this->camera->setPosition(this->camera->getPosition()+tslu*this->velocity);
+  this->camera->moveRelative(tslu*this->velocity);
+  this->camera->yaw(tslu*this->spin);
   static Ogre::Ray updateRay;
   updateRay.setOrigin(this->camera->getPosition());
   updateRay.setDirection(-Ogre::Vector3::UNIT_Y);
@@ -134,13 +135,17 @@ void PlayState::update() {
 
   bool PlayState::keyPressed(const OIS::KeyEvent &evt) {
     if (evt.key == OIS::KC_RIGHT) {
-      this->velocity.x += 1;
+      this->velocity.x -= 0.1;
     } else if(evt.key == OIS::KC_LEFT) {
-      this->velocity.x -= 1;
+      this->velocity.x += 0.1;
     } else if (evt.key == OIS::KC_UP) {
-      this->velocity.z += 1;
+      this->velocity.z -= 0.1;
     } else if (evt.key == OIS::KC_DOWN) {
-      this->velocity.z -= 1;
+      this->velocity.z += 0.1;
+    } else if (evt.key == OIS::KC_A) {
+      this->spin += Ogre::Radian(0.005);
+    } else if (evt.key == OIS::KC_D) {
+      this->spin -= Ogre::Radian(0.005);
     }
     
     return true;
@@ -151,14 +156,18 @@ void PlayState::update() {
     } else if(evt.key == OIS::KC_ESCAPE) {
       //this->game->requestStateChange(SHUTDOWN);
     } else if (evt.key == OIS::KC_RIGHT) {
-      this->velocity.x -= 1;
+      this->velocity.x += 0.1;
     } else if(evt.key == OIS::KC_LEFT) {
-      this->velocity.x += 1;
+      this->velocity.x -= 0.1;
     } else if (evt.key == OIS::KC_UP) {
-      this->velocity.z -= 1;
+      this->velocity.z += 0.1;
     } else if (evt.key == OIS::KC_DOWN) {
-      this->velocity.z += 1;
-    }      
+      this->velocity.z -= 0.1;
+    } else if (evt.key == OIS::KC_A) {
+      this->spin -= Ogre::Radian(0.005);
+    } else if (evt.key == OIS::KC_D) {
+      this->spin += Ogre::Radian(0.005);
+    } 
     return true;
   }
 
