@@ -11,6 +11,7 @@
 #include "MenuState.h"
 #include "Game.h"
 #include <Ogre/OgreTextureUnitState.h>
+#include "RTSCamera.h"
 
 namespace Orbifold {
   
@@ -20,8 +21,8 @@ PlayState::PlayState() {
   this->ogre = 0;
   this->window = 0;
   this->scene = 0;
-  this->game = 0;
   this->camRaySceneQuery = 0;
+  this->initialised = false;
 }
 
 PlayState::~PlayState() {
@@ -41,22 +42,19 @@ PlayState* PlayState::getSingleton() {
   return instance;
 }
 
-
-void PlayState::enter(Game* game, Ogre::RenderWindow* window) {
-	
+void PlayState::enter() {
   PlayState* state = PlayState::getSingleton();
-  state->ogre = Ogre::Root::getSingletonPtr();
-  state->window = window;
-  state->game = game;
-
-  this->velocity = Ogre::Vector3(0,0,0);
+  if (state->initialised) {
   //state->createSceneManager();
-  state->setupView();
-  state->setupContent();
+    state->setupView();
+    state->setupContent();
+  } else {
+    state->initialise();
+  }
 }
 
 
-void PlayState::exit() {
+void PlayState::shutdown() {
 	PlayState* state = PlayState::getSingleton();
 	if (state->scene) state->scene->clearScene();
 	if (contentSetup) state->cleanupContent();
@@ -67,9 +65,40 @@ void PlayState::exit() {
 	state->scene = 0;
 }
 
+  void PlayState::save() {
+    if (camera) camera->save(); 
+  }
+  
+  void PlayState::restore() {
+    //camera->restore(); 
+  }
+  
+  void PlayState::initialise() {
+    PlayState* state = PlayState::getSingleton();
+    state->ogre = Ogre::Root::getSingletonPtr();
+    state->window = Game::getRenderWindow();
+    state->timer = new Ogre::Timer();
+    state->velocity = Ogre::Vector3(0,0,0);
+    this->initialiseView();
+    this->initialiseContent();
+    this->setupView();
+    this->setupContent();
+    initialised = true;
+  }
+  
+  void PlayState::exit() {
+    PlayState* state = PlayState::getSingleton();
+    if (state->scene) state->scene->clearScene();
+  }
+  
+  void PlayState::initialiseContent() {
+    Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Scene");    
+  }
+  
+  
 void PlayState::setupContent(){
   
-  Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Scene");  
+  
   
   Ogre::Plane waterPlane;
   
@@ -88,7 +117,7 @@ void PlayState::setupContent(){
   std::string terrain_config("terrain.cfg");
   this->scene->setWorldGeometry(terrain_config);
   if (this->ogre->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_INFINITE_FAR_PLANE)) {
-    this->camera->setFarClipDistance(0);
+    this->camera->getCamera()->setFarClipDistance(0);
   }
   
   // Define the required skyplane
@@ -96,11 +125,15 @@ void PlayState::setupContent(){
   plane.d = 5000;
   plane.normal = -Ogre::Vector3::UNIT_Y;
   
-  this->camera->setPosition(707,2500,528);
-  this->camera->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));
-  
-  camRaySceneQuery = this->scene->createRayQuery(Ogre::Ray(this->camera->getPosition(), -Ogre::Vector3::UNIT_Y));
+  if(!initialised) {
+    this->camera->getCamera()->setPosition(707,2500,528);
+    this->camera->getCamera()->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));
+  } else {
+    this->camera->restore();
+  }
+  camRaySceneQuery = this->scene->createRayQuery(Ogre::Ray(this->camera->getCamera()->getPosition(), -Ogre::Vector3::UNIT_Y));
 }
+  
 void PlayState::cleanupContent(){}
 
 void PlayState::locateResources(){}
@@ -108,25 +141,25 @@ void PlayState::loadResources(){}
 void PlayState::unloadResources(){}
 
 // A lot of stubs.
-void PlayState::pause() {}
-void PlayState::resume() {}
 void PlayState::update() {
-  
   // get time since last Update
-  unsigned long tslu = this->game->timer->getMilliseconds();
+  unsigned long tslu = this->timer->getMilliseconds();
+  this->timer->reset();
   
-  this->camera->moveRelative(tslu*this->velocity);
-  this->camera->yaw(tslu*this->spin);
+  Ogre::Camera* cam = this->camera->getCamera();
+  
+  cam->moveRelative(tslu*this->velocity);
+  cam->yaw(tslu*this->spin);
   static Ogre::Ray updateRay;
-  updateRay.setOrigin(this->camera->getPosition());
+  updateRay.setOrigin(cam->getPosition());
   updateRay.setDirection(-Ogre::Vector3::UNIT_Y);
   camRaySceneQuery->setRay(updateRay);
   Ogre::RaySceneQueryResult& qryResult = camRaySceneQuery->execute();
   Ogre::RaySceneQueryResult::iterator i = qryResult.begin();
   if (i != qryResult.end() && i->worldFragment) {
-    this->camera->setPosition(this->camera->getPosition().x,
+    cam->setPosition(cam->getPosition().x,
                               i->worldFragment->singleIntersection.y + 10,
-                              this->camera->getPosition().z);
+                              cam->getPosition().z);
     }
   
 }
@@ -180,7 +213,7 @@ void PlayState::update() {
   }
 
   bool PlayState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {
-    this->game->requestStateChange(MenuState::getSingleton());
+    Game::requestStateChange(MenuState::getSingleton());
     return true;
   }
   bool PlayState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
@@ -196,22 +229,24 @@ void PlayState::update() {
 //void createOverlays() {}
 //void hideOverlays() {}
 
-
-void PlayState::setupView() {
+  void PlayState::initialiseView() {
+    this->scene = this->ogre->createSceneManager("TerrainSceneManager");
+    RTSCamera* rtscam = new RTSCamera("PlayerCamera", this->scene);  
+    this->camera = rtscam;                          
+  }
   
-  this->scene = this->ogre->createSceneManager("TerrainSceneManager");
-	Ogre::Camera* cam = this->scene->createCamera("PlayerCamera");
-	
-  cam->setPosition(Ogre::Vector3(128,25,128));
-	cam->lookAt(Ogre::Vector3(0,0,-300));
-	
+void PlayState::setupView() {
+
+  Ogre::Camera* cam = camera->getCamera();
+  
+  	
   cam->setNearClipDistance(1);
 	cam->setFarClipDistance(1000);
 	
 	Ogre::Viewport* v = this->window->addViewport(cam);
 	//v->setBackgroundColour(Ogre::ColourValue(0.5,0.0,0.5));
 	cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
-  this->camera = cam;
+
 }
 
 }

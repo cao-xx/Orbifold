@@ -24,19 +24,18 @@ class Game;
 class MenuState : public GameState, public SdkTrayListener {
   
 public:
-  
-  void initialise(Game* game, Ogre::RenderWindow* window);
-  void shutdown();
-  
-  void enter(Game* game, Ogre::RenderWindow* window);
+  void enter();
   void exit();
-  
-  void pause();
-  void resume();
+
+  void save();
+  void restore();
+
+  void initialise();
+  void shutdown();
   
   // Update
   void update();
-  void update(float ms);
+
   
   static MenuState* getSingleton();
   
@@ -72,10 +71,7 @@ protected:
   
   SdkTrayManager* tray;
   SelectMenu* rendererMenu;
-  
-  
-  Game *game;
-  
+
   bool contentSetup;
   bool resourcesLoaded;
   bool firstEntry;

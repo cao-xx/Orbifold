@@ -26,13 +26,6 @@
 
 namespace Orbifold {
 
-enum GState{
-	INTRO,
-	MENU,
-	LOADING,
-	INGAME,
-	SHUTDOWN,
-};
 
 class GameState;
 
@@ -45,8 +38,6 @@ public:
 
   void static start();
   void static stop();
-	  
-	  Ogre::Timer* timer;
 
   // Callbacks for Inputhandling
   bool mouseMoved(const OIS::MouseEvent &evt);
@@ -56,10 +47,12 @@ public:
   bool keyPressed(const OIS::KeyEvent &evt);
   bool keyReleased(const OIS::KeyEvent &evt);
 	  
-  OIS::Mouse* getMouse();
-  OIS::Keyboard* getKeyboard();
+  static OIS::Mouse* getMouse();
+  static OIS::Keyboard* getKeyboard();
 
-  // Callbacks for Windowhandling
+  // Window handling
+  static Ogre::RenderWindow* getRenderWindow();
+	  
   void windowResized(Ogre::RenderWindow* rw);
   void windowMoved(Ogre::RenderWindow* rw);
   bool windowClosing(Ogre::RenderWindow* rw);
@@ -68,8 +61,7 @@ public:
 
   // State handling
   GameState* getCurrentState();
-  bool requestStateChange(GameState* s);
-  bool requestStateChange(GState s);
+  static bool requestStateChange(GameState* s);
 
 protected:
 

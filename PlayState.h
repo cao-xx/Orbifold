@@ -9,7 +9,7 @@
 #ifndef PlayState_H
 #define PlayState_H
 
-#include <Ogre/OgreCamera.h>
+#include "RTSCamera.h"
 
 #include "GameState.h"
 //#include "PauseState.h"
@@ -22,15 +22,17 @@ class PlayState : public GameState {
 
 public:
 
-  void enter(Game* game, Ogre::RenderWindow* window);
+  void enter();
   void exit();
 
-  void pause();
-  void resume();
-
+  void save();
+  void restore();
+  
+  void initialise();
+  void shutdown();
+  
   // Update
   void update();
-  void update(float ms);
 
   static PlayState* getSingleton();
 
@@ -52,25 +54,28 @@ public:
 protected:
 
   static PlayState* instance;
+  
+  
 
   Ogre::Root *ogre;
   Ogre::RenderWindow *window;
   Ogre::SceneManager *scene;
-  Ogre::Camera *camera;
+  RTSCamera *camera;
+  
+  Ogre::Timer* timer;
   
   Ogre::Vector3 velocity;
   Ogre::Radian spin;
 
   Ogre::RaySceneQuery *camRaySceneQuery;
   
-
-  Game *game;
-
   bool contentSetup;
   bool resourcesLoaded;
 		
   void setupContent();
   void cleanupContent();
+  
+  void initialiseContent();
 	
   void locateResources();
   void loadResources();
@@ -79,6 +84,8 @@ protected:
   void createSceneManager();
 	
   void setupView();
+  
+  void initialiseView();
 	
 
   void createOverlays();

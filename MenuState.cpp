@@ -20,7 +20,6 @@ namespace Orbifold {
     this->ogre = 0;
     this->window = 0;
     this->scene = 0;
-    this->game = 0;
     this->tray = 0;
     this->contentSetup = false;
     this->firstEntry = true;
@@ -41,17 +40,19 @@ namespace Orbifold {
     return instance;
   }
   
-  void MenuState::initialise(Game* game, Ogre::RenderWindow* window) {
+  void MenuState::save() {}
+  void MenuState::restore() {}
+  
+  void MenuState::initialise() {
     MenuState* state = MenuState::getSingleton();
     state->ogre = Ogre::Root::getSingletonPtr();
-    state->window = window;
-    state->game = game;
+    state->window = Game::getRenderWindow();
     
     //locateResources();
     
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential");
     
-    state->tray = new SdkTrayManager("MainMenuControls", state->window, state->game->getMouse(), this);
+    state->tray = new SdkTrayManager("MainMenuControls", state->window, Game::getMouse(), this);
     state->tray->showBackdrop("SdkTrays/Bands");
     state->tray->getTrayContainer(TL_NONE)->hide();
     
@@ -76,7 +77,7 @@ namespace Orbifold {
   } 
   
   
-  void MenuState::enter(Game* game, Ogre::RenderWindow* window) {
+  void MenuState::enter() {
     
     MenuState* state = MenuState::getSingleton();
     
@@ -86,7 +87,7 @@ namespace Orbifold {
       state->tray->showBackdrop("SdkTrays/Bands");
       state->tray->showAll();
     } else {
-      state->initialise(game, window);
+      state->initialise();
       firstEntry = false;
     }
   }
@@ -153,8 +154,6 @@ namespace Orbifold {
   void MenuState::unloadResources(){}
   
   // A lot of stubs.
-  void MenuState::pause() {}
-  void MenuState::resume() {}
   void MenuState::update() {this->tray->update();}
   
   
@@ -201,9 +200,9 @@ namespace Orbifold {
   
   void MenuState::buttonHit(SdkButton* b) {
     if (b->getName() == "StartStop") {
-      this->game->requestStateChange(PlayState::getSingleton());
+      Game::requestStateChange(PlayState::getSingleton());
     } else if (b->getName() == "Quit") {
-      this->game->stop();
+      Game::stop();
     } else {
       ;
     }

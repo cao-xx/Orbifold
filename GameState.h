@@ -27,8 +27,14 @@ namespace Orbifold {
 class GameState {
 
 public:
-  virtual void enter(Game* game, Ogre::RenderWindow *window) = 0;
+  virtual void save() = 0;
+  virtual void restore() = 0;
+  
+  virtual void enter() = 0;
   virtual void exit() = 0;
+  
+  virtual void initialise() = 0;
+  virtual void shutdown() = 0;
 
   virtual void update() = 0;
 
@@ -46,6 +52,8 @@ public:
   virtual void windowFocusChange(Ogre::RenderWindow* rw) = 0;
   
 protected:
+  bool initialised;
+  
   GameState(){}
   ~GameState(){}
     
