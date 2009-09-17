@@ -17,13 +17,12 @@ namespace Orbifold {
   
 class Game;
 
-PlayState::PlayState() {
-  this->ogre = 0;
-  this->window = 0;
-  this->scene = 0;
-  this->camRaySceneQuery = 0;
-  this->initialised = false;
-}
+  PlayState::PlayState() :
+  ogre(0),
+  window(0),
+  camRaySceneQuery(0),
+  initialised(false)
+  {}
 
 PlayState::~PlayState() {
   if(this->instance) {
@@ -125,13 +124,30 @@ void PlayState::setupContent(){
   plane.d = 5000;
   plane.normal = -Ogre::Vector3::UNIT_Y;
   
+  
   if(!initialised) {
-    this->camera->getCamera()->setPosition(707,2500,528);
-    this->camera->getCamera()->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));
+    Ogre::Camera* cam = this->camera->getCamera();
+    
+    cam->setPosition(707,2500,528);
+    cam->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));
+    camRaySceneQuery = this->scene->createRayQuery(Ogre::Ray(cam->getPosition(), -Ogre::Vector3::UNIT_Y));
+    static Ogre::Ray updateRay;
+    updateRay.setOrigin(cam->getPosition());
+    updateRay.setDirection(-Ogre::Vector3::UNIT_Y);
+    camRaySceneQuery->setRay(updateRay);
+    Ogre::RaySceneQueryResult& qryResult = camRaySceneQuery->execute();
+    Ogre::RaySceneQueryResult::iterator i = qryResult.begin();
+    if (i != qryResult.end() && i->worldFragment) {
+      Ogre::Vector3 campos = cam->getPosition();
+      Ogre::Vector3 inter = i->worldFragment->singleIntersection;  
+      
+      cam->setPosition(cam->getPosition().x,
+                       inter.y +10,
+                       cam->getPosition().z);
+    }
   } else {
     this->camera->restore();
   }
-  camRaySceneQuery = this->scene->createRayQuery(Ogre::Ray(this->camera->getCamera()->getPosition(), -Ogre::Vector3::UNIT_Y));
 }
   
 void PlayState::cleanupContent(){}
@@ -145,22 +161,10 @@ void PlayState::update() {
   // get time since last Update
   unsigned long tslu = this->timer->getMilliseconds();
   this->timer->reset();
+  this->camera->update(tslu);
   
-  Ogre::Camera* cam = this->camera->getCamera();
+  //Ogre::Camera* cam = this->camera->getCamera();
   
-  cam->moveRelative(tslu*this->velocity);
-  cam->yaw(tslu*this->spin);
-  static Ogre::Ray updateRay;
-  updateRay.setOrigin(cam->getPosition());
-  updateRay.setDirection(-Ogre::Vector3::UNIT_Y);
-  camRaySceneQuery->setRay(updateRay);
-  Ogre::RaySceneQueryResult& qryResult = camRaySceneQuery->execute();
-  Ogre::RaySceneQueryResult::iterator i = qryResult.begin();
-  if (i != qryResult.end() && i->worldFragment) {
-    cam->setPosition(cam->getPosition().x,
-                              i->worldFragment->singleIntersection.y + 10,
-                              cam->getPosition().z);
-    }
   
 }
 
@@ -175,7 +179,12 @@ void PlayState::update() {
       this->velocity.z -= 0.1;
     } else if (evt.key == OIS::KC_DOWN) {
       this->velocity.z += 0.1;
-    } else if (evt.key == OIS::KC_A) {
+    } else if (evt.key == OIS::KC_Q) {
+      this->velocity.y += 0.1;
+    } else if (evt.key == OIS::KC_E) {
+      this->velocity.y -= 0.1;
+    }   
+    else if (evt.key == OIS::KC_A) {
       this->spin += Ogre::Radian(0.005);
     } else if (evt.key == OIS::KC_D) {
       this->spin -= Ogre::Radian(0.005);

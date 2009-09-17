@@ -9,8 +9,6 @@
 
 #include "GameState.h"
 #include "MenuState.h"
-//#include "IntroState.h"
-//#include "PauseState.h"
 #include "Game.h"
 #include "Input.h"
 #include "Utils.h"
@@ -22,13 +20,12 @@
 namespace Orbifold {
 
 
-  Game::Game() {
-    this->running = false;
-    this->ogre = 0;
-    this->window = 0;
-    this->input = 0;
-    this->state = 0;
-  }
+  Game::Game() :
+    running(false),
+    ogre(0),
+    window(0),
+    input(0),
+    state(0) {}
 
   Game::~Game() {
     if(this->instance) {

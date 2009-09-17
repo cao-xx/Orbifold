@@ -16,14 +16,14 @@ namespace Orbifold {
   class Game;
   class SdkTrayManager;
   
-  MenuState::MenuState() {
-    this->ogre = 0;
-    this->window = 0;
-    this->scene = 0;
-    this->tray = 0;
-    this->contentSetup = false;
-    this->firstEntry = true;
-  }
+  MenuState::MenuState():
+    ogre(0),
+    window(0),
+    scene(0),
+    tray(0),
+    contentSetup(false),
+    firstEntry(true)
+  {}
   
   MenuState::~MenuState() {
     if(this->instance) {
@@ -53,7 +53,7 @@ namespace Orbifold {
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential");
     
     state->tray = new SdkTrayManager("MainMenuControls", state->window, Game::getMouse(), this);
-    state->tray->showBackdrop("SdkTrays/Bands");
+    //state->tray->showBackdrop("SdkTrays/Bands");
     state->tray->getTrayContainer(TL_NONE)->hide();
     
     createDummyScene();
@@ -84,7 +84,7 @@ namespace Orbifold {
     if (!firstEntry) {
     //create dummy scene and modify controls
       state->createDummyScene();
-      state->tray->showBackdrop("SdkTrays/Bands");
+      //state->tray->showBackdrop("SdkTrays/Bands");
       state->tray->showAll();
     } else {
       state->initialise();

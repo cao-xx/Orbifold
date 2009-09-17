@@ -52,7 +52,6 @@ public:
   virtual void windowFocusChange(Ogre::RenderWindow* rw) = 0;
   
 protected:
-  bool initialised;
   
   GameState(){}
   ~GameState(){}

@@ -67,7 +67,7 @@ protected:
   Ogre::Vector3 velocity;
   Ogre::Radian spin;
 
-  Ogre::RaySceneQuery *camRaySceneQuery;
+  
   
   bool contentSetup;
   bool resourcesLoaded;
@@ -95,6 +95,7 @@ protected:
 
 
 private:
+  bool initialised;
 
   PlayState();
   ~PlayState();
