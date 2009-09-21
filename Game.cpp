@@ -191,14 +191,12 @@ namespace Orbifold {
     GameState* pstate = game->state;
 
     if(pstate) {
-      pstate->save();
       pstate->exit();
     }
 
     game->window->removeAllViewports();
 
     if(nstate) {
-      nstate->restore();
       nstate->enter();
     }
 

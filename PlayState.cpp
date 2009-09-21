@@ -63,7 +63,10 @@ void PlayState::save() {
   
 
 void PlayState::restore() {
-    camera->restore(); 
+  PlayState* state = PlayState::getSingleton();
+  state->setupView();
+  state->setupContent();
+  state->camera->restore(); 
 }  
 
 
@@ -92,10 +95,25 @@ void PlayState::initialise() {
     this->initialiseContent();
     this->setupView();
     this->setupContent();
+    // has to be called after the content is setup,
+    // because its rayscenequery depends on an actual world being present
+    this->camera->initialise();
     initialised = true;
 }
   
+  void PlayState::initialiseView() {
+    this->scene = this->ogre->createSceneManager("TerrainSceneManager");
+    RTSCamera* rtscam = new RTSCamera("PlayerCamera", this->scene);  
+    this->camera = rtscam;
+    //this->camera->initialise();
+  }
   
+  void PlayState::setupView() {
+    Ogre::Camera* cam = camera->getCamera();
+    Ogre::Viewport* v = this->window->addViewport(cam);
+    //v->setBackgroundColour(Ogre::ColourValue(0.5,0.0,0.5));
+    cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
+  }
   
   void PlayState::initialiseContent() {
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Scene");    
@@ -103,8 +121,6 @@ void PlayState::initialise() {
   
   
 void PlayState::setupContent(){
-  
-  
   
   Ogre::Plane waterPlane;
   
@@ -127,13 +143,6 @@ void PlayState::setupContent(){
   Ogre::Plane plane;
   plane.d = 5000;
   plane.normal = -Ogre::Vector3::UNIT_Y;
-  
-  if(initialised) {
-    this->camera->restore();
-  } else {
-    this->camera->initialise();
-    initialised = true;
-  }
  }
   
 void PlayState::cleanupContent(){}
@@ -148,10 +157,6 @@ void PlayState::update() {
   unsigned long tslu = this->timer->getMilliseconds();
   this->timer->reset();
   this->camera->update(tslu);
-  
-  //Ogre::Camera* cam = this->camera->getCamera();
-  
-  
 }
 
 
@@ -183,30 +188,6 @@ void PlayState::update() {
   bool PlayState::windowClosing(Ogre::RenderWindow* rw) {return true;}
   void PlayState::windowClosed(Ogre::RenderWindow* rw) {}
   void PlayState::windowFocusChange(Ogre::RenderWindow* rw) {}
-
-
-//void createOverlays() {}
-//void hideOverlays() {}
-
-  void PlayState::initialiseView() {
-    this->scene = this->ogre->createSceneManager("TerrainSceneManager");
-    RTSCamera* rtscam = new RTSCamera("PlayerCamera", this->scene);  
-    this->camera = rtscam;
-    this->camera->initialise();
-  }
-  
-void PlayState::setupView() {
-
-  Ogre::Camera* cam = camera->getCamera();
-  
-  	
-  
-	
-	Ogre::Viewport* v = this->window->addViewport(cam);
-	//v->setBackgroundColour(Ogre::ColourValue(0.5,0.0,0.5));
-	cam->setAspectRatio(Ogre::Real(v->getActualWidth())/v->getActualHeight());
-
-}
 
 }
 

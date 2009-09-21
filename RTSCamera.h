@@ -30,9 +30,6 @@ namespace Orbifold {
     
     Ogre::Vector3 mVelocity;
     
-    
-    
-    
     // those 6 functions should really just be 2
     // they should represent slowdown and acceleration with
     // air resistance
@@ -62,7 +59,7 @@ namespace Orbifold {
   };
   
   
-  class RTSCamera : BaseAnim {
+  class RTSCamera : public BaseAnim, public OIS::KeyListener, public OIS::MouseListener {
   public:
     RTSCamera(const Ogre::String& name, Ogre::SceneManager* sm);
     virtual ~RTSCamera();
@@ -82,20 +79,62 @@ namespace Orbifold {
     
     bool keyPressed(const OIS::KeyEvent &evt) {
       switch (evt.key) {
-        case OIS::RIGHT:
-          
+        case OIS::KC_D:
+          mVelocity.x += 0.1;
+          break;
+        case OIS::KC_A:
+          mVelocity.x -= 0.1;
+          break;
+        case OIS::KC_S:
+          mVelocity.z -= 0.1;
+          break;
+        case OIS::KC_W:
+          mVelocity.z += 0.1;
+          break;  
+        case OIS::KC_Q:
+          mVelocity.y += 0.1;
+          break;
+        case OIS::KC_E:
+          mVelocity.y -= 0.1;
           break;
         default:
           break;
       }
+      return true;
     }
     
-    bool keyReleased(const OIS::KeyEvent &evt);
+    bool keyReleased(const OIS::KeyEvent &evt) {
+      switch (evt.key) {
+        case OIS::KC_D:
+          mVelocity.x -= 0.1;
+          break;
+        case OIS::KC_A:
+          mVelocity.x += 0.1;
+        break;
+        case OIS::KC_W:
+          mVelocity.z -= 0.1;
+          break;
+        case OIS::KC_S:
+          mVelocity.z += 0.1;
+          break;
+        case OIS::KC_Q:
+          mVelocity.y -= 0.1;
+          break;
+        case OIS::KC_E:
+          mVelocity.y += 0.1;
+          break;
+        default:
+          break;
+      }
+      
+      
+      return true;
+    }
     
     
-    bool mouseMoved(const OIS::MouseEvent &evt);
-    bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
-    bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
+    bool mouseMoved(const OIS::MouseEvent &evt) {return true;}
+    bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
+    bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id) {return true;}
   
   protected:
     Ogre::SceneManager* mSceneManager;
@@ -107,6 +146,7 @@ namespace Orbifold {
     Ogre::Vector3 mSavedUp;
     Ogre::Vector3 mSavedRight;
     
+    Ogre::Vector3 mVelocity;
     
     Ogre::Radian mRollVel;
     Ogre::Radian mPitchVel;

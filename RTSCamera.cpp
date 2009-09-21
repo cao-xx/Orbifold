@@ -15,24 +15,28 @@
 class RTSCamera;
 
 namespace Orbifold {
-  RTSCamera::RTSCamera(const Ogre::String& name,  Ogre::SceneManager* sm) {
+  RTSCamera::RTSCamera(const Ogre::String& name,  Ogre::SceneManager* sm) :
+    mSceneManager(0),
+    mCamera(0)
+  {
     mSceneManager = sm;
     mCamera = sm->createCamera(name);
   }
   
   RTSCamera::~RTSCamera() {}
   
-  RTSCamera::initialise() {
-    Ogre::Camera* cam = mCamera;
+  void RTSCamera::initialise() {
+    InputHandler* input = InputHandler::getSingleton();
     
+    input->addKeyListener(this, "RTSCam");
+    input->addMouseListener(this, "RTSCam");
+    
+    mVelocity = Ogre::Vector3(0,0,0);
+    Ogre::Camera* cam = mCamera;
     if (Ogre::Root::getSingletonPtr()->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_INFINITE_FAR_PLANE)) {
       cam->setFarClipDistance(0);
-    } else {
-      cam->setNearClipDistance(1);
-      cam->setFarClipDistance(1000);
     }
-
-    
+    cam->setNearClipDistance(1);
     cam->setPosition(707,2500,528);
     cam->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));
     mRaySceneQuery = mSceneManager->createRayQuery(Ogre::Ray(cam->getPosition(), -Ogre::Vector3::UNIT_Y));
@@ -70,9 +74,10 @@ namespace Orbifold {
   }
   
   void RTSCamera::update(unsigned long tslu) {
+
     // Movement should be adapted / restricted
     mCamera->moveRelative(tslu*this->mVelocity);
-    mCamera->roll(tslu*this->mRollVel);
+    //mCamera->roll(tslu*this->mRollVel);
     
     // Basic collision detection
     static Ogre::Ray updateRay;
@@ -86,7 +91,7 @@ namespace Orbifold {
       Ogre::Vector3 inter = i->worldFragment->singleIntersection;  
       if (campos.y < inter.y + 10) {
         mCamera->setPosition(mCamera->getPosition().x,
-                             inter.y +10,
+                             inter.y + 10,
                              mCamera->getPosition().z);
       } else {
         mCamera->setPosition(campos);

@@ -31,8 +31,9 @@ class GameState;
 
 class Game :
 public Ogre::WindowEventListener,
-  public OIS::KeyListener,
-  public OIS::MouseListener {
+	OIS::KeyListener,
+	OIS::MouseListener
+	{
 
 public:
 
