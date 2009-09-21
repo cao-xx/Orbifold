@@ -246,7 +246,7 @@ namespace Orbifold {
   }
 
 
-  // Window Handling
+  // Window Handling ///////////////////////////////////////////////////////////////////
   
   Ogre::RenderWindow* Game::getRenderWindow() {
     return Game::getSingleton()->window;
