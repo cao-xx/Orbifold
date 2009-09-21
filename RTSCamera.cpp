@@ -22,12 +22,16 @@ namespace Orbifold {
   
   RTSCamera::~RTSCamera() {}
   
-  Ogre::Viewport* RTSCamera::initialise() {
+  RTSCamera::initialise() {
     Ogre::Camera* cam = mCamera;
     
     if (Ogre::Root::getSingletonPtr()->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_INFINITE_FAR_PLANE)) {
       cam->setFarClipDistance(0);
+    } else {
+      cam->setNearClipDistance(1);
+      cam->setFarClipDistance(1000);
     }
+
     
     cam->setPosition(707,2500,528);
     cam->setOrientation(Ogre::Quaternion(-0.3486, 0.0122, 0.9365, 0.0329));

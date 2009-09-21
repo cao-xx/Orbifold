@@ -67,19 +67,33 @@ namespace Orbifold {
     RTSCamera(const Ogre::String& name, Ogre::SceneManager* sm);
     virtual ~RTSCamera();
     
-    Ogre::Viewport* initialise();
+    void initialise();
     
     void restore();
     void save();
     
     void update(unsigned long tslu);
     
+    inline Ogre::Camera* getCamera() {
+      return this->mCamera;
+    }
+    
     // Input Handling, not sure if its a good idea to place it here, but well...
     
-    bool keyPressed(const OIS::KeyEvent &evt);
-    bool keyReleased(const OIS::KeyEvent &evt);
-    bool mouseMoved(const OIS::MouseEvent &evt);
+    bool keyPressed(const OIS::KeyEvent &evt) {
+      switch (evt.key) {
+        case OIS::RIGHT:
+          
+          break;
+        default:
+          break;
+      }
+    }
     
+    bool keyReleased(const OIS::KeyEvent &evt);
+    
+    
+    bool mouseMoved(const OIS::MouseEvent &evt);
     bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
     bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
   

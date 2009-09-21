@@ -44,13 +44,27 @@ PlayState* PlayState::getSingleton() {
 void PlayState::enter() {
   PlayState* state = PlayState::getSingleton();
   if (state->initialised) {
-  //state->createSceneManager();
-    state->setupView();
-    state->setupContent();
+    state->restore();
   } else {
     state->initialise();
   }
 }
+  
+void PlayState::exit() {
+  PlayState* state = PlayState::getSingleton();
+  state->save();
+  if (state->scene) state->scene->clearScene();
+}
+
+
+void PlayState::save() {
+    if (camera) camera->save(); 
+}  
+  
+
+void PlayState::restore() {
+    camera->restore(); 
+}  
 
 
 void PlayState::shutdown() {
@@ -64,31 +78,24 @@ void PlayState::shutdown() {
 	state->scene = 0;
 }
 
-  void PlayState::save() {
-    if (camera) camera->save(); 
-  }
   
-  void PlayState::restore() {
-    //camera->restore(); 
-  }
   
-  void PlayState::initialise() {
+  
+  
+void PlayState::initialise() {
     PlayState* state = PlayState::getSingleton();
     state->ogre = Ogre::Root::getSingletonPtr();
     state->window = Game::getRenderWindow();
     state->timer = new Ogre::Timer();
-    state->velocity = Ogre::Vector3(0,0,0);
+    //state->velocity = Ogre::Vector3(0,0,0);
     this->initialiseView();
     this->initialiseContent();
     this->setupView();
     this->setupContent();
     initialised = true;
-  }
+}
   
-  void PlayState::exit() {
-    PlayState* state = PlayState::getSingleton();
-    if (state->scene) state->scene->clearScene();
-  }
+  
   
   void PlayState::initialiseContent() {
     Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Scene");    
@@ -122,7 +129,7 @@ void PlayState::setupContent(){
   plane.normal = -Ogre::Vector3::UNIT_Y;
   
   if(initialised) {
-    this->camera->restore()
+    this->camera->restore();
   } else {
     this->camera->initialise();
     initialised = true;
@@ -150,45 +157,9 @@ void PlayState::update() {
 
 
   bool PlayState::keyPressed(const OIS::KeyEvent &evt) {
-    if (evt.key == OIS::KC_RIGHT) {
-      this->velocity.x -= 0.1;
-    } else if(evt.key == OIS::KC_LEFT) {
-      this->velocity.x += 0.1;
-    } else if (evt.key == OIS::KC_UP) {
-      this->velocity.z -= 0.1;
-    } else if (evt.key == OIS::KC_DOWN) {
-      this->velocity.z += 0.1;
-    } else if (evt.key == OIS::KC_Q) {
-      this->velocity.y += 0.1;
-    } else if (evt.key == OIS::KC_E) {
-      this->velocity.y -= 0.1;
-    }   
-    else if (evt.key == OIS::KC_A) {
-      this->spin += Ogre::Radian(0.005);
-    } else if (evt.key == OIS::KC_D) {
-      this->spin -= Ogre::Radian(0.005);
-    }
-    
     return true;
   }
   bool PlayState::keyReleased(const OIS::KeyEvent &evt) {
-    if (evt.key == OIS::KC_SPACE) {
-      //mGame->requestStateChange(PAUSE);
-    } else if(evt.key == OIS::KC_ESCAPE) {
-      //this->game->requestStateChange(SHUTDOWN);
-    } else if (evt.key == OIS::KC_RIGHT) {
-      this->velocity.x += 0.1;
-    } else if(evt.key == OIS::KC_LEFT) {
-      this->velocity.x -= 0.1;
-    } else if (evt.key == OIS::KC_UP) {
-      this->velocity.z += 0.1;
-    } else if (evt.key == OIS::KC_DOWN) {
-      this->velocity.z -= 0.1;
-    } else if (evt.key == OIS::KC_A) {
-      this->spin -= Ogre::Radian(0.005);
-    } else if (evt.key == OIS::KC_D) {
-      this->spin += Ogre::Radian(0.005);
-    } 
     return true;
   }
 
@@ -220,7 +191,8 @@ void PlayState::update() {
   void PlayState::initialiseView() {
     this->scene = this->ogre->createSceneManager("TerrainSceneManager");
     RTSCamera* rtscam = new RTSCamera("PlayerCamera", this->scene);  
-    this->camera = rtscam;                          
+    this->camera = rtscam;
+    this->camera->initialise();
   }
   
 void PlayState::setupView() {
@@ -228,8 +200,7 @@ void PlayState::setupView() {
   Ogre::Camera* cam = camera->getCamera();
   
   	
-  cam->setNearClipDistance(1);
-	cam->setFarClipDistance(1000);
+  
 	
 	Ogre::Viewport* v = this->window->addViewport(cam);
 	//v->setBackgroundColour(Ogre::ColourValue(0.5,0.0,0.5));

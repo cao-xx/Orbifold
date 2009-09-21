@@ -21,13 +21,10 @@ class Game;
 class PlayState : public GameState {
 
 public:
-
+  
   void enter();
   void exit();
 
-  void save();
-  void restore();
-  
   void initialise();
   void shutdown();
   
@@ -52,10 +49,11 @@ public:
   void windowFocusChange(Ogre::RenderWindow* rw);
 
 protected:
-
+  
   static PlayState* instance;
   
-  
+  void save();
+  void restore();
 
   Ogre::Root *ogre;
   Ogre::RenderWindow *window;
@@ -64,13 +62,11 @@ protected:
   
   Ogre::Timer* timer;
   
-  Ogre::Vector3 velocity;
-  Ogre::Radian spin;
-
-  
-  
   bool contentSetup;
   bool resourcesLoaded;
+  
+  void initialiseView();
+  void setupView();
 		
   void setupContent();
   void cleanupContent();
@@ -82,10 +78,6 @@ protected:
   void unloadResources();
 	
   void createSceneManager();
-	
-  void setupView();
-  
-  void initialiseView();
 	
 
   void createOverlays();
