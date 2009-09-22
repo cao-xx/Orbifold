@@ -18,7 +18,7 @@
 
 namespace Orbifold {
   
-  class BaseAnim {
+  /*class BaseAnim {
   
   protected:
     double mMv;
@@ -31,7 +31,7 @@ namespace Orbifold {
     Ogre::Vector3 mVelocity;
     
     // those 6 functions should really just be 2
-    // they should represent slowdown and acceleration with
+    // they represent slowdown and acceleration with
     // air resistance
     void xAcc(double vx0, unsigned long tx) {
       mVelocity.x = mMv*tanh(tx + atanh(vx0));      
@@ -56,10 +56,10 @@ namespace Orbifold {
     void zSlow(double vz0, unsigned long tz) {
       mVelocity.z = vz0 / (1 + vz0 * mGm * tz);
     }    
-  };
+  }; */
   
   
-  class RTSCamera : public BaseAnim, public OIS::KeyListener, public OIS::MouseListener {
+  class RTSCamera : public OIS::KeyListener, public OIS::MouseListener {
   public:
     RTSCamera(const Ogre::String& name, Ogre::SceneManager* sm);
     virtual ~RTSCamera();

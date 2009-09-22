@@ -17,11 +17,7 @@
 #include <OIS/OISMouse.h>
 #include <OIS/OISKeyboard.h>
 
-#include <Ogre/OgreRoot.h>
-#include <Ogre/OgreConfigFile.h>
-#include <Ogre/OgreRenderWindow.h>
-#include <Ogre/OgreWindowEventUtilities.h>
-
+#include <Ogre/Ogre.h>
 #include "Input.h"
 
 namespace Orbifold {

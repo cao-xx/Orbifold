@@ -10,9 +10,6 @@
 #ifndef MAP_H
 #define MAP_H
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-#include <Carbon/Carbon.h>
-#endif
 
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>

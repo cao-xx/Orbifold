@@ -12,7 +12,7 @@
 #include "Game.h"
 #include "Input.h"
 #include "Utils.h"
-#include <Ogre/OgreWindowEventUtilities.h>
+//#include <Ogre/OgreWindowEventUtilities.h>
 #include <Ogre/Ogre.h>
 
 
@@ -99,19 +99,13 @@ namespace Orbifold {
 #else
     this->ogre->loadPlugin("RenderSystem_GL");
 #endif
-    Ogre::RenderSystemList *rs = NULL;
-    Ogre::RenderSystemList::iterator r_it;
-
-    rs = this->ogre->getAvailableRenderers();
-    r_it = rs->begin();
-
-    if(rs && rs->size() && rs->at(0)->getName().compare("RenderSystem_GL")){
-      Ogre::RenderSystem *r=rs->at(0);
-      ogre->setRenderSystem(r);
-    }else{
-      exit(1);
-    }
-  }
+    Ogre::RenderSystemList rlist = this->ogre->getAvailableRenderers();
+    Ogre::RenderSystemList::iterator it = rlist.begin();
+    
+    Ogre::RenderSystem *rSys = *it;
+    this->ogre->setRenderSystem(rSys);
+  
+}
 
   void Game::initPlugins() {
     // necessary for TerrainManager

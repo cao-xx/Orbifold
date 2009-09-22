@@ -13,13 +13,17 @@
 		AA2146EE1051175D00607FF4 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2146ED1051175D00607FF4 /* IOKit.framework */; };
 		AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21498610528D8E00607FF4 /* MenuState.cpp */; };
 		AA214A791052E2DF00607FF4 /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA214A781052E2DF00607FF4 /* resources.cfg */; };
+		AA30225010684BBE00156078 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA30224F10684BBE00156078 /* Ogre.framework */; };
+		AA3024331068D34000156078 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = AA3024321068D34000156078 /* plugins.cfg */; };
+		AA3024461068D50600156078 /* OIS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA2146DE105116F500607FF4 /* OIS.framework */; };
+		AA3024501068D50B00156078 /* Cg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA2146E41051171700607FF4 /* Cg.framework */; };
+		AA3024FC1068D5A400156078 /* Ogre.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA30224F10684BBE00156078 /* Ogre.framework */; };
+		AA3025AB1068D5AA00156078 /* IOKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA2146ED1051175D00607FF4 /* IOKit.framework */; };
 		AA7BE9CA105582A200C1DCEA /* RTSCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7BE9C9105582A200C1DCEA /* RTSCamera.cpp */; };
-		AAAEEAEA1067A94B006CF34A /* Console.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAEEAE91067A94B006CF34A /* Console.cpp */; };
 		AABE87FC104704710090CB0C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FA104704710090CB0C /* Game.cpp */; };
 		AABE87FF1047047F0090CB0C /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE87FD1047047F0090CB0C /* Input.cpp */; };
 		AABE88011047048A0090CB0C /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88001047048A0090CB0C /* Main.cpp */; };
 		AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AABE88E81047216F0090CB0C /* PlayState.cpp */; };
-		AAD1F6D31053BCFC003B7163 /* Ogre.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD1F6D21053BCFC003B7163 /* Ogre.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +33,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				AA3025AB1068D5AA00156078 /* IOKit.framework in CopyFiles */,
+				AA3024FC1068D5A400156078 /* Ogre.framework in CopyFiles */,
+				AA3024501068D50B00156078 /* Cg.framework in CopyFiles */,
+				AA3024461068D50600156078 /* OIS.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,10 +54,12 @@
 		AA21498510528D8E00607FF4 /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
 		AA21498610528D8E00607FF4 /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
 		AA214A781052E2DF00607FF4 /* resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resources.cfg; sourceTree = "<group>"; };
+		AA30224F10684BBE00156078 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = /Library/Frameworks/Ogre.framework; sourceTree = "<absolute>"; };
+		AA3023E210685AB800156078 /* Plugin_OctreeSceneManager.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = Plugin_OctreeSceneManager.dylib; sourceTree = "<group>"; };
+		AA3023E310685AB800156078 /* RenderSystem_GL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = RenderSystem_GL.dylib; sourceTree = "<group>"; };
+		AA3024321068D34000156078 /* plugins.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plugins.cfg; sourceTree = "<group>"; };
 		AA7BE9C8105582A200C1DCEA /* RTSCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSCamera.h; sourceTree = "<group>"; };
 		AA7BE9C9105582A200C1DCEA /* RTSCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTSCamera.cpp; sourceTree = "<group>"; };
-		AAAEEAE81067A94B006CF34A /* Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Console.h; sourceTree = "<group>"; };
-		AAAEEAE91067A94B006CF34A /* Console.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Console.cpp; sourceTree = "<group>"; };
 		AABE87FA104704710090CB0C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		AABE87FB104704710090CB0C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 		AABE87FD1047047F0090CB0C /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
@@ -58,7 +68,6 @@
 		AABE88AB10471DDF0090CB0C /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		AABE88E81047216F0090CB0C /* PlayState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayState.cpp; sourceTree = "<group>"; };
 		AABE88E91047216F0090CB0C /* PlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayState.h; sourceTree = "<group>"; };
-		AAD1F6D21053BCFC003B7163 /* Ogre.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogre.framework; path = /Users/Christian/Library/Frameworks/Ogre.framework; sourceTree = "<absolute>"; };
 		AAD1F82610540026003B7163 /* Game.xcclassmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcclassmodel; path = Game.xcclassmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,7 +80,7 @@
 				AA2146E51051171700607FF4 /* Cg.framework in Frameworks */,
 				AA2146E91051174900607FF4 /* Carbon.framework in Frameworks */,
 				AA2146EE1051175D00607FF4 /* IOKit.framework in Frameworks */,
-				AAD1F6D31053BCFC003B7163 /* Ogre.framework in Frameworks */,
+				AA30225010684BBE00156078 /* Ogre.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +98,7 @@
 		20286C29FDCF999611CA2CEA /* Prototyp */ = {
 			isa = PBXGroup;
 			children = (
+				AA0DB67D1068DBC1002C74E4 /* Plugins */,
 				20286C2AFDCF999611CA2CEA /* Sources */,
 				20286C2CFDCF999611CA2CEA /* Resources */,
 				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
@@ -115,8 +125,6 @@
 				AA21498610528D8E00607FF4 /* MenuState.cpp */,
 				AA7BE9C8105582A200C1DCEA /* RTSCamera.h */,
 				AA7BE9C9105582A200C1DCEA /* RTSCamera.cpp */,
-				AAAEEAE81067A94B006CF34A /* Console.h */,
-				AAAEEAE91067A94B006CF34A /* Console.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -124,8 +132,10 @@
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA3024321068D34000156078 /* plugins.cfg */,
 				AA214A781052E2DF00607FF4 /* resources.cfg */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
+				AA30243C1068D3E400156078 /* Plugins */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -137,9 +147,25 @@
 				AA2146E41051171700607FF4 /* Cg.framework */,
 				AA2146E81051174900607FF4 /* Carbon.framework */,
 				AA2146ED1051175D00607FF4 /* IOKit.framework */,
-				AAD1F6D21053BCFC003B7163 /* Ogre.framework */,
+				AA30224F10684BBE00156078 /* Ogre.framework */,
 			);
 			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		AA0DB67D1068DBC1002C74E4 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				AA3023E210685AB800156078 /* Plugin_OctreeSceneManager.dylib */,
+				AA3023E310685AB800156078 /* RenderSystem_GL.dylib */,
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
+		AA30243C1068D3E400156078 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Plugins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA214A791052E2DF00607FF4 /* resources.cfg in Resources */,
+				AA3024331068D34000156078 /* plugins.cfg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +233,6 @@
 				AABE88EA1047216F0090CB0C /* PlayState.cpp in Sources */,
 				AA21498710528D8E00607FF4 /* MenuState.cpp in Sources */,
 				AA7BE9CA105582A200C1DCEA /* RTSCamera.cpp in Sources */,
-				AAAEEAEA1067A94B006CF34A /* Console.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +249,7 @@
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies\"",
 					"\"$(SRCROOT)/../../../Library/Frameworks\"",
 					"\"$(SRCROOT)/../../Library/Frameworks\"",
+					"\"$(SRCROOT)/../OgreSDK/Dependencies\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -240,6 +267,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies/lib/Release\"",
 					"\"$(SRCROOT)/../OgreSDK/Dependencies/lib/Release\"",
+					"\"$(SRCROOT)\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Prototyp;
@@ -256,6 +284,7 @@
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies\"",
 					"\"$(SRCROOT)/../../../Library/Frameworks\"",
 					"\"$(SRCROOT)/../../Library/Frameworks\"",
+					"\"$(SRCROOT)/../OgreSDK/Dependencies\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -270,6 +299,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OgreSDK/Dependencies/lib/Release\"",
 					"\"$(SRCROOT)/../OgreSDK/Dependencies/lib/Release\"",
+					"\"$(SRCROOT)\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Prototyp;
