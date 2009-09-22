@@ -54,6 +54,7 @@ void PlayState::exit() {
   PlayState* state = PlayState::getSingleton();
   state->save();
   if (state->scene) state->scene->clearScene();
+  state->tray->hideAll();
 }
 
 
@@ -66,7 +67,8 @@ void PlayState::restore() {
   PlayState* state = PlayState::getSingleton();
   state->setupView();
   state->setupContent();
-  state->camera->restore(); 
+  state->camera->restore();
+  state->tray->showAll();
 }  
 
 
@@ -90,6 +92,14 @@ void PlayState::initialise() {
     state->ogre = Ogre::Root::getSingletonPtr();
     state->window = Game::getRenderWindow();
     state->timer = new Ogre::Timer();
+    
+    //
+    Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup("Essential"); 
+  
+    state->tray = new SdkTrayManager("GameControls", state->window, Game::getMouse(), this);
+    
+    state->tray->getTrayContainer(TL_NONE)->hide();
+  
     //state->velocity = Ogre::Vector3(0,0,0);
     this->initialiseView();
     this->initialiseContent();
@@ -157,6 +167,7 @@ void PlayState::update() {
   unsigned long tslu = this->timer->getMilliseconds();
   this->timer->reset();
   this->camera->update(tslu);
+  this->tray->update();
 }
 
 
@@ -169,10 +180,7 @@ void PlayState::update() {
   }
 
   bool PlayState::mouseMoved(const OIS::MouseEvent &evt) {
-  //const OIS::MouseState &mouseState = evt.state;
-  // Update Mousepointer on Screen, might be smoother if moved by relative change.
-  // mMousePointer->setTop(mouseState.Y.abs);
-  // mMousePointer->setLeft(mouseState.X.abs);
+    if (this->tray->injectMouseMove(evt)) return true;
     return true;
   }
 

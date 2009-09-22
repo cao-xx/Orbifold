@@ -12,13 +12,14 @@
 #include "RTSCamera.h"
 
 #include "GameState.h"
+#include "Trays.h"
 //#include "PauseState.h"
 
 namespace Orbifold {
 
 class Game;
 
-class PlayState : public GameState {
+class PlayState : public GameState, public SdkTrayListener {
 
 public:
   
@@ -60,6 +61,8 @@ protected:
   Ogre::SceneManager *scene;
   RTSCamera *camera;
   
+  SdkTrayManager* tray;
+  
   Ogre::Timer* timer;
   
   bool contentSetup;
@@ -80,8 +83,8 @@ protected:
   void createSceneManager();
 	
 
-  void createOverlays();
-  void hideOverlays();
+  //void createOverlays();
+  //void hideOverlays();
   //Ogre::Camera* createCamera(Ogre::SceneManager* sceneMgr, Ogre::RenderWindow* window);
 	
 

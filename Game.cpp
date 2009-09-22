@@ -99,6 +99,9 @@ namespace Orbifold {
 #else
     this->ogre->loadPlugin("RenderSystem_GL");
 #endif
+    
+    
+    // this is version dependend !
     Ogre::RenderSystemList rlist = this->ogre->getAvailableRenderers();
     Ogre::RenderSystemList::iterator it = rlist.begin();
     

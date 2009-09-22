@@ -86,10 +86,10 @@ namespace Orbifold {
           mVelocity.x -= 0.1;
           break;
         case OIS::KC_S:
-          mVelocity.z -= 0.1;
+          mVelocity.z += 0.1;
           break;
         case OIS::KC_W:
-          mVelocity.z += 0.1;
+          mVelocity.z -= 0.1;
           break;  
         case OIS::KC_Q:
           mVelocity.y += 0.1;
@@ -112,10 +112,10 @@ namespace Orbifold {
           mVelocity.x += 0.1;
         break;
         case OIS::KC_W:
-          mVelocity.z -= 0.1;
+          mVelocity.z += 0.1;
           break;
         case OIS::KC_S:
-          mVelocity.z += 0.1;
+          mVelocity.z -= 0.1;
           break;
         case OIS::KC_Q:
           mVelocity.y -= 0.1;

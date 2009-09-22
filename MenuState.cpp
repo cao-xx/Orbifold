@@ -159,20 +159,9 @@ namespace Orbifold {
   
   
   bool MenuState::keyPressed(const OIS::KeyEvent &evt) {return true;}
-  bool MenuState::keyReleased(const OIS::KeyEvent &evt) {
-    if (evt.key == OIS::KC_SPACE) {
-      //mGame->requestStateChange(PAUSE);
-    } else if(evt.key == OIS::KC_ESCAPE) {
-      //this->game->requestStateChange(SHUTDOWN);
-    }
-    return true;
-  }
+  bool MenuState::keyReleased(const OIS::KeyEvent &evt) {return true;}
   
   bool MenuState::mouseMoved(const OIS::MouseEvent &evt) {
-    //const OIS::MouseState &mouseState = evt.state;
-    // Update Mousepointer on Screen, might be smoother if moved by relative change.
-    // mMousePointer->setTop(mouseState.Y.abs);
-    // mMousePointer->setLeft(mouseState.X.abs);
     if(this->tray->injectMouseMove(evt))
       return true;
     return true;
